@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Features\Attendants\ObjectMother.cs" />
     <Compile Include="Features\Customers\ObjectMother.cs" />
+    <Compile Include="Features\Managers\ObjectMother.cs" />
+    <Compile Include="Features\Movies\ObjectMother.cs" />
     <Compile Include="Features\Snacks\ObjectMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,8 +60,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\Managers\" />
-    <Folder Include="Features\Movies\" />
     <Folder Include="Features\MovieTheaters\" />
     <Folder Include="Features\Sessions\" />
   </ItemGroup>

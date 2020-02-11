@@ -44,6 +44,10 @@
     <Compile Include="Features\Attendants\Attendant.cs" />
     <Compile Include="Features\Base\Entity.cs" />
     <Compile Include="Features\Base\Enums\AccessLevelEnum.cs" />
+    <Compile Include="Features\Base\Exceptions\AttendantException.cs" />
+    <Compile Include="Features\Base\Exceptions\CustomerException.cs" />
+    <Compile Include="Features\Base\Exceptions\ManagerException.cs" />
+    <Compile Include="Features\Base\Exceptions\MovieException.cs" />
     <Compile Include="Features\Base\Identity.cs" />
     <Compile Include="Features\Customers\Customer.cs" />
     <Compile Include="Features\Managers\Manager.cs" />
