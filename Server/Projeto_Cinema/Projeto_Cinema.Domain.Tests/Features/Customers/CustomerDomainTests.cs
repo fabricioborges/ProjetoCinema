@@ -19,7 +19,7 @@ namespace Projeto_Cinema.Domain.Tests.Features.Customers
         [SetUp]
         public void SetUp()
         {
-            _customer = ObjectMother.customerDafault;
+            _customer = ObjectMother.customerDefault;
         }
 
         [Test]

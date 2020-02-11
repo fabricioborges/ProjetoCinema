@@ -48,6 +48,7 @@
     <Compile Include="Features\Base\Exceptions\CustomerException.cs" />
     <Compile Include="Features\Base\Exceptions\ManagerException.cs" />
     <Compile Include="Features\Base\Exceptions\MovieException.cs" />
+    <Compile Include="Features\Base\Exceptions\MovieTheaterException.cs" />
     <Compile Include="Features\Base\Identity.cs" />
     <Compile Include="Features\Customers\Customer.cs" />
     <Compile Include="Features\Managers\Manager.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Features\Movies\Enums\TypeAudioEnum.cs" />
     <Compile Include="Features\Movies\Movie.cs" />
     <Compile Include="Features\MovieTheaters\MovieTheater.cs" />
+    <Compile Include="Features\Seats\Seat.cs" />
     <Compile Include="Features\Sessions\Session.cs" />
     <Compile Include="Features\Snacks\Snack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

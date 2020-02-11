@@ -9,7 +9,7 @@ namespace Projeto_Cinema.Common.Tests.Features
 {
     public static partial class ObjectMother
     {
-        public static Customer customerDafault
+        public static Customer customerDefault
         {
             get
             {
@@ -20,6 +20,19 @@ namespace Projeto_Cinema.Common.Tests.Features
                     Password = "password",
                     Snacks = snackListDefault,
                      
+                };
+            }
+        }
+
+        public static List<Customer> customerListDefault
+        {
+            get
+            {
+                return new List<Customer>
+                {
+                    customerDefault,
+                    customerDefault,
+                    customerDefault
                 };
             }
         }

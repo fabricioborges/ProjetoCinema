@@ -67,6 +67,8 @@
     <Compile Include="Features\Customers\CustomerDomainTests.cs" />
     <Compile Include="Features\Managers\ManagerDomainTests.cs" />
     <Compile Include="Features\Movies\MovieDomainTests.cs" />
+    <Compile Include="Features\MovieTheaters\MovieTheaterDomainTests.cs" />
+    <Compile Include="Features\Sessions\SessionDomainTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -18,11 +18,19 @@ namespace Projeto_Cinema.Domain.Features.Sessions
         public List<Customer> Customers { get; set; }
         public MovieTheater MovieTheater { get; set; }
         public DateTime Duration { get; set; }
-        public bool Remove { get; private set; }
 
-        public void CanRemove()
+        public bool CanRemove()
         {
+            var targetDate = DateTime.Now - Date;
+            return targetDate.Days >= 10;
         }
 
+        public void CalculateDuration()
+        {
+            var durationHours = Date.Hour + Movie.Duration.Hour;
+            var durationMinutes = Date.Minute + Movie.Duration.Minute;
+            var durationSeconds = Date.Second + Movie.Duration.Second;
+            
+        }
     }
 }
