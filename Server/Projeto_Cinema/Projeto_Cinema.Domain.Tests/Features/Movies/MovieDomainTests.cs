@@ -23,7 +23,7 @@ namespace Projeto_Cinema.Domain.Tests.Features.Movies
         }
 
         [Test]
-        public void Deveria_validar_campos_obrigatórios_movie()
+        public void Dominio_Deveria_validar_campos_obrigatórios_movie()
         {
             //Action
             Action validate = () => _movie.Validate();
@@ -32,42 +32,16 @@ namespace Projeto_Cinema.Domain.Tests.Features.Movies
         }
 
         [Test]
-        public void Deveria_validar_um_filme_com_duracao_de_minutos()
+        public void Dominio_Nao_deveria_validar_um_filme_sem_duracao()
         {
             //Arrange
-            _movie.Duration = DateTime.Parse("03/01/2009 00:45:00 -5:00");
-
-            //Action
-            Action validate = () => _movie.Validate();
-
-            //Assert
-            validate.Should().NotThrow<Exception>();
-        }
-
-        [Test]
-        public void Deveria_validar_um_filme_com_duracao_de_segundos()
-        {
-            //Arrange
-            _movie.Duration = DateTime.Parse("03/01/2009 00:00:15 -5:00");
-
-            //Action
-            Action validate = () => _movie.Validate();
-
-            //Assert
-            validate.Should().NotThrow<Exception>();
-        }
-
-        [Test]
-        public void Nao_deveria_validar_um_filme_com_duracao_de_zerada()
-        {
-            //Arrange
-            _movie.Duration = DateTime.Parse("03/01/2009 00:00:00 -5:00");
+            _movie.Duration = TimeSpan.Zero; ;
 
             //Action
             Action validate = () => _movie.Validate();
 
             //Assert
             validate.Should().Throw<MovieException>();
-        }
+        }        
     }
 }

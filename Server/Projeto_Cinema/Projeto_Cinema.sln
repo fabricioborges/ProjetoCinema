@@ -1,17 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29215.179
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto_Cinema.Domain", "Projeto_Cinema.Domain\Projeto_Cinema.Domain.csproj", "{5B34C548-5510-4FAF-A7D5-086CE0184247}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E74B1161-86B2-498C-8AFD-4F4682D1BBE3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Tests", "5.Tests", "{E74B1161-86B2-498C-8AFD-4F4682D1BBE3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{DC2A4BD2-C9D9-49AE-8C88-00FF3EA20BE3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Domain", "3.Domain", "{DC2A4BD2-C9D9-49AE-8C88-00FF3EA20BE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto_Cinema.Domain.Tests", "Projeto_Cinema.Domain.Tests\Projeto_Cinema.Domain.Tests.csproj", "{F7E6DF3A-6A58-4E78-A3A0-21E588BB199C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto_Cinema.Common.Tests", "Projeto_Cinema.Common.Tests\Projeto_Cinema.Common.Tests.csproj", "{3E17EC7B-FE20-47F3-86CD-13AD70AC6CCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Application", "2.Application", "{F4D6F223-6ED9-419A-953F-2D44EE80F03D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto_Cinema.Application", "Projeto_Cinema.Application\Projeto_Cinema.Application.csproj", "{9F303DD1-18D9-4557-BDFA-EFE039AD786D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto_Cinema.Application.Tests", "Projeto_Cinema.Application.Tests\Projeto_Cinema.Application.Tests.csproj", "{27DD6A7D-6E1A-4E1D-8C13-5606A23D3A28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infrastructure", "4. Infrastructure", "{C314F7CA-4309-41A8-A18A-33D1F197E4E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto_Cinema.Infra.ORM", "Projeto_Cinema.Infra.ORM\Projeto_Cinema.Infra.ORM.csproj", "{FA0CD2D2-8F5F-4695-9137-A14E07BB051E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +41,18 @@ Global
 		{3E17EC7B-FE20-47F3-86CD-13AD70AC6CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E17EC7B-FE20-47F3-86CD-13AD70AC6CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E17EC7B-FE20-47F3-86CD-13AD70AC6CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F303DD1-18D9-4557-BDFA-EFE039AD786D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F303DD1-18D9-4557-BDFA-EFE039AD786D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F303DD1-18D9-4557-BDFA-EFE039AD786D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F303DD1-18D9-4557-BDFA-EFE039AD786D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27DD6A7D-6E1A-4E1D-8C13-5606A23D3A28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27DD6A7D-6E1A-4E1D-8C13-5606A23D3A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27DD6A7D-6E1A-4E1D-8C13-5606A23D3A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27DD6A7D-6E1A-4E1D-8C13-5606A23D3A28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA0CD2D2-8F5F-4695-9137-A14E07BB051E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA0CD2D2-8F5F-4695-9137-A14E07BB051E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA0CD2D2-8F5F-4695-9137-A14E07BB051E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA0CD2D2-8F5F-4695-9137-A14E07BB051E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +61,9 @@ Global
 		{5B34C548-5510-4FAF-A7D5-086CE0184247} = {DC2A4BD2-C9D9-49AE-8C88-00FF3EA20BE3}
 		{F7E6DF3A-6A58-4E78-A3A0-21E588BB199C} = {E74B1161-86B2-498C-8AFD-4F4682D1BBE3}
 		{3E17EC7B-FE20-47F3-86CD-13AD70AC6CCA} = {E74B1161-86B2-498C-8AFD-4F4682D1BBE3}
+		{9F303DD1-18D9-4557-BDFA-EFE039AD786D} = {F4D6F223-6ED9-419A-953F-2D44EE80F03D}
+		{27DD6A7D-6E1A-4E1D-8C13-5606A23D3A28} = {E74B1161-86B2-498C-8AFD-4F4682D1BBE3}
+		{FA0CD2D2-8F5F-4695-9137-A14E07BB051E} = {C314F7CA-4309-41A8-A18A-33D1F197E4E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {76D96694-0651-4A52-8118-913F173F433D}

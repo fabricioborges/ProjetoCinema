@@ -17,7 +17,8 @@ namespace Projeto_Cinema.Common.Tests.Features
                 return new MovieTheater
                 {
                     Name = "sala 01",
-                    Seats = seatListDefault
+                    Seats = seatListDefault,
+                    ValueOfSeats = 10
                 };
             }
         }       

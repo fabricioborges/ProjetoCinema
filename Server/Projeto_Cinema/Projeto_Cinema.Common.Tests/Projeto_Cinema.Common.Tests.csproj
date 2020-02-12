@@ -49,21 +49,23 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Attendants\ObjectMother.cs" />
-    <Compile Include="Features\Customers\ObjectMother.cs" />
-    <Compile Include="Features\Managers\ObjectMother.cs" />
     <Compile Include="Features\Movies\ObjectMother.cs" />
     <Compile Include="Features\MovieTheaters\ObjectMother.cs" />
     <Compile Include="Features\Seats\ObjectMother.cs" />
     <Compile Include="Features\Sessions\ObjectMother.cs" />
     <Compile Include="Features\Snacks\ObjectMother.cs" />
+    <Compile Include="Features\Tickets\ObjectMother.cs" />
+    <Compile Include="Features\Users\ObjectMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Projeto_Cinema.Application\Projeto_Cinema.Application.csproj">
+      <Project>{9F303DD1-18D9-4557-BDFA-EFE039AD786D}</Project>
+      <Name>Projeto_Cinema.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Projeto_Cinema.Domain\Projeto_Cinema.Domain.csproj">
       <Project>{5B34C548-5510-4FAF-A7D5-086CE0184247}</Project>
       <Name>Projeto_Cinema.Domain</Name>

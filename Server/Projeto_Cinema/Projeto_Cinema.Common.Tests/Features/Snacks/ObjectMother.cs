@@ -28,6 +28,8 @@ namespace Projeto_Cinema.Common.Tests.Features
             {
                 return new List<Snack>
                 {
+                    snackDefault,
+                    snackDefault,
                     snackDefault
                 };
             }

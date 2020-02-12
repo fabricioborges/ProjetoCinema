@@ -1,20 +1,17 @@
-﻿using Projeto_Cinema.Domain.Features.Base;
-using Projeto_Cinema.Domain.Features.Base.Exceptions;
+﻿using Projeto_Cinema.Domain.Features.Base.Exceptions;
 using Projeto_Cinema.Domain.Features.Seats;
 using Projeto_Cinema.Domain.Features.Sessions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Projeto_Cinema.Domain.Features.MovieTheaters
 {
-    public class MovieTheater : Identity
+    public class MovieTheater 
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public List<Seat> Seats { get; set; }
-        public List<Session> Sessions { get; set; }
+        public List<int> NumberOfSeats { get; set; }
+        public double ValueOfSeats { get; set; }
 
         public void ValidateNumberOfSeats()
         {

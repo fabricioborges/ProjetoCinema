@@ -41,24 +41,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Attendants\Attendant.cs" />
-    <Compile Include="Features\Base\Entity.cs" />
-    <Compile Include="Features\Base\Enums\AccessLevelEnum.cs" />
-    <Compile Include="Features\Base\Exceptions\AttendantException.cs" />
-    <Compile Include="Features\Base\Exceptions\CustomerException.cs" />
-    <Compile Include="Features\Base\Exceptions\ManagerException.cs" />
     <Compile Include="Features\Base\Exceptions\MovieException.cs" />
     <Compile Include="Features\Base\Exceptions\MovieTheaterException.cs" />
-    <Compile Include="Features\Base\Identity.cs" />
-    <Compile Include="Features\Customers\Customer.cs" />
-    <Compile Include="Features\Managers\Manager.cs" />
+    <Compile Include="Features\Base\Exceptions\NotFoundException.cs" />
+    <Compile Include="Features\Base\Exceptions\UserException.cs" />
     <Compile Include="Features\Movies\Enums\AnimationTypeEnum.cs" />
     <Compile Include="Features\Movies\Enums\TypeAudioEnum.cs" />
+    <Compile Include="Features\Movies\IMovieRepository.cs" />
     <Compile Include="Features\Movies\Movie.cs" />
     <Compile Include="Features\MovieTheaters\MovieTheater.cs" />
     <Compile Include="Features\Seats\Seat.cs" />
     <Compile Include="Features\Sessions\Session.cs" />
     <Compile Include="Features\Snacks\Snack.cs" />
+    <Compile Include="Features\Tickets\Ticket.cs" />
+    <Compile Include="Features\Users\Enums\AccessLevelEnum.cs" />
+    <Compile Include="Features\Users\IUserRepository.cs" />
+    <Compile Include="Features\Users\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

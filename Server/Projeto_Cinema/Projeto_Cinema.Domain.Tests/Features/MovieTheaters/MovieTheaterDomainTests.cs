@@ -23,7 +23,7 @@ namespace Projeto_Cinema.Domain.Tests.Features.MovieTheaters
         }
 
         [Test]
-        public void Nao_deveria_permitir_sala_com_menos_de_20_assentos()
+        public void Dominio_Nao_deveria_permitir_sala_com_menos_de_20_assentos()
         {
             //Arrange
             ObjectMother.CreateListOfSeats(19);
@@ -36,7 +36,7 @@ namespace Projeto_Cinema.Domain.Tests.Features.MovieTheaters
         }
 
         [Test]
-        public void Nao_deveria_permitir_sala_com_mais_de_100_assentos()
+        public void Dominio_Nao_deveria_permitir_sala_com_mais_de_100_assentos()
         {
             //Arrange
             ObjectMother.CreateListOfSeats(200);

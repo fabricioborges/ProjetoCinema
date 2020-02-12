@@ -16,9 +16,7 @@ namespace Projeto_Cinema.Common.Tests.Features
                 return new Session
                 {
                     Movie = ObjectMother.movieDefault,
-                    Customers = ObjectMother.customerListDefault,
-                    Date = DateTime.Now,
-                    Duration = DateTime.Now,
+                    DateInitial = DateTime.Now,
                     MovieTheater = movieTheaterDefault,
                     Hour = DateTime.Now                    
                 };

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F303DD1-18D9-4557-BDFA-EFE039AD786D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Projeto_Cinema.Application</RootNamespace>
+    <AssemblyName>Projeto_Cinema.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config\AutoMapperConfig.cs" />
+    <Compile Include="Features\Movies\Commands\MovieAddCommand.cs" />
+    <Compile Include="Features\Movies\Commands\MovieDeleteCommand.cs" />
+    <Compile Include="Features\Movies\Commands\MovieUpdateCommand.cs" />
+    <Compile Include="Features\Movies\IMovieAppService.cs" />
+    <Compile Include="Features\Movies\Mapping\MappingProfile.cs" />
+    <Compile Include="Features\Movies\MovieAppService.cs" />
+    <Compile Include="Features\Users\Commands\UserAddCommand.cs" />
+    <Compile Include="Features\Users\Commands\UserDeleteCommand.cs" />
+    <Compile Include="Features\Users\Commands\UserUpdateCommand.cs" />
+    <Compile Include="Features\Users\IUserAppService.cs" />
+    <Compile Include="Features\Users\Mapping\MappingProfile.cs" />
+    <Compile Include="Features\Users\UserAppService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\MoviesTheaters\" />
+    <Folder Include="Features\Movies\Query\" />
+    <Folder Include="Features\Movies\ViewModels\" />
+    <Folder Include="Features\Seats\" />
+    <Folder Include="Features\Sessions\" />
+    <Folder Include="Features\Snacks\" />
+    <Folder Include="Features\Tickets\" />
+    <Folder Include="Features\Users\Query\" />
+    <Folder Include="Features\Users\ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Projeto_Cinema.Domain\Projeto_Cinema.Domain.csproj">
+      <Project>{5B34C548-5510-4FAF-A7D5-086CE0184247}</Project>
+      <Name>Projeto_Cinema.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

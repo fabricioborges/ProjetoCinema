@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace Projeto_Cinema.Domain.Features.Movies
 {
-    public class Movie : Identity
+    public class Movie
     {
+        public long Id { get; set; }
         public string Image { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime Duration { get; set; }
+        public TimeSpan Duration { get; set; }
         public AnimationTypeEnum AnimationType { get; set; }
         public TypeAudioEnum TypeAudio { get; set; }
 
@@ -46,12 +47,8 @@ namespace Projeto_Cinema.Domain.Features.Movies
 
         private void ValidateDuration()
         {
-            var minDate = DateTime.Parse("03/01/2000 00:00:00 -5:00");
-
-            if (Duration.Hour <= minDate.Hour)
-                if (Duration.Minute <= minDate.Minute)
-                    if (Duration.Second <= minDate.Second)
-                        throw new MovieException("Filme não pode ter a duração vazia!");
+            if (TimeSpan.Zero == Duration)
+                throw new MovieException("Filme deve possuir uma duração!");
         }
     }
 }
