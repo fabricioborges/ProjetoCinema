@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Base\Exceptions\BusinessException.cs" />
+    <Compile Include="Features\Base\Exceptions\DomainException.cs" />
+    <Compile Include="Features\Base\Exceptions\ErrorCode.cs" />
     <Compile Include="Features\Base\Exceptions\MovieException.cs" />
     <Compile Include="Features\Base\Exceptions\MovieTheaterException.cs" />
     <Compile Include="Features\Base\Exceptions\NotFoundException.cs" />
