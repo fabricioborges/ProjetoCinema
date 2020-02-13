@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Movies\MovieAppServiceTests.cs" />
+    <Compile Include="Features\MovieTheaters\MovieTheaterAppServiceTests.cs" />
     <Compile Include="Features\Users\UserAppServiceTests.cs" />
     <Compile Include="Initializer\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

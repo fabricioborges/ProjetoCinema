@@ -112,6 +112,7 @@
     <Compile Include="Context\DbContextFactory.cs" />
     <Compile Include="Context\ProjetoCinemaContext.cs" />
     <Compile Include="Features\Movies\MovieRepository.cs" />
+    <Compile Include="Features\MovieTheaters\MovieTheatersRepository.cs" />
     <Compile Include="Features\Users\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

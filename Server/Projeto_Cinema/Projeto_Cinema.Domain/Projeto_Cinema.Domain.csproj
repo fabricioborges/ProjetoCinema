@@ -49,6 +49,7 @@
     <Compile Include="Features\Movies\Enums\TypeAudioEnum.cs" />
     <Compile Include="Features\Movies\IMovieRepository.cs" />
     <Compile Include="Features\Movies\Movie.cs" />
+    <Compile Include="Features\MovieTheaters\IMovieTheaterRepository.cs" />
     <Compile Include="Features\MovieTheaters\MovieTheater.cs" />
     <Compile Include="Features\Seats\Seat.cs" />
     <Compile Include="Features\Sessions\Session.cs" />

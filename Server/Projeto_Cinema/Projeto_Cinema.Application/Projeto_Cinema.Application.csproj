@@ -49,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\AutoMapperConfig.cs" />
+    <Compile Include="Features\MoviesTheaters\Commands\MovieTheaterAddCommand.cs" />
+    <Compile Include="Features\MoviesTheaters\Commands\MovieTheaterDeleteCommand.cs" />
+    <Compile Include="Features\MoviesTheaters\Commands\MovieTheaterUpdateCommand.cs" />
+    <Compile Include="Features\MoviesTheaters\IMovieTheatersAppService.cs" />
+    <Compile Include="Features\MoviesTheaters\Mapping\MappingProfile.cs" />
+    <Compile Include="Features\MoviesTheaters\MovieTheatersAppService.cs" />
     <Compile Include="Features\Movies\Commands\MovieAddCommand.cs" />
     <Compile Include="Features\Movies\Commands\MovieDeleteCommand.cs" />
     <Compile Include="Features\Movies\Commands\MovieUpdateCommand.cs" />
@@ -64,7 +70,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\MoviesTheaters\" />
+    <Folder Include="Features\MoviesTheaters\Query\" />
+    <Folder Include="Features\MoviesTheaters\ViewModels\" />
     <Folder Include="Features\Movies\Query\" />
     <Folder Include="Features\Movies\ViewModels\" />
     <Folder Include="Features\Seats\" />
