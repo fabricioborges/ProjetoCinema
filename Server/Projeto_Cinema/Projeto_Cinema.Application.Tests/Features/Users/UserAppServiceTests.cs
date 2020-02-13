@@ -136,8 +136,8 @@ namespace Projeto_Cinema.Application.Tests.Features.Users
         public void ApplService_User_GetAll_Deve_Chamar_OMetodo_GetAll()
         {
             //Arrange
-            IQueryable<User> destinatarioList = ObjectMother.userListDefault;
-            _repository.Setup(x => x.GetAll()).Returns(destinatarioList);
+            IQueryable<User> userList = ObjectMother.userListDefault;
+            _repository.Setup(x => x.GetAll()).Returns(userList);
 
             //Action
             List<User> userResultList = _appService.GetAll().ToList();

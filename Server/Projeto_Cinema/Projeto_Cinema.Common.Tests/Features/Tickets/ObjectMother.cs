@@ -1,4 +1,5 @@
-﻿using Projeto_Cinema.Domain.Features.Tickets;
+﻿using Projeto_Cinema.Application.Features.Tickets.Commands;
+using Projeto_Cinema.Domain.Features.Tickets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,64 @@ namespace Projeto_Cinema.Common.Tests.Features
                     Session = ObjectMother.sessionDefault,
                     Value = 100
                 };
+            }
+        }
+
+        public static TicketAddCommand ticketAddCommand
+        {
+            get
+            {
+                return new TicketAddCommand
+                {
+                    DateBuy = DateTime.Now,
+                    IsConfirmed = true,
+                    Movie = ObjectMother.movieDefault,
+                    MovieTheater = ObjectMother.movieTheaterDefault,
+                    Session = ObjectMother.sessionDefault,
+                    Value = 100
+                };
+            }
+        }
+
+        public static TicketUpdateCommand ticketUpdateCommand
+        {
+            get
+            {
+                return new TicketUpdateCommand
+                {
+                    Id = 1,
+                    DateBuy = DateTime.Now,
+                    IsConfirmed = true,
+                    Movie = ObjectMother.movieDefault,
+                    MovieTheater = ObjectMother.movieTheaterDefault,
+                    Session = ObjectMother.sessionDefault,
+                    Value = 100
+                };
+            }
+        }
+
+        public static TicketDeleteCommand ticketDeleteCommand
+        {
+            get
+            {
+                return new TicketDeleteCommand
+                {
+                    Id = 1,
+                };
+            }
+        }
+
+        public static IQueryable<Ticket> ticketListDefault
+        {
+            get
+            {
+                List<Ticket> tickets = new List<Ticket>();
+
+                tickets.Add(ticketDefault);
+                tickets.Add(ticketDefault);
+                tickets.Add(ticketDefault);
+
+                return tickets.AsQueryable();
             }
         }
     }

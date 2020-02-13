@@ -3,6 +3,7 @@ using Moq;
 using NUnit.Framework;
 using Projeto_Cinema.Application.Features.Movies;
 using Projeto_Cinema.Application.Features.MoviesTheaters;
+using Projeto_Cinema.Application.Tests.Initializer;
 using Projeto_Cinema.Common.Tests.Features;
 using Projeto_Cinema.Domain.Features.Base.Exceptions;
 using Projeto_Cinema.Domain.Features.Movies;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 namespace Projeto_Cinema.Application.Tests.Features.MovieTheaters
 {
     [TestFixture]
-    public class MovieTheaterAppServiceTests
+    public class MovieTheaterAppServiceTests : TestBase
     {
         Mock<IMovieTheaterRepository> _repository;
         MovieTheatersAppService _appService;
@@ -137,8 +138,8 @@ namespace Projeto_Cinema.Application.Tests.Features.MovieTheaters
         public void ApplService_User_GetAll_Deve_Chamar_OMetodo_GetAll()
         {
             //Arrange
-            IQueryable<MovieTheater> destinatarioList = ObjectMother.movieTheatersListDefault;
-            _repository.Setup(x => x.GetAll()).Returns(destinatarioList);
+            IQueryable<MovieTheater> movieTheaterList = ObjectMother.movieTheatersListDefault;
+            _repository.Setup(x => x.GetAll()).Returns(movieTheaterList);
 
             //Action
             List<MovieTheater> userResultList = _appService.GetAll().ToList();

@@ -48,9 +48,9 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters
             if (movieTheaterDb == null)
                 throw new NotFoundException("Registro não encontrado!");
 
-            var userEdit = Mapper.Map(movieTheater, movieTheaterDb);
+            var movieTheaterEdit = Mapper.Map(movieTheater, movieTheaterDb);
 
-            return MovieTheaterRepository.Update(userEdit);
+            return MovieTheaterRepository.Update(movieTheaterEdit);
         }
     }
 }

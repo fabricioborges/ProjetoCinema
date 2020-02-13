@@ -113,6 +113,10 @@
     <Compile Include="Context\ProjetoCinemaContext.cs" />
     <Compile Include="Features\Movies\MovieRepository.cs" />
     <Compile Include="Features\MovieTheaters\MovieTheatersRepository.cs" />
+    <Compile Include="Features\Seats\SeatRepository.cs" />
+    <Compile Include="Features\Sessions\SessionRepository.cs" />
+    <Compile Include="Features\Snacks\SnackRepository.cs" />
+    <Compile Include="Features\Tickets\TicketRepository.cs" />
     <Compile Include="Features\Users\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

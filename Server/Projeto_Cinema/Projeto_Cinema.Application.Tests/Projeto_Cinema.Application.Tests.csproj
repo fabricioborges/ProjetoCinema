@@ -79,6 +79,10 @@
   <ItemGroup>
     <Compile Include="Features\Movies\MovieAppServiceTests.cs" />
     <Compile Include="Features\MovieTheaters\MovieTheaterAppServiceTests.cs" />
+    <Compile Include="Features\Seats\SeatAppServiceTests.cs" />
+    <Compile Include="Features\Sessions\SessionAppServiceTests.cs" />
+    <Compile Include="Features\Snacks\SnackAppServiceTests.cs" />
+    <Compile Include="Features\Tickets\TicketAppServiceTests.cs" />
     <Compile Include="Features\Users\UserAppServiceTests.cs" />
     <Compile Include="Initializer\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
