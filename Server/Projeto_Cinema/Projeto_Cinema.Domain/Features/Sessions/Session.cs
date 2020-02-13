@@ -11,7 +11,9 @@ namespace Projeto_Cinema.Domain.Features.Sessions
         public DateTime DateFinal { get; private set; }
         public DateTime Hour { get; set; }
         public Movie Movie { get; set; }
+        public long MovieId { get; set; }
         public MovieTheater MovieTheater { get; set; }
+        public long MovieTheaterId { get; set; }
         public TimeSpan Duration { get; private set; }
 
         public bool CanRemove()

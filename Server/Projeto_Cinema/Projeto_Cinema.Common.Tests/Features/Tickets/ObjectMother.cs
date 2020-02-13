@@ -26,6 +26,27 @@ namespace Projeto_Cinema.Common.Tests.Features
             }
         }
 
+        public static Ticket ticketToPersist
+        {
+            get
+            {
+                return new Ticket
+                {
+                    DateBuy = DateTime.Now,
+                    IsConfirmed = true,
+                    Movie = ObjectMother.movieDefault,
+                    MovieId = ObjectMother.movieDefault.Id,
+                    MovieTheater = ObjectMother.movieTheaterDefault,
+                    MovieTheaterId = ObjectMother.movieTheaterDefault.Id,
+                    Session = ObjectMother.sessionDefault,
+                    SessionId = ObjectMother.seatDefault.Id,
+                    User = ObjectMother.userDefault,
+                    UserId = ObjectMother.userDefault.Id,
+                    Value = 100
+                };
+            }
+        }
+
         public static TicketAddCommand ticketAddCommand
         {
             get

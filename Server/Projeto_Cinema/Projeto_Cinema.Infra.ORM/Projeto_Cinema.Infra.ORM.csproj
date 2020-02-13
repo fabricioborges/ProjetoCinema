@@ -109,6 +109,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\Movies\MovieConfiguration.cs" />
+    <Compile Include="Configurations\MovieTheaters\MovieTheaterConfiguration.cs" />
+    <Compile Include="Configurations\Seats\SeatConfiguration.cs" />
+    <Compile Include="Configurations\Sessions\SessionConfiguration.cs" />
+    <Compile Include="Configurations\Snacks\SnackConfiguration.cs" />
+    <Compile Include="Configurations\Tickets\TicketConfiguration.cs" />
+    <Compile Include="Configurations\Users\UserConfiguration.cs" />
     <Compile Include="Context\DbContextFactory.cs" />
     <Compile Include="Context\ProjetoCinemaContext.cs" />
     <Compile Include="Features\Movies\MovieRepository.cs" />
@@ -130,9 +137,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configurations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -22,6 +22,7 @@ namespace Projeto_Cinema.Infra.ORM.Features.Movies
         public Movie Add(Movie movie)
         {
             Context.Movies.Add(movie);
+            Context.SaveChanges();
             return movie;
         }
 

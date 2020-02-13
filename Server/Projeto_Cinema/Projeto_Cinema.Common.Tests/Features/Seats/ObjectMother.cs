@@ -16,6 +16,7 @@ namespace Projeto_Cinema.Common.Tests.Features
             {                
                 return new Seat
                 {
+                    Id = 1,
                     IsAvailable = true,
                     Number = 20
                 };

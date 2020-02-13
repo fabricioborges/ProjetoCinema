@@ -16,7 +16,7 @@ namespace Projeto_Cinema.Common.Tests.Features
             {
                 return new Session
                 {
-                    Movie = ObjectMother.movieDefault,
+                    Movie = movieDefault,
                     DateInitial = DateTime.Now,
                     MovieTheater = movieTheaterDefault,
                     Hour = DateTime.Now                    
@@ -24,6 +24,21 @@ namespace Projeto_Cinema.Common.Tests.Features
             }
         }
 
+        public static Session sessionToPersist
+        {
+            get
+            {
+                return new Session
+                {
+                    Movie = movieDefault,
+                    MovieId = movieDefault.Id,
+                    DateInitial = DateTime.Now,
+                    MovieTheater = movieTheaterDefault,
+                    MovieTheaterId = movieTheaterDefault.Id,
+                    Hour = DateTime.Now
+                };
+            }
+        }
 
         public static SessionAddCommand sessionAddCommand
         {
@@ -31,7 +46,7 @@ namespace Projeto_Cinema.Common.Tests.Features
             {
                 return new SessionAddCommand
                 {
-                    Movie = ObjectMother.movieDefault,
+                    Movie = movieDefault,
                     DateInitial = DateTime.Now,
                     MovieTheater = movieTheaterDefault,
                     Hour = DateTime.Now
@@ -57,7 +72,7 @@ namespace Projeto_Cinema.Common.Tests.Features
                 return new SessionUpdateCommand
                 {
                     Id = 1,
-                    Movie = ObjectMother.movieDefault,
+                    Movie = movieDefault,
                     DateInitial = DateTime.Now,
                     MovieTheater = movieTheaterDefault,
                     Hour = DateTime.Now

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projeto_Cinema.Domain.Features.Users.Enums
 {
-    public enum AccessLevelEnum
+    public enum AccessLevelEnum : Byte
     {
         Customer = 1,
         Attendant = 2,

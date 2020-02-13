@@ -21,6 +21,7 @@ namespace Projeto_Cinema.Common.Tests.Features
 
                 return new Movie()
                 {
+                    Id = 1,
                     Title = "title",
                     AnimationType = AnimationTypeEnum.ThreeD,
                     Description = "description",
