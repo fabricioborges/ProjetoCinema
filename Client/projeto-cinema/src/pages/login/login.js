@@ -19,7 +19,7 @@ export default function Login({ history }) {
 
         const response = await api.post('api/login', user);
 
-        console.log(response);
+        sessionStorage.setItem('token', response.data)
     }
 
     function handleCreateAccount(event){

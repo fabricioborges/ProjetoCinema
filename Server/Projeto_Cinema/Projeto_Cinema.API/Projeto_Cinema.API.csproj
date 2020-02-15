@@ -183,6 +183,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Common\ApiControllerBase.cs" />
     <Compile Include="Controllers\Login\LoginController.cs" />
+    <Compile Include="Controllers\Movies\MovieController.cs" />
     <Compile Include="Controllers\Users\UserController.cs" />
     <Compile Include="Exceptions\ExceptionPayload.cs" />
     <Compile Include="Extensions\QueryExtensions.cs" />

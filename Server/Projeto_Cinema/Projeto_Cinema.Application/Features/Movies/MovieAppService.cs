@@ -42,6 +42,11 @@ namespace Projeto_Cinema.Application.Features.Movies
             return MovieRepository.GetById(Id);
         }
 
+        public IQueryable<Movie> GetMovieInExhibition()
+        {
+            return MovieRepository.GetMovieInExhibition();
+        }
+
         public bool Update(MovieUpdateCommand movie)
         {
             var movieDb = MovieRepository.GetById(movie.Id);

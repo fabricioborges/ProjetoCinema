@@ -45,6 +45,11 @@ namespace Projeto_Cinema.Infra.ORM.Features.Movies
             return Context.Movies.FirstOrDefault(m => m.Id == Id);
         }
 
+        public IQueryable<Movie> GetMovieInExhibition()
+        {
+            return Context.Movies.Where(x => x.DebutDate >= DateTime.Now && x.EndDate >= DateTime.Now);
+        }
+
         public bool Update(Movie movie)
         {
             Context.Entry(movie).State = EntityState.Modified;

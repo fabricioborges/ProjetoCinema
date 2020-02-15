@@ -22,6 +22,7 @@ namespace Projeto_Cinema.Application.Features.Users
         public long Add(UserAddCommand user)
         {
             var userAdd = Mapper.Map<UserAddCommand, User>(user);
+            userAdd.GeneratePassword(userAdd.Password);
             var newUser = UserRepository.Add(userAdd);
 
             return newUser.Id;

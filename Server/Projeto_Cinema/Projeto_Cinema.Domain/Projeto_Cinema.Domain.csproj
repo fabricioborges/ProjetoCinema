@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Encrypt.cs" />
     <Compile Include="Features\Base\Exceptions\BusinessException.cs" />
     <Compile Include="Features\Base\Exceptions\DomainException.cs" />
     <Compile Include="Features\Base\Exceptions\ErrorCode.cs" />

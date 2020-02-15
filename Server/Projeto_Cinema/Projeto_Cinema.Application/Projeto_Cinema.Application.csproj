@@ -71,6 +71,7 @@
     <Compile Include="Features\Movies\IMovieAppService.cs" />
     <Compile Include="Features\Movies\Mapping\MappingProfile.cs" />
     <Compile Include="Features\Movies\MovieAppService.cs" />
+    <Compile Include="Features\Movies\ViewModels\MovieViewModel.cs" />
     <Compile Include="Features\Seats\Commands\SeatAddCommand.cs" />
     <Compile Include="Features\Seats\Commands\SeatDeleteCommand.cs" />
     <Compile Include="Features\Seats\Commands\SeatUpdateCommand.cs" />
@@ -109,7 +110,6 @@
     <Folder Include="Features\MoviesTheaters\Query\" />
     <Folder Include="Features\MoviesTheaters\ViewModels\" />
     <Folder Include="Features\Movies\Query\" />
-    <Folder Include="Features\Movies\ViewModels\" />
     <Folder Include="Features\Seats\Query\" />
     <Folder Include="Features\Seats\ViewModels\" />
     <Folder Include="Features\Sessions\Query\" />

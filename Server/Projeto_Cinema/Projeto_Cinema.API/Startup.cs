@@ -1,4 +1,7 @@
-﻿using Microsoft.Owin;
+﻿using Microsoft.AspNet.OData.Extensions;
+using Microsoft.OData;
+using Microsoft.OData.UriParser;
+using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
@@ -25,6 +28,7 @@ namespace Projeto_Cinema.API
             HttpConfiguration config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(name: "DefaultApi", routeTemplate: "api/{controller}/{id}", defaults: new { id = RouteParameter.Optional });
+            EnableOdata(config);
             ConfigureCors(app);
             ActiveAccessTokens(app);
             app.UseWebApi(config);
@@ -67,6 +71,18 @@ namespace Projeto_Cinema.API
                 }
             };
             app.UseCors(corsOptions);
+        }
+
+        private static void EnableOdata(HttpConfiguration config)
+        {
+            // Web API Enable OData
+            config.Count().Select().Filter().OrderBy().MaxTop(null);
+            config.AddODataQueryFilter();
+            config.EnableDependencyInjection(builder =>
+            {
+                /* string as enum, substitui o antigo EnableEnumPrefixFree. Converte a String que vem no FiltroOdata para o Enum correspondente*/
+                builder.AddService<ODataUriResolver>(ServiceLifetime.Singleton, sp => new StringAsEnumResolver() { EnableCaseInsensitive = true });
+            });
         }
     }
 }

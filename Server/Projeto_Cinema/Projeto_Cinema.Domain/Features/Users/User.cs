@@ -3,8 +3,10 @@ using Projeto_Cinema.Domain.Features.Users.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Projeto_Cinema.Domain.Extensions;
 
 namespace Projeto_Cinema.Domain.Features.Users
 {
@@ -13,7 +15,7 @@ namespace Projeto_Cinema.Domain.Features.Users
         public long Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string Password { get; private set; }
         public AccessLevelEnum AccessLevel { get; private set; }
 
         public virtual void Validate()
@@ -21,6 +23,11 @@ namespace Projeto_Cinema.Domain.Features.Users
             ValidateName();
             ValidateNameEmail();
             ValidatePassword();
+        }
+
+        public void GeneratePassword(string password)
+        {
+            Password = password.EncryptPassword();
         }
 
         protected void CanAccess(AccessLevelEnum accessLevel)
@@ -48,7 +55,11 @@ namespace Projeto_Cinema.Domain.Features.Users
 
         public bool ValidatePassword(string password)
         {
-            throw new NotImplementedException();
+            password = password.EncryptPassword();
+
+            return Password.Equals(password);
         }
+
+       
     }
 }
