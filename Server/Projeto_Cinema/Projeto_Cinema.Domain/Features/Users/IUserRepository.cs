@@ -14,6 +14,8 @@ namespace Projeto_Cinema.Domain.Features.Users
 
         User GetById(long Id);
 
+        User GetUserByEmail(string email);
+
         bool Update(User user);
 
         bool Delete(long user);

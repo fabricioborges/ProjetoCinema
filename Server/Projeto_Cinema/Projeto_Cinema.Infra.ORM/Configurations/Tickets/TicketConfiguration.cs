@@ -18,17 +18,17 @@ namespace Projeto_Cinema.Infra.ORM.Configurations.Tickets
 
             Property(p => p.Value).IsRequired();
 
-            Property(p => p.UserId).HasColumnName("UserId").IsRequired();
-            HasRequired(f => f.User).WithMany().HasForeignKey(k => k.UserId);
+            Property(p => p.UserId).HasColumnName("UserId").IsOptional();
+            HasOptional(f => f.User).WithMany().HasForeignKey(k => k.UserId);
 
-            Property(p => p.SessionId).HasColumnName("SessionId").IsRequired();
-            HasRequired(f => f.Session).WithMany().HasForeignKey(k => k.SessionId);
+            Property(p => p.SessionId).HasColumnName("SessionId").IsOptional();
+            HasOptional(f => f.Session).WithMany().HasForeignKey(k => k.SessionId);
 
-            Property(p => p.MovieTheaterId).HasColumnName("MovieTheaterId").IsRequired();
-            HasRequired(f => f.MovieTheater).WithMany().HasForeignKey(k => k.MovieTheaterId);
+            Property(p => p.MovieTheaterId).HasColumnName("MovieTheaterId").IsOptional();
+            HasOptional(f => f.MovieTheater).WithMany().HasForeignKey(k => k.MovieTheaterId);
 
-            Property(p => p.MovieId).HasColumnName("MovieId").IsRequired();
-            HasRequired(f => f.Movie).WithMany().HasForeignKey(k => k.MovieId);
+            Property(p => p.MovieId).HasColumnName("MovieId").IsOptional();
+            HasOptional(f => f.Movie).WithMany().HasForeignKey(k => k.MovieId);
                         
             Property(p => p.IsConfirmed).IsRequired();
 

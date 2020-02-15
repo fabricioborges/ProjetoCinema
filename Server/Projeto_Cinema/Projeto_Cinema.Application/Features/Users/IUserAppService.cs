@@ -12,6 +12,8 @@ namespace Projeto_Cinema.Application.Features.Users
 
         User GetById(long Id);
 
+        bool GetUserByEmail(UserLoginCommand loginCommand);
+
         bool Update(UserUpdateCommand user);
 
         bool Delete(UserDeleteCommand user);

@@ -42,6 +42,19 @@ namespace Projeto_Cinema.Application.Features.Users
             return UserRepository.GetById(Id);
         }
 
+        public bool GetUserByEmail(UserLoginCommand loginCommand)
+        {
+            var user = UserRepository.GetUserByEmail(loginCommand.Email);
+
+            if (user != null)
+            {
+                return user.ValidatePassword(loginCommand.Password);
+            }
+            else
+                return false;
+
+        }
+
         public bool Update(UserUpdateCommand user)
         {
             var userDb = UserRepository.GetById(user.Id);

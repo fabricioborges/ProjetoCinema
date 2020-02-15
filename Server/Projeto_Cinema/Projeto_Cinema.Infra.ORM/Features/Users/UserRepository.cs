@@ -41,6 +41,11 @@ namespace Projeto_Cinema.Infra.ORM.Features.Users
             return Context.Users.FirstOrDefault(u => u.Id == Id);
         }
 
+        public User GetUserByEmail(string email)
+        {
+            return Context.Users.FirstOrDefault(x => x.Email.Equals(email));
+        }
+
         public bool Update(User user)
         {
             Context.Entry(user).State = EntityState.Modified;

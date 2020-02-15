@@ -45,5 +45,10 @@ namespace Projeto_Cinema.Domain.Features.Users
             if (String.IsNullOrEmpty(Password))
                 throw new UserException("Senha não pode ser vazio!");
         }
+
+        public bool ValidatePassword(string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
