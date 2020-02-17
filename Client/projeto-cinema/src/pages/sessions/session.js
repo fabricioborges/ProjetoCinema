@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import api from '../../services/api';
 import './session.css';
 import { addDays } from "date-fns";
-import Ticket from "../tickets/ticket";
 
 export default function Session({history}) {
 

@@ -1,29 +1,29 @@
-.main-container {
+.snack-container {
     max-width: 980px;
     margin: 0 auto;
     padding: 50px 0;
     text-align: center;
 }
 
-.main-container ul{
+.snack-container ul{
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
-    margin-top: 50px;    
+    margin-top: 20px;    
 }
 
-.main-container ul li {
+.snack-container ul li {
     display: flex;
     flex-direction: column;
 }
 
-.main-container ul li img {
+.snack-container ul li img {
     max-width: 100%;
     border-radius: 5px 5px;
 }
 
-.main-container ul li footer {
+.snack-container ul li footer {
     flex: 1;
     background: #fff;
     border: 1px solid #eee;
@@ -32,26 +32,26 @@
     border-radius: 0 0 5px 5px;
 }
 
-.main-container ul li footer strong {
+.snack-container ul li footer strong {
     font-size: 16px;
     color: #333;
 }
 
-.main-container ul li footer p {
+.snack-container ul li footer p {
     font-size: 14px;
     line-height: 20px;
     color: #999;
     margin-top: 5px;
 } 
 
-.main-container ul li .buttons {
+.snack-container ul li .buttons {
     margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
 }
 
-.main-container ul li .buttons button {
+.snack-container ul li .buttons button {
     height: 50px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
     border: 0;
@@ -60,7 +60,7 @@
     cursor: pointer;
 }
 
-.main-container ul li .buttons button:hover img {
+.snack-container ul li .buttons button:hover img {
     transform: translateY(-5px);
     transition: all 0.2s;
 }
@@ -93,9 +93,50 @@
     display: flex;
 }
 
+.snack-container input {
+    margin-top:  20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 48px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
+}
 
+.snack-container input::placeholder {
+    color: #999;
+}
 
+button{
+    margin-top:  10px;
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 16px;
+    background: #fff;
+    font-weight:  bold;
+    color:  #555555;
+    cursor: pointer;
+}
 
+.snack-container p {
+    font-size: 20px;
+    line-height: 20px;
+    color: #999;
+    margin-top: 5px;    
+} 
+
+.snack-container .confirmed{
+    display: inline;
+    text-align: center;
+    border: 0;
+    border-radius: 4px;
+    background: #b80e0e;
+    font-weight:  bold;
+    color:  #fff;
+    cursor: pointer;
+    align-items: center;
+}
 
 
 

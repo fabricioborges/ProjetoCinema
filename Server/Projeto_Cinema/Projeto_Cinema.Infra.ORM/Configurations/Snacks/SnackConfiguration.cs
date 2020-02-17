@@ -19,6 +19,7 @@ namespace Projeto_Cinema.Infra.ORM.Configurations.Snacks
             Property(p => p.Image).IsRequired();
             Property(p => p.Name).IsRequired();
             Property(p => p.Price).IsRequired();
+            Property(p => p.Quantity).IsOptional();
         }
     }
 }
