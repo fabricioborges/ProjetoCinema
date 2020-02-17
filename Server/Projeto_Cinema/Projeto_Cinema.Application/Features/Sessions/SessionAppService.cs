@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Projeto_Cinema.Application.Features.Sessions.Commands;
 using Projeto_Cinema.Domain.Features.Base.Exceptions;
+using Projeto_Cinema.Domain.Features.Movies;
 using Projeto_Cinema.Domain.Features.Sessions;
 
 namespace Projeto_Cinema.Application.Features.Sessions
@@ -13,15 +14,26 @@ namespace Projeto_Cinema.Application.Features.Sessions
     public class SessionAppService : ISessionAppService
     {
         ISessionRepository SessionRepository;
+        IMovieRepository MovieRepository;
 
-        public SessionAppService(ISessionRepository repository)
+        public SessionAppService(ISessionRepository repository, IMovieRepository movieRepository)
         {
             SessionRepository = repository;
+            MovieRepository = movieRepository;
         }
 
         public long Add(SessionAddCommand session)
         {
             var sessionAdd = Mapper.Map<SessionAddCommand, Session>(session);
+
+            var movie = MovieRepository.GetById(session.MovieId);
+
+            sessionAdd.Movie = movie;
+
+            sessionAdd.SetDuration();
+
+            sessionAdd.SetEndDate();
+
             var newSession = SessionRepository.Add(sessionAdd);
 
             return newSession.Id;

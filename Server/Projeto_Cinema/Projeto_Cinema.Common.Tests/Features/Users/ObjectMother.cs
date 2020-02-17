@@ -18,8 +18,7 @@ namespace Projeto_Cinema.Common.Tests.Features
                 {
                     Id = 1,
                     Name = "user",
-                    Email = "email@email.com",
-                    Password = "password"
+                    Email = "email@email.com"                 
                 };
             }
         }
@@ -46,7 +45,7 @@ namespace Projeto_Cinema.Common.Tests.Features
                 {
                     Name = "user",
                     Email = "email@email.com",
-                    Password = "password"
+                    Password = "123"
                 };
             }
         }

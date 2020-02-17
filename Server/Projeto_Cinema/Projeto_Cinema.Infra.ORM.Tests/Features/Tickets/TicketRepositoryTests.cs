@@ -28,8 +28,10 @@ namespace Projeto_Cinema.Infra.ORM.Tests.Features.Tickets
             Context = new FakeDbContext(connection);
             _repository = new TicketRepository(Context);
             _ticket = ObjectMother.ticketToPersist;
+            _ticket.User.GeneratePassword("123");
 
             _ticketSeed = ObjectMother.ticketToPersist;
+            _ticketSeed.User.GeneratePassword("123");
 
             Context.Tickets.Add(_ticketSeed);
             Context.SaveChanges();

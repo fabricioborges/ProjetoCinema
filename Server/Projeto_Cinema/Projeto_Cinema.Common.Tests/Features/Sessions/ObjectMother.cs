@@ -46,9 +46,9 @@ namespace Projeto_Cinema.Common.Tests.Features
             {
                 return new SessionAddCommand
                 {
-                    Movie = movieDefault,
+                    MovieId = movieDefault.Id,
                     DateInitial = DateTime.Now,
-                    MovieTheater = movieTheaterDefault,
+                    MovieTheaterId = movieTheaterDefault.Id,
                     Hour = DateTime.Now
                 };
             }

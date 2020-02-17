@@ -56,18 +56,6 @@ namespace Projeto_Cinema.Domain.Tests.Features.Users
             //Assert
             validate.Should().Throw<UserException>();
         }
-
-        [Test]
-        public void Dominio_Deveria_retornar_excessao_senha_nula()
-        {
-            //Arrange
-            _user.Password = string.Empty;
-
-            //Action
-            Action validate = () => _user.Validate();
-
-            //Assert
-            validate.Should().Throw<UserException>();
-        }
+        
     }
 }

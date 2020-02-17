@@ -25,7 +25,7 @@ namespace Projeto_Cinema.Infra.ORM.Configurations.Sessions
             Property(p => p.Hour).IsRequired();
             Property(p => p.DateInitial).IsRequired();
             Property(p => p.Duration).IsRequired();
-            Property(p => p.DateFinal).IsRequired();
+            Property(p => p.EndDate).IsRequired();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Projeto_Cinema.Domain.Features.Seats;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Projeto_Cinema.Domain.Features.Seats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,18 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters.Commands
         public long Id { get; set; }
         public string Name { get; set; }
         public List<Seat> Seats { get; set; }
-        public List<int> NumberOfSeats { get; set; }
-        public double ValueOfSeats { get; set; }
+
+        public virtual ValidationResult Validation()
+        {
+            return new MovieTheaterUpdateCommandValidator().Validate(this);
+        }
+
+        class MovieTheaterUpdateCommandValidator : AbstractValidator<MovieTheaterUpdateCommand>
+        {
+            public MovieTheaterUpdateCommandValidator()
+            {
+                RuleFor(x => x.Name).NotNull();
+            }
+        }
     }
 }

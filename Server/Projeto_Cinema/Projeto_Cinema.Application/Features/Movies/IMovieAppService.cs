@@ -1,4 +1,5 @@
 ﻿using Projeto_Cinema.Application.Features.Movies.Commands;
+using Projeto_Cinema.Application.Features.Movies.ViewModels;
 using Projeto_Cinema.Domain.Features.Movies;
 using System;
 using System.Collections.Generic;

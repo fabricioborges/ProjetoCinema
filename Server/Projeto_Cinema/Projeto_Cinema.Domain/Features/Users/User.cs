@@ -22,7 +22,6 @@ namespace Projeto_Cinema.Domain.Features.Users
         {
             ValidateName();
             ValidateNameEmail();
-            ValidatePassword();
         }
 
         public void GeneratePassword(string password)
@@ -45,13 +44,7 @@ namespace Projeto_Cinema.Domain.Features.Users
         {
             if (String.IsNullOrEmpty(Email))
                 throw new UserException("E-mail não pode ser vazio!");
-        }
-
-        protected void ValidatePassword()
-        {
-            if (String.IsNullOrEmpty(Password))
-                throw new UserException("Senha não pode ser vazio!");
-        }
+        }      
 
         public bool ValidatePassword(string password)
         {

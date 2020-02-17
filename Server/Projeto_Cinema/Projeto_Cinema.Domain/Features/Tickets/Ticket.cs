@@ -30,7 +30,7 @@ namespace Projeto_Cinema.Domain.Features.Tickets
 
         public double CalculateValueSeats()
         {
-            return MovieTheater.Seats.Count * MovieTheater.ValueOfSeats;
+            return MovieTheater.Seats.Count * Session.ValueOfSeats;
         }
 
         public double CalculateValueSnacks()

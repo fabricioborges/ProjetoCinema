@@ -1,11 +1,13 @@
 ﻿using Projeto_Cinema.Application.Features.Movies;
 using Projeto_Cinema.Application.Features.MoviesTheaters;
+using Projeto_Cinema.Application.Features.Seats;
 using Projeto_Cinema.Application.Features.Sessions;
 using Projeto_Cinema.Application.Features.Snacks;
 using Projeto_Cinema.Application.Features.Tickets;
 using Projeto_Cinema.Application.Features.Users;
 using Projeto_Cinema.Domain.Features.Movies;
 using Projeto_Cinema.Domain.Features.MovieTheaters;
+using Projeto_Cinema.Domain.Features.Seats;
 using Projeto_Cinema.Domain.Features.Sessions;
 using Projeto_Cinema.Domain.Features.Snacks;
 using Projeto_Cinema.Domain.Features.Tickets;
@@ -13,6 +15,7 @@ using Projeto_Cinema.Domain.Features.Users;
 using Projeto_Cinema.Infra.ORM.Context;
 using Projeto_Cinema.Infra.ORM.Features.Movies;
 using Projeto_Cinema.Infra.ORM.Features.MovieTheaters;
+using Projeto_Cinema.Infra.ORM.Features.Seats;
 using Projeto_Cinema.Infra.ORM.Features.Sessions;
 using Projeto_Cinema.Infra.ORM.Features.Snacks;
 using Projeto_Cinema.Infra.ORM.Features.Tickets;
@@ -55,6 +58,7 @@ namespace Projeto_Cinema.API.IoC
             container.Register<IMovieTheatersAppService, MovieTheatersAppService>();
             container.Register<ISessionAppService, SessionAppService>();
             container.Register<ISnackAppService, SnackAppService>();
+            container.Register<ISeatAppService, SeatAppService>();
             container.Register<ITicketAppService, TicketAppService>();
             container.Register<IUserRepository, UserRepository>();
             container.Register<IMovieRepository, MovieRepository>();
@@ -62,6 +66,7 @@ namespace Projeto_Cinema.API.IoC
             container.Register<ISessionRepository, SessionRepository>();
             container.Register<ISnackRepository, SnackRepository>();
             container.Register<ITicketRepository, TicketRepository>();
+            container.Register<ISeatRepository, SeatRepository>();
 
             container.Register(() => new ProjetoCinemaContext(), Lifestyle.Scoped);
         }

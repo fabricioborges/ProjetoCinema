@@ -30,9 +30,10 @@ namespace Projeto_Cinema.Infra.ORM.Tests.Features.Users
             Context = new FakeDbContext(connection);
             _repository = new UserRepository(Context);
             _user = ObjectMother.userDefault;
+            _user.GeneratePassword("123");
 
             _userSeed = ObjectMother.userDefault;
-
+            _userSeed.GeneratePassword("123");
             Context.Users.Add(_userSeed);
             Context.SaveChanges();
         }

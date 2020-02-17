@@ -20,7 +20,6 @@ namespace Projeto_Cinema.Common.Tests.Features
                     Id = 1,
                     Name = "sala 01",
                     Seats = seatListDefault,
-                    ValueOfSeats = 10
                 };
             }
         }
@@ -47,8 +46,6 @@ namespace Projeto_Cinema.Common.Tests.Features
                 return new MovieTheaterAddCommand
                 {
                     Name = "sala 01",
-                    Seats = seatListDefault,
-                    ValueOfSeats = 10
                 };
             }
         }
@@ -62,7 +59,7 @@ namespace Projeto_Cinema.Common.Tests.Features
                     Id = 1,
                     Name = "sala 01",
                     Seats = seatListDefault,
-                    ValueOfSeats = 10
+                    
                 };
             }
         }

@@ -60,15 +60,14 @@ namespace Projeto_Cinema.Domain.Tests.Features.Sessions
         public void Dominio_Deveria_calcular_a_data_final_da_sessao()
         {
             //Arrange
-            _session.SetDuration();
 
-            var targetDateFinal = _session.DateInitial + _session.Duration;
+            var targetDateFinal = _session.Movie.EndDate;
 
             //Action
-            _session.CalculateDateFinal();
+            _session.SetEndDate();
 
             //Assert
-            _session.DateFinal.Should().Be(targetDateFinal);
+            _session.EndDate.Should().Be(targetDateFinal);
         }
     }
 }

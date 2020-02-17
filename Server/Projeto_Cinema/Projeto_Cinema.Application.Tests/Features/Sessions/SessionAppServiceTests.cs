@@ -5,6 +5,7 @@ using Projeto_Cinema.Application.Features.Sessions;
 using Projeto_Cinema.Application.Tests.Initializer;
 using Projeto_Cinema.Common.Tests.Features;
 using Projeto_Cinema.Domain.Features.Base.Exceptions;
+using Projeto_Cinema.Domain.Features.Movies;
 using Projeto_Cinema.Domain.Features.Sessions;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,15 @@ namespace Projeto_Cinema.Application.Tests.Features.Sessions
     public class SessionAppServiceTests : TestBase
     {
         Mock<ISessionRepository> _repository;
+        Mock<IMovieRepository> _movieRepository;
         SessionAppService _appService;
 
         [SetUp]
         public void SetUp()
         {
             _repository = new Mock<ISessionRepository>();
-            _appService = new SessionAppService(_repository.Object);
+            _movieRepository = new Mock<IMovieRepository>();
+            _appService = new SessionAppService(_repository.Object, _movieRepository.Object);
         }
 
         [Test]
@@ -32,16 +35,17 @@ namespace Projeto_Cinema.Application.Tests.Features.Sessions
         {
             //Arrange
             long expectedId = 1;
-            var movie = ObjectMother.sessionDefault;
-            movie.Id = expectedId;
+            var session = ObjectMother.sessionDefault;
+            session.Id = expectedId;
             var sesionAddCommand = ObjectMother.sessionAddCommand;
-            _repository.Setup(x => x.Add(It.IsAny<Session>())).Returns(movie);
+            _repository.Setup(x => x.Add(It.IsAny<Session>())).Returns(session);
+            _movieRepository.Setup(x => x.GetById(It.IsAny<long>())).Returns(It.IsAny<Movie>());
 
             //Action
             var result = _appService.Add(sesionAddCommand);
 
             //Assert
-            result.Should().Be((int)movie.Id);
+            result.Should().Be((int)session.Id);
             _repository.Verify(x => x.Add(It.IsAny<Session>()), Times.Once);
             _repository.VerifyNoOtherCalls();
         }
