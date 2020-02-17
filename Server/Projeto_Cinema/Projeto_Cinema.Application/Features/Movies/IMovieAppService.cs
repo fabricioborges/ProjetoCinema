@@ -19,7 +19,5 @@ namespace Projeto_Cinema.Application.Features.Movies
         bool Update(MovieUpdateCommand user);
 
         bool Delete(MovieDeleteCommand user);
-
-        IQueryable<Movie> GetMovieInExhibition();
     }
 }

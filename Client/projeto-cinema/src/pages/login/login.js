@@ -19,7 +19,10 @@ export default function Login({ history }) {
 
         const response = await api.post('api/login', user);
 
-        sessionStorage.setItem('token', response.data)
+        if(response.status === 200){
+            sessionStorage.setItem('token', response.data)
+            history.push(`/movie/`);
+        }
     }
 
     function handleCreateAccount(event){

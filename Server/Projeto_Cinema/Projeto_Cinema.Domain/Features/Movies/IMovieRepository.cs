@@ -17,7 +17,5 @@ namespace Projeto_Cinema.Domain.Features.Movies
         bool Update(Movie movie);
 
         bool Delete(long Id);
-
-        IQueryable<Movie> GetMovieInExhibition();
     }
 }

@@ -44,16 +44,13 @@ namespace Projeto_Cinema.API.Controllers.Movies
             return HandleQueryable<Movie, MovieViewModel>(query, queryOptions);
         }
 
-        [HttpGet]
-        [Route("GetMovieInExhibition")]
-        public IHttpActionResult GetMovieInExhibition(ODataQueryOptions<Movie> queryOptions)
+        [HttpDelete]
+        public IHttpActionResult Delete(MovieDeleteCommand movie)
         {
-
-            var query = default(IQueryable<Movie>);
-
-            query = MovieAppService.GetMovieInExhibition();
-
-            return HandleQueryable<Movie, Movie>(query, queryOptions);
+            var validator = movie.Validation();
+            if (!validator.IsValid)
+                return HandleValidationFailure(validator.Errors);
+            return HandleCallback(() => MovieAppService.Delete(movie));
         }
     }
 }
