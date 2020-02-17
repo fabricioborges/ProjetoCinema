@@ -9,7 +9,7 @@ namespace Projeto_Cinema.Domain.Features.MovieTheaters
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public List<Seat> Seats { get; set; }
+        public virtual List<Seat> Seats { get; set; }
 
         public void ValidateNumberOfSeats()
         {

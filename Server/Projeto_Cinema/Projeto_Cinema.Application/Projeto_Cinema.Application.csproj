@@ -65,6 +65,7 @@
     <Compile Include="Features\MoviesTheaters\IMovieTheatersAppService.cs" />
     <Compile Include="Features\MoviesTheaters\Mapping\MappingProfile.cs" />
     <Compile Include="Features\MoviesTheaters\MovieTheatersAppService.cs" />
+    <Compile Include="Features\MoviesTheaters\ViewModels\MovieTheaterSeatsViewModel.cs" />
     <Compile Include="Features\MoviesTheaters\ViewModels\MovieTheaterViewModel.cs" />
     <Compile Include="Features\Movies\Commands\MovieAddCommand.cs" />
     <Compile Include="Features\Movies\Commands\MovieDeleteCommand.cs" />

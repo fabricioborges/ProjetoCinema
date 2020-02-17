@@ -11,7 +11,6 @@ namespace Projeto_Cinema.Application.Features.Seats.Commands
     public class SeatAddCommand
     {
         public int Number { get; set; }
-        public bool IsAvailable { get; set; }
 
         public virtual ValidationResult Validation()
         {
@@ -22,8 +21,7 @@ namespace Projeto_Cinema.Application.Features.Seats.Commands
         {
             public SessionAddCommandValidator()
             {
-                RuleFor(x => x.Number).NotNull();
-                RuleFor(x => x.IsAvailable).NotNull().NotEmpty();               
+                RuleFor(x => x.Number).NotNull();           
             }
         }
     }

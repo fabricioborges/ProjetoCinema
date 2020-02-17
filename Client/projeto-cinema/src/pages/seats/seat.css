@@ -1,0 +1,95 @@
+.seat-container {
+    max-width: 980px;
+    margin: 8px;
+}
+
+.seat-container ul{
+    display: grid;
+    grid-template-columns: repeat(20, 0fr);
+    grid-gap: 5px;
+    margin-top: 50px;    
+}
+
+.seat-container ul li {
+    display: flex;
+}
+
+.seat-container ul li img {
+    max-width: 10%;
+    border-radius: 5px 5px;
+}
+
+.seat-container ul li footer {
+    flex: 1;
+    border: 1px solid #eee;
+    padding: 15px 20px;
+    text-align: left;
+    border-radius: 0 0 5px 5px;
+}
+
+.seat-container ul li footer strong {
+    font-size: 16px;
+    color: #333;
+}
+
+.seat-container p {
+    font-size: 20px;
+    line-height: 20px;
+    color: #999;
+    margin-top: 5px;
+    align-items: center;
+} 
+
+.seat-container ul li .buttons {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 5px;
+}
+
+
+button{
+    border: 0;
+    font-size: 14px;
+    font-weight:  bold;
+    color:  #555555;
+    cursor: pointer;
+    display: flex;
+}
+
+h1 {
+    border: 0;
+    font-size: 24px;
+    font-weight:  bold;
+    color:  #555555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 500px;
+}
+
+.seat-container .confirmed{
+    text-align: center;
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    background: #b80e0e;
+    font-weight:  bold;
+    color:  #fff;
+    cursor: pointer;
+    margin-left: 550px;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+

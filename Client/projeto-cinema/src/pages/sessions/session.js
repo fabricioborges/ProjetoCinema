@@ -4,8 +4,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import api from '../../services/api';
 import './session.css';
 import { addDays } from "date-fns";
+import Ticket from "../tickets/ticket";
 
-export default function Session() {
+export default function Session({history}) {
 
     const [sessions, setSessions] = useState([]);
     const [startDate, setStartDate] = useState(new Date());
@@ -25,6 +26,10 @@ export default function Session() {
         loadSessions();
 
     }, [startDate]);
+
+    async function handleToTicket(item){
+        history.push(`/ticket/${item}`);
+    }
 
     return (
         <div className="main-container">
@@ -48,7 +53,8 @@ export default function Session() {
                                 <p>{session.AnimationType == 1 ? '3D' : '2D'}</p>
                                 <p>{session.TypeAudio == 1 ? 'Dublado' : 'Legendado'}</p>
                                 <p>{session.MovieTheater.Name}</p>
-                                <p>{session.Hour}</p>
+                                <p className="dateSession">{session.Hour}</p>
+                                <button className="buy" onClick={() => handleToTicket(session.Id)}>Comprar</button>
                             </footer>
                         </li>
                     ))}

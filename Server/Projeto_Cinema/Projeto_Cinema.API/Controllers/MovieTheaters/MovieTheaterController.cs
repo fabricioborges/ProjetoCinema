@@ -49,7 +49,11 @@ namespace Projeto_Cinema.API.Controllers.MovieTheaters
         [Route("{id:int}")]
         public IHttpActionResult GetById(int id)
         {
-            return HandleCallback(() => Mapper.Map<MovieTheaterViewModel>(MovieTheaterAppService.GetById(id)));
+            //  return HandleCallback(() => Mapper.Map<MovieTheaterViewModel>(MovieTheaterAppService.GetById(id)));
+
+            var movieTheater = Mapper.Map<MovieTheaterViewModel>(MovieTheaterAppService.GetById(id));
+
+            return Ok(movieTheater);
         }
 
         [HttpPut]

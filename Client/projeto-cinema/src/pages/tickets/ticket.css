@@ -1,29 +1,28 @@
-.main-container {
+.ticket-container {
     max-width: 980px;
     margin: 0 auto;
-    padding: 50px 0;
     text-align: center;
 }
 
-.main-container ul{
+.ticket-container ul{
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: 30px;
     margin-top: 50px;    
 }
 
-.main-container ul li {
+.ticket-container ul li {
     display: flex;
-    flex-direction: column;
 }
 
-.main-container ul li img {
-    max-width: 100%;
+.ticket-container ul li img {
+    width: 70%;
+    height: 50%;
     border-radius: 5px 5px;
 }
 
-.main-container ul li footer {
+.ticket-container ul li footer {
     flex: 1;
     background: #fff;
     border: 1px solid #eee;
@@ -32,26 +31,24 @@
     border-radius: 0 0 5px 5px;
 }
 
-.main-container ul li footer strong {
+.ticket-container ul li footer strong {
     font-size: 16px;
     color: #333;
 }
 
-.main-container ul li footer p {
+.ticket-container ul li footer p {
     font-size: 14px;
     line-height: 20px;
     color: #999;
     margin-top: 5px;
 } 
 
-.main-container ul li .buttons {
-    margin-top: 10px;
+.ticket-container ul li .buttons {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+    grid-template-columns: repeat(2, 1fr); 
 }
 
-.main-container ul li .buttons button {
+.ticket-container ul li .buttons button {
     height: 50px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
     border: 0;
@@ -60,7 +57,7 @@
     cursor: pointer;
 }
 
-.main-container ul li .buttons button:hover img {
+.ticket-container ul li .buttons button:hover img {
     transform: translateY(-5px);
     transition: all 0.2s;
 }
@@ -79,7 +76,7 @@
     display: flex;
 }
 
-.buy{
+.confirmed{
     margin-top: 10px;
     border: 0;
     border-radius: 4px;
@@ -96,6 +93,8 @@
 .dateSession {
     
 }
+
+
 
 
 

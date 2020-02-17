@@ -26,6 +26,13 @@ namespace Projeto_Cinema.Infra.ORM.Features.Seats
             return seat;
         }
 
+        public List<Seat> Add(List<Seat> seats)
+        {
+            Context.Seats.AddRange(seats);
+            Context.SaveChanges();
+            return seats;
+        }
+        
         public bool Delete(long Id)
         {
             var seat = Context.Seats.Where(c => c.Id == Id).FirstOrDefault();
@@ -43,6 +50,11 @@ namespace Projeto_Cinema.Infra.ORM.Features.Seats
         public Seat GetById(long Id)
         {
             return Context.Seats.FirstOrDefault(s => s.Id == Id);
+        }
+
+        public IQueryable<Seat> GetBySeatIds(List<long> seatIds)
+        {
+            return GetAll().Where(x => seatIds.Contains(x.Id));
         }
 
         public bool Update(Seat seat)

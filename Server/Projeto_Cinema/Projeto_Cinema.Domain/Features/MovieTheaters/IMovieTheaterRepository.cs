@@ -12,7 +12,7 @@ namespace Projeto_Cinema.Domain.Features.MovieTheaters
     {
         MovieTheater Add(MovieTheater movieTheater);
 
-        IQueryable<MovieTheater> GetAll();
+       IQueryable<MovieTheater> GetAll();
 
         MovieTheater GetById(long Id);
 

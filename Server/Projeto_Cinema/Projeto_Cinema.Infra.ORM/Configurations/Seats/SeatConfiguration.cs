@@ -16,8 +16,8 @@ namespace Projeto_Cinema.Infra.ORM.Configurations.Seats
 
             HasKey(i => i.Id);
 
-            Property(p => p.IsAvailable).IsRequired();
             Property(p => p.Number).IsRequired();
+            Property(p => p.IsAvailable).IsRequired();
         }
     }
 }

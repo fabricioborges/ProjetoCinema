@@ -12,7 +12,6 @@ namespace Projeto_Cinema.Application.Features.Seats.Commands
     {
         public long Id { get; set; }
         public int Number { get; set; }
-        public bool IsAvailable { get; set; }
 
         public virtual ValidationResult Validation()
         {
@@ -24,7 +23,6 @@ namespace Projeto_Cinema.Application.Features.Seats.Commands
             public SessionUpdateCommandValidator()
             {
                 RuleFor(x => x.Number).NotNull();
-                RuleFor(x => x.IsAvailable).NotNull().NotEmpty();
             }
         }
     }

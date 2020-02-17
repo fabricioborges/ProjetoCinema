@@ -25,7 +25,6 @@ namespace Projeto_Cinema.Domain.Features.Tickets
         public DateTime DateBuy { get; set; }
         public double Value { get; set; }
         public List<Snack> Snacks { get; set; }
-        public long SnackId { get; set; }
         public bool IsConfirmed { get; set; }
 
         public double CalculateValueSeats()

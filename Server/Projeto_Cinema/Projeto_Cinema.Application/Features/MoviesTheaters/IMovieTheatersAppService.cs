@@ -1,5 +1,6 @@
 ﻿using Projeto_Cinema.Application.Features.MoviesTheaters.Commands;
 using Projeto_Cinema.Domain.Features.MovieTheaters;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Projeto_Cinema.Application.Features.MoviesTheaters
@@ -11,7 +12,7 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters
         IQueryable<MovieTheater> GetAll();
 
         MovieTheater GetById(long Id);
-
+        
         bool Update(MovieTheaterUpdateCommand movieTheater);
 
         bool Delete(MovieTheaterDeleteCommand movieTheater);

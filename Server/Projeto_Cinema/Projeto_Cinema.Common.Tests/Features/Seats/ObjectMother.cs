@@ -17,7 +17,6 @@ namespace Projeto_Cinema.Common.Tests.Features
                 return new Seat
                 {
                     Id = 1,
-                    IsAvailable = true,
                     Number = 20
                 };
             }
@@ -31,7 +30,6 @@ namespace Projeto_Cinema.Common.Tests.Features
             {
                 seatListDefault.Add(new Seat
                 {
-                    IsAvailable = true,
                     Number = i
                 });
             }
@@ -43,7 +41,6 @@ namespace Projeto_Cinema.Common.Tests.Features
             {
                 return new SeatAddCommand
                 {
-                    IsAvailable = true,
                     Number = 20
                 };
             }
@@ -67,7 +64,6 @@ namespace Projeto_Cinema.Common.Tests.Features
                 return new SeatUpdateCommand
                 {
                     Id = 1,
-                    IsAvailable = true,
                     Number = 20
                 };
             }

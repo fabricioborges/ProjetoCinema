@@ -7,23 +7,35 @@ using AutoMapper;
 using Projeto_Cinema.Application.Features.MoviesTheaters.Commands;
 using Projeto_Cinema.Domain.Features.Base.Exceptions;
 using Projeto_Cinema.Domain.Features.MovieTheaters;
+using Projeto_Cinema.Domain.Features.Seats;
 
 namespace Projeto_Cinema.Application.Features.MoviesTheaters
 {
     public class MovieTheatersAppService : IMovieTheatersAppService
     {
         IMovieTheaterRepository MovieTheaterRepository;
+        ISeatRepository SeatRepository;
 
-        public MovieTheatersAppService(IMovieTheaterRepository repository)
+        public MovieTheatersAppService(IMovieTheaterRepository repository, ISeatRepository seatRepository)
         {
             MovieTheaterRepository = repository;
+            SeatRepository = seatRepository;
         }
 
         public long Add(MovieTheaterAddCommand movieTheater)
         {
             var movieTheaterAdd = Mapper.Map<MovieTheaterAddCommand, MovieTheater>(movieTheater);
-            var newMovieTheater = MovieTheaterRepository.Add(movieTheaterAdd);
 
+            var quantity = movieTheater.QuantityOfSeats;
+            Seat Seat = new Seat();
+            var seats = Seat.GenerateSeats(quantity);
+
+            SeatRepository.Add(seats);
+
+            movieTheaterAdd.Seats = seats;
+
+            var newMovieTheater = MovieTheaterRepository.Add(movieTheaterAdd);
+                       
             return newMovieTheater.Id;
         }
 
@@ -41,7 +53,7 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters
         {
             return MovieTheaterRepository.GetById(Id);
         }
-
+            
         public bool Update(MovieTheaterUpdateCommand movieTheater)
         {
             var movieTheaterDb = MovieTheaterRepository.GetById(movieTheater.Id);

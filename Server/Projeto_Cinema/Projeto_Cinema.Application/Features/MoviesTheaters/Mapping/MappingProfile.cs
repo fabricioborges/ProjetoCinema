@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Projeto_Cinema.Application.Features.MoviesTheaters.Commands;
 using Projeto_Cinema.Application.Features.MoviesTheaters.ViewModels;
+using Projeto_Cinema.Application.Features.Seats.ViewModels;
 using Projeto_Cinema.Domain.Features.MovieTheaters;
+using Projeto_Cinema.Domain.Features.Seats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,6 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters.Mapping
         public MappingProfile()
         {
             CreateMap<MovieTheaterAddCommand, MovieTheater>();
-                ;
 
             CreateMap<MovieTheaterUpdateCommand, MovieTheater>()
                 .ForPath(src => src.Seats, m => m.MapFrom(dest => dest.Seats));
