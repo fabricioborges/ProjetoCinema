@@ -19,7 +19,8 @@ namespace Projeto_Cinema.Common.Tests.Features
                     Movie = movieDefault,
                     DateInitial = DateTime.Now,
                     MovieTheater = movieTheaterDefault,
-                    Hour = DateTime.Now                    
+                    Hour = DateTime.Now,
+                    ValueOfSeats = 10
                 };
             }
         }

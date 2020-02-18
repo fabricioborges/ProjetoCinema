@@ -55,9 +55,6 @@ namespace Projeto_Cinema.Common.Tests.Features
                 {
                     DateBuy = DateTime.Now,
                     IsConfirmed = true,
-                    Movie = ObjectMother.movieDefault,
-                    MovieTheater = ObjectMother.movieTheaterDefault,
-                    Session = ObjectMother.sessionDefault,
                     Value = 100
                 };
             }

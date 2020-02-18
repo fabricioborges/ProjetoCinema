@@ -45,7 +45,7 @@ namespace Projeto_Cinema.Application.Features.Tickets
 
             ticketAdd.Session = session;
 
-            var movie = MovieRepository.GetById(session.MovieId);
+            var movie = MovieRepository.GetById(ticket.MovieId);
 
             ticketAdd.Movie = movie;
 

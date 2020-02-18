@@ -5,7 +5,12 @@ using Projeto_Cinema.Application.Features.Tickets;
 using Projeto_Cinema.Application.Tests.Initializer;
 using Projeto_Cinema.Common.Tests.Features;
 using Projeto_Cinema.Domain.Features.Base.Exceptions;
+using Projeto_Cinema.Domain.Features.Movies;
+using Projeto_Cinema.Domain.Features.MovieTheaters;
+using Projeto_Cinema.Domain.Features.Sessions;
+using Projeto_Cinema.Domain.Features.Snacks;
 using Projeto_Cinema.Domain.Features.Tickets;
+using Projeto_Cinema.Domain.Features.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +23,24 @@ namespace Projeto_Cinema.Application.Tests.Features.Tickets
     public class TicketAppServiceTests : TestBase
     {
         Mock<ITicketRepository> _repository;
+        Mock<IMovieRepository> MovieRepository;
+        Mock<ISessionRepository> SessionRepository;
+        Mock<IUserRepository> UserRepository;
+        Mock<IMovieTheaterRepository> MovieTheaterRepository;
+        Mock<ISnackRepository> SnackRepository;
         TicketAppService _appService;
         
         [SetUp]
         public void SetUp()
         {
             _repository = new Mock<ITicketRepository>();
-            _appService = new TicketAppService(_repository.Object);
+            SnackRepository = new Mock<ISnackRepository>();
+            MovieRepository = new Mock<IMovieRepository>();
+            SessionRepository = new Mock<ISessionRepository>();
+            UserRepository = new Mock<IUserRepository>();
+            MovieTheaterRepository = new Mock<IMovieTheaterRepository>();
+            
+            _appService = new TicketAppService(_repository.Object, MovieRepository.Object, SessionRepository.Object, UserRepository.Object,  MovieTheaterRepository.Object, SnackRepository.Object);
         }
 
         [Test]

@@ -39,7 +39,7 @@ namespace Projeto_Cinema.Application.Tests.Features.Sessions
             session.Id = expectedId;
             var sesionAddCommand = ObjectMother.sessionAddCommand;
             _repository.Setup(x => x.Add(It.IsAny<Session>())).Returns(session);
-            _movieRepository.Setup(x => x.GetById(It.IsAny<long>())).Returns(It.IsAny<Movie>());
+            _movieRepository.Setup(x => x.GetById(It.IsAny<long>())).Returns(ObjectMother.movieDefault);
 
             //Action
             var result = _appService.Add(sesionAddCommand);
