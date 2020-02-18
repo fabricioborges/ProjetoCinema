@@ -16,15 +16,15 @@ namespace Projeto_Cinema.Domain.Features.Tickets
         public long Id { get; set; }
         public virtual User User { get; set; }
         public long UserId { get; set; }
-        public Movie Movie { get; set; }
+        public virtual Movie Movie { get; set; }
         public long MovieId { get; set; }
-        public MovieTheater MovieTheater { get; set; }
+        public virtual MovieTheater MovieTheater { get; set; }
         public long MovieTheaterId { get; set; }
-        public Session Session { get; set; }
+        public virtual Session Session { get; set; }
         public long SessionId { get; set; }
         public DateTime DateBuy { get; set; }
         public double Value { get; set; }
-        public List<Snack> Snacks { get; set; }
+        public virtual List<Snack> Snacks { get; set; }
         public bool IsConfirmed { get; set; }
 
         public double CalculateValueSeats()

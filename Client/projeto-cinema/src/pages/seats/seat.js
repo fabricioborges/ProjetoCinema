@@ -2,7 +2,7 @@ import React, { useState, useEffect, useImperativeHandle } from 'react';
 import api from '../../services/api';
 import './seat.css';
 
-export default function Seat({ match }) {
+export default function Seat({ match, history }) {
 
     var [seats, setSeats] = useState([]);
     const [value, setValue] = useState();
@@ -33,8 +33,22 @@ export default function Seat({ match }) {
         setSeats(seatSeatsSelected);
 
         var selected = seatSeatsSelected.filter(x => x.IsSelected === true);
-
+        localStorage.setItem('seats', JSON.stringify(selected));
         setValue(selected.length * 10);
+       
+    }
+
+    async function handleConfirmed() {
+        const response = await api.put(`api/seat/`, seats, {
+            headers: {
+                token: sessionStorage.getItem('token')
+            }
+        })
+
+        if (response.data === true) {
+            localStorage.setItem('seatsValue', JSON.stringify(value));
+            history.push(`/snack/`)
+        }
     }
 
     return (
@@ -56,7 +70,7 @@ export default function Seat({ match }) {
                         ))}
                     </ul>
                     <p value={value}>Preço: R${value}</p>
-                    <button className="confirmed" type="submit"> Confirmar</button>
+                    <button className="confirmed" onClick={handleConfirmed}> Confirmar</button>
                 </div>
                 ) : (
                     <div>

@@ -12,6 +12,7 @@ namespace Projeto_Cinema.Application.Features.Seats.Commands
     {
         public long Id { get; set; }
         public int Number { get; set; }
+        public bool IsAvailable { get; set; }
 
         public virtual ValidationResult Validation()
         {

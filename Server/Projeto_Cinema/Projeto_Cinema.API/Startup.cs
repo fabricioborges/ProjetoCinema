@@ -63,6 +63,8 @@ namespace Projeto_Cinema.API
             policy.Origins.Add("http://localhost:3000");
             policy.Methods.Add("GET");
             policy.Methods.Add("POST");
+            policy.Methods.Add("PUT");
+            policy.Methods.Add("DELETE");
             var corsOptions = new CorsOptions
             {
                 PolicyProvider = new CorsPolicyProvider

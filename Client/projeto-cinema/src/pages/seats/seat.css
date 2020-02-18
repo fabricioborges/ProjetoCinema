@@ -48,7 +48,7 @@
 }
 
 
-button{
+.seat-container button{
     border: 0;
     font-size: 14px;
     font-weight:  bold;
@@ -57,7 +57,7 @@ button{
     display: flex;
 }
 
-h1 {
+.seat-container h1 {
     border: 0;
     font-size: 24px;
     font-weight:  bold;

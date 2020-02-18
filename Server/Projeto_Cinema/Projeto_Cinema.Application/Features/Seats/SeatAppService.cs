@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using Projeto_Cinema.Application.Features.Seats.Commands;
 using Projeto_Cinema.Domain.Features.Base.Exceptions;
@@ -38,15 +39,22 @@ namespace Projeto_Cinema.Application.Features.Seats
             return SeatRepository.GetById(Id);
         }
 
-        public bool Update(SeatUpdateCommand seat)
+        public bool Update(List<SeatUpdateCommand> seat)
         {
-            var seatDb = SeatRepository.GetById(seat.Id);
+            var ids = seat.Select(x => x.Id).ToList();
+
+            var seatDb = SeatRepository.GetBySeatIds(ids).ToList();
             if (seatDb == null)
                 throw new NotFoundException("Registro não encontrado!");
 
             var seatEdit = Mapper.Map(seat, seatDb);
+            foreach (var item in seatEdit)
+            {
+                SeatRepository.Update(item);
+            }
 
-            return SeatRepository.Update(seatEdit);
+
+            return true;
         }
     }
 }

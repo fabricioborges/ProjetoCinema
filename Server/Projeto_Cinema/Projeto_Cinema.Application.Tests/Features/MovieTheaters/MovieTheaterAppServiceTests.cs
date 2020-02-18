@@ -8,6 +8,7 @@ using Projeto_Cinema.Common.Tests.Features;
 using Projeto_Cinema.Domain.Features.Base.Exceptions;
 using Projeto_Cinema.Domain.Features.Movies;
 using Projeto_Cinema.Domain.Features.MovieTheaters;
+using Projeto_Cinema.Domain.Features.Seats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +21,16 @@ namespace Projeto_Cinema.Application.Tests.Features.MovieTheaters
     public class MovieTheaterAppServiceTests : TestBase
     {
         Mock<IMovieTheaterRepository> _repository;
+        Mock<ISeatRepository> _seatRepository;
+
         MovieTheatersAppService _appService;
 
         [SetUp]
         public void SetUp()
         {
             _repository = new Mock<IMovieTheaterRepository>();
-            _appService = new MovieTheatersAppService(_repository.Object);
+            _seatRepository = new Mock<ISeatRepository>();
+            _appService = new MovieTheatersAppService(_repository.Object, _seatRepository.Object);
         }
 
         [Test]

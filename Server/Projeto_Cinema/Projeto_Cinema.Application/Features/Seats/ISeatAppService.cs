@@ -16,7 +16,7 @@ namespace Projeto_Cinema.Application.Features.Seats
 
         Seat GetById(long Id);
 
-        bool Update(SeatUpdateCommand seat);
+        bool Update(List<SeatUpdateCommand> seat);
 
         bool Delete(SeatDeleteCommand seat);
     }

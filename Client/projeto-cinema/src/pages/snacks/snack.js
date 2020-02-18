@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import api from '../../services/api';
 import './snack.css'
 
-export default function Snack() {
+export default function Snack({history}) {
 
     var [snacks, setSnack] = useState([]);
     const [value, setValue] = useState(0);
     var valueOfSnacks = 0;
-    var quantity = 0;
-    var x;
+    
     useEffect(() => {
         async function loadSnacks() {
 
@@ -42,12 +41,17 @@ export default function Snack() {
         snack.Quantity = snack.Quantity - 1;
         var snackQuantity = [];
         snacks[index] = snack;
-        console.log(snacks)
         snacks.map(x => snackQuantity.push(x))
 
         setSnack(snackQuantity);
         valueOfSnacks = value - snackQuantity[index].Price;
         setValue(valueOfSnacks);
+    }
+
+    async function handleConfirmed(){
+        localStorage.setItem('snacks', JSON.stringify(snacks));
+        localStorage.setItem('snacksValue', value);
+        history.push('/ticket-buy/');
     }
 
     return (
@@ -68,7 +72,7 @@ export default function Snack() {
                     ))}
                 </ul>
                     <p>Preço: R${value}</p>
-                    <button className="confirmed" type="submit"> Adicionar Itens</button>
+                    <button className="confirmed" onClick={handleConfirmed}> Adicionar Itens</button>
                 </div>) : (
                     <div>
                         <div className="empty"> Não há snacks disponíveis :(</div>

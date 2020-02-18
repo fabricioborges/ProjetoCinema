@@ -45,6 +45,11 @@ namespace Projeto_Cinema.Infra.ORM.Features.Snacks
             return Context.Snacks.FirstOrDefault(s => s.Id == Id);
         }
 
+        public List<Snack> GetById(List<long> Id)
+        {
+            return Context.Snacks.Where(x => Id.Contains(x.Id)).ToList();
+        }
+
         public bool Update(Snack snack)
         {
             Context.Entry(snack).State = EntityState.Modified;

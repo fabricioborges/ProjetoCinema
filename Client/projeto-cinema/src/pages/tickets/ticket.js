@@ -20,8 +20,9 @@ export default function Ticket({ match, history }) {
 
     }, []);
 
-    async function handleToSeat(id){
-        history.push(`/seat/${id}`);
+    async function handleToSeat(movieTheaterid, sessionId){
+        localStorage.setItem('session', sessionId);
+        history.push(`/seat/${movieTheaterid}`);
     }
 
     return (
@@ -39,7 +40,7 @@ export default function Ticket({ match, history }) {
                                 <p>{session.TypeAudio == 1 ? 'Dublado' : 'Legendado'}</p>
                                 <p>{session.MovieTheater.Name}</p>
                                 <p className="dateSession">{session.Hour}</p>
-                                <button className="confirmed" onClick={() => handleToSeat(session.MovieTheater.Id)}>Confirmar</button>
+                                <button className="confirmed" onClick={() => handleToSeat(session.MovieTheater.Id, session.Id)}>Confirmar</button>
                             </footer>
                         </li>
                     ))}

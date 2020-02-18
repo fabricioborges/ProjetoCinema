@@ -4,6 +4,7 @@ using Projeto_Cinema.Infra.ORM.Context;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace Projeto_Cinema.Infra.ORM.Features.Seats
             Context.SaveChanges();
             return seats;
         }
-        
+
         public bool Delete(long Id)
         {
             var seat = Context.Seats.Where(c => c.Id == Id).FirstOrDefault();
@@ -54,12 +55,12 @@ namespace Projeto_Cinema.Infra.ORM.Features.Seats
 
         public IQueryable<Seat> GetBySeatIds(List<long> seatIds)
         {
-            return GetAll().Where(x => seatIds.Contains(x.Id));
+            return GetAll().Where(x => seatIds.Contains(x.Id)).AsNoTracking();
         }
 
-        public bool Update(Seat seat)
+        public bool Update(Seat seats)
         {
-            Context.Entry(seat).State = EntityState.Modified;
+            Context.Entry(seats).State = EntityState.Modified;
             return Context.SaveChanges() > 0;
         }
     }

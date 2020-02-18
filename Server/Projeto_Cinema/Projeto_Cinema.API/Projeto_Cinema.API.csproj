@@ -188,6 +188,7 @@
     <Compile Include="Controllers\Seats\SeatController.cs" />
     <Compile Include="Controllers\Sessions\SessionController.cs" />
     <Compile Include="Controllers\Snacks\SnackController.cs" />
+    <Compile Include="Controllers\Tickets\TicketController.cs" />
     <Compile Include="Controllers\Users\UserController.cs" />
     <Compile Include="Exceptions\ExceptionPayload.cs" />
     <Compile Include="Extensions\QueryExtensions.cs" />

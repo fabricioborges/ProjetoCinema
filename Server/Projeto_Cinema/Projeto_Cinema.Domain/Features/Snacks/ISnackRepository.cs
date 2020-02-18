@@ -14,6 +14,8 @@ namespace Projeto_Cinema.Domain.Features.Snacks
 
         Snack GetById(long Id);
 
+        List<Snack> GetById(List<long> Id);
+
         bool Update(Snack snack);
 
         bool Delete(long Id);

@@ -81,41 +81,6 @@ namespace Projeto_Cinema.Application.Tests.Features.Seats
         }
 
         [Test]
-        public void ApplService_Seat_deveria_atualizar_assento()
-        {
-            //Arrange
-            var seat = ObjectMother.seatDefault;
-            var seatCmd = ObjectMother.seatUpdateCommand;
-            var updated = true;
-            _repository.Setup(x => x.GetById(seatCmd.Id)).Returns(seat);
-            _repository.Setup(pr => pr.Update(seat)).Returns(updated);
-
-            //Action
-            var seatUpdated = _appService.Update(seatCmd);
-
-            //Assert
-            _repository.Verify(pr => pr.GetById(seatCmd.Id), Times.Once);
-            _repository.Verify(pr => pr.Update(seat), Times.Once);
-            seatUpdated.Should().BeTrue();
-        }
-
-        [Test]
-        public void ApplService_Seat_deveria_retornar_excecao()
-        {
-            //Arrange
-            var seatCmd = ObjectMother.seatUpdateCommand;
-            _repository.Setup(x => x.GetById(seatCmd.Id)).Returns((Seat)null);
-
-            //Action
-            Action act = () => _appService.Update(seatCmd);
-
-            //Assert
-            act.Should().Throw<NotFoundException>();
-            _repository.Verify(pr => pr.GetById(seatCmd.Id), Times.Once);
-            _repository.Verify(pr => pr.Update(It.IsAny<Seat>()), Times.Never);
-        }
-
-        [Test]
         public void ApplService_Seat_deveria_retornar_assento()
         {
             //Arrange

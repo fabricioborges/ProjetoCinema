@@ -53,12 +53,16 @@ namespace Projeto_Cinema.API.Controllers.Seats
         }
 
         [HttpPut]
-        public IHttpActionResult Update(SeatUpdateCommand seat)
+        public IHttpActionResult Update(List<SeatUpdateCommand> seats)
         {
-            var validator = seat.Validation();
-            if (!validator.IsValid)
-                return HandleValidationFailure(validator.Errors);
-            return HandleCallback(() => SeatAppService.Update(seat));
+            foreach (var seat in seats)
+            {
+                var validator = seat.Validation();
+                if (!validator.IsValid)
+                    return HandleValidationFailure(validator.Errors);
+            }
+           
+            return HandleCallback(() => SeatAppService.Update(seats));
         }
 
         [HttpDelete]

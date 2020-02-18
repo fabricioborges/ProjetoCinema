@@ -21,7 +21,7 @@ export default function Login({ history }) {
 
         if(response.status === 200){
             sessionStorage.setItem('token', response.data)
-            history.push(`/movie/`);
+            history.push(`/session/`);
         }
     }
 

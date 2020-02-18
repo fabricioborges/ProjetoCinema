@@ -31,7 +31,7 @@ export default function Session({history}) {
     }
 
     return (
-        <div className="main-container">
+        <div className="session-container">
             <DatePicker
                 className="date"
                 selected={startDate}
