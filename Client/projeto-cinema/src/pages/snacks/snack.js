@@ -7,7 +7,8 @@ export default function Snack({history}) {
     var [snacks, setSnack] = useState([]);
     const [value, setValue] = useState(0);
     var valueOfSnacks = 0;
-    
+    var manager = localStorage.getItem('Manager');
+
     useEffect(() => {
         async function loadSnacks() {
 
@@ -54,6 +55,10 @@ export default function Snack({history}) {
         history.push('/ticket-buy/');
     }
 
+    async function handleNew(){
+        history.push('/snack-new/');
+    }
+
     return (
         <div className="snack-container">
             {snacks.length > 0 ?
@@ -65,18 +70,20 @@ export default function Snack({history}) {
                                 <strong>{snack.Name}</strong>
                                 <p>Preço: R${snack.Price}</p>
                                 <p>Quantidade: {snack.Quantity}</p>
-                                <button onClick={() => handlePlus(snack)}>Adicionar +</button>
-                                <button onClick={() => handleRemove(snack)}>Remover -</button>
+                                {manager === 'true' ? '' : <button onClick={() => handlePlus(snack)}>Adicionar +</button>}
+                                {manager === 'true' ? '' : <button onClick={() => handleRemove(snack)}>Remover -</button>}
                             </footer>
                         </li>
                     ))}
                 </ul>
                     <p>Preço: R${value}</p>
-                    <button className="confirmed" onClick={handleConfirmed}> Adicionar Itens</button>
-                </div>) : (
+                    {manager === 'true' ? '' : <button className="confirmed" onClick={handleConfirmed}> Adicionar Itens</button>}
+                </div>)                
+                : (
                     <div>
                         <div className="empty"> Não há snacks disponíveis :(</div>
                     </div>)}
+            {manager === 'true' ? <button className="createSnack" onClick={handleNew}> Novo Snack</button> : ''} 
         </div>
     );
 }

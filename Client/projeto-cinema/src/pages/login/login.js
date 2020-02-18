@@ -19,13 +19,18 @@ export default function Login({ history }) {
 
         const response = await api.post('api/login', user);
 
-        if(response.status === 200){
+        if (response.status === 200) {
             sessionStorage.setItem('token', response.data)
-            history.push(`/session/`);
+            const userAuthenticated = await api.get(`api/user?$filter=Email eq '${user.email}'`);
+            localStorage.setItem('User', JSON.stringify(userAuthenticated))
+            if (userAuthenticated.data.Items[0].AccessLevel === 3)
+                history.push(`/usermanager/${userAuthenticated.data.Items[0].Id}`);
+            else
+                history.push(`/session/`);
         }
     }
 
-    function handleCreateAccount(event){
+    function handleCreateAccount(event) {
         history.push(`/user/`);
     }
 
@@ -41,7 +46,7 @@ export default function Login({ history }) {
                     type="password"
                     value={userpassword}
                     onChange={e => setUserPassword(e.target.value)}
-                />                
+                />
                 <button className="login" type="submit">Logar</button>
                 <button className="createAccount" onClick={handleCreateAccount}>Criar conta</button>
             </form>

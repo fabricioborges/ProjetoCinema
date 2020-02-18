@@ -1,18 +1,18 @@
-.login-container {
+.movie-container {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-container form {
+.movie-container form {
     width: 100%;
     max-width: 300px;
     display: flex;
     flex-direction: column;
 }
 
-.login-container form input {
+.movie-container form input {
     margin-top:  20px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -22,12 +22,12 @@
     color: #666;
 }
 
-.login-container form input::placeholder {
+.movie-container form input::placeholder {
     color: #999;
 }
 
 
-.login-container form .login{
+.movie-container form .movie{
     margin-top:  10px;
     border: 0;
     border-radius: 4px;
@@ -39,7 +39,7 @@
     cursor: pointer;
 }
 
-.login-container form .createAccount{
+.movie-container form .createAccount{
     margin-top:  10px;
     border: 0;
     border-radius: 4px;
@@ -51,12 +51,12 @@
     cursor: pointer;
 }
 
-.login-container form img {
+.movie-container form img {
     height: 165px;
     width: 285px;    
 }
 
-.login-container form select {
+.movie-container form select {
     margin-top:  20px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -65,4 +65,10 @@
     font-size: 16px;
     color: #666;
 }
+
+.movie-container label {
+    font-size: 10;
+    color: #999;
+    align-items: center;
+} 
 

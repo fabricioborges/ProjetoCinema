@@ -10,11 +10,13 @@ export default function TicketBuy({ history }) {
     const [seatValue, setSeatValue] = useState(0);
     const [snackValue, setSnackValue] = useState([]);
     const [valueTotal, setValue] = useState(0);
+    const [user, setUser] = useState([]);
     var id;
     useEffect(() => {
         async function loadSessions() {
 
             id = localStorage.getItem('session')
+            var user = localStorage.getItem('User')
             const snacks = localStorage.getItem('snacks');
             const seats = localStorage.getItem('seats');
             var value = localStorage.getItem('seatsValue')
@@ -32,7 +34,7 @@ export default function TicketBuy({ history }) {
             value = parseInt(value)
             valueSnack = parseInt(valueSnack)
             setValue(value + valueSnack);
-
+            setUser(JSON.parse(user));
         }
         loadSessions();
 
@@ -41,7 +43,7 @@ export default function TicketBuy({ history }) {
     async function handleConfirmed(movieTheaterid) {
 
         var ticketAdd = {
-            userId: 1,
+            userId: user.data.Items[0].Id,
             sessionId: sessions[0].Id,
             movieId: sessions[0].Movie.Id,
             movieTheaterid: sessions[0].MovieTheater.Id,
