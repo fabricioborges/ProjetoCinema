@@ -1,21 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './login.css';
 import api from '../../services/api';
-
+import Input from '../../components/inputs/input'
 import logo from '../../assets/logo.png'
+import { Form } from '@unform/web';
 
 export default function Login({ history }) {
 
-    const [useremail, setUserEmail] = useState('')
-    const [userpassword, setUserPassword] = useState('')
-
-    async function handleSubmit(event) {
-        event.preventDefault();
-
-        const user = {
-            email: useremail,
-            password: userpassword
-        }
+    async function handleSubmit(user) {
 
         const response = await api.post('api/login', user);
 
@@ -36,20 +28,13 @@ export default function Login({ history }) {
 
     return (
         <div className="login-container">
-            <form onSubmit={handleSubmit}>
+            <Form className="form" onSubmit={handleSubmit}>
                 <img src={logo} alt="logo" />
-                <input placeholder="Digite seu e-mail"
-                    value={useremail}
-                    onChange={e => setUserEmail(e.target.value)}
-                />
-                <input placeholder="Digite sua senha"
-                    type="password"
-                    value={userpassword}
-                    onChange={e => setUserPassword(e.target.value)}
-                />
+                <Input name="email" placeholder="E-mail" />
+                <Input name="password" type="password" placeholder="Digite sua senha" />
                 <button className="login" type="submit">Logar</button>
                 <button className="createAccount" onClick={handleCreateAccount}>Criar conta</button>
-            </form>
+            </Form>
         </div>
     )
 }

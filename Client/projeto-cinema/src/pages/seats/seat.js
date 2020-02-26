@@ -61,7 +61,7 @@ export default function Seat({ match, history }) {
                             <li style={{ background: seat.IsAvailable === true ? 'rgb(17, 182, 91)' : seat.IsSelected === true ? 'blue' : 'red' }} onChange={handleSeatsSelected} key={seat.Id}>
                                 {seat.IsAvailable}
                                 <footer>
-                                    <button style={{
+                                    <button disabled={!seat.IsAvailable && !seat.IsSelected} style={{
                                         background: seat.IsAvailable === true ? 'rgb(17, 182, 91)'
                                             : seat.IsSelected === true ? 'blue' : 'red'
                                     }} onClick={() => handleSeatsSelected(seat)}>{seat.Number}</button>
