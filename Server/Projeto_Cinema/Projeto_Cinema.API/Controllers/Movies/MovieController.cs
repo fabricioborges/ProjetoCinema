@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.OData.Query;
+﻿using AutoMapper;
+using Microsoft.AspNet.OData.Query;
 using Projeto_Cinema.API.Controllers.Common;
 using Projeto_Cinema.API.Filters;
 using Projeto_Cinema.Application.Features.Movies;
@@ -42,6 +43,22 @@ namespace Projeto_Cinema.API.Controllers.Movies
             query = MovieAppService.GetAll();
 
             return HandleQueryable<Movie, MovieViewModel>(query, queryOptions);
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public IHttpActionResult GetById(int id)
+        {
+            return HandleCallback(() => Mapper.Map<MovieViewModel>(MovieAppService.GetById(id)));
+        }
+
+        [HttpPut]
+        public IHttpActionResult Update(MovieUpdateCommand movie)
+        {
+            var validator = movie.Validation();
+            if (!validator.IsValid)
+                return HandleValidationFailure(validator.Errors);
+            return HandleCallback(() => MovieAppService.Update(movie));
         }
 
         [HttpDelete]

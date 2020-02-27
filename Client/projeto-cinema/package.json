@@ -13,11 +13,14 @@
     "odata-query": "^5.7.0",
     "react": "^16.13.0",
     "react-burger-menu": "^2.6.13",
+    "react-confirm-alert": "^2.5.1",
     "react-datepicker": "^2.12.1",
     "react-dom": "^16.12.0",
     "react-odata": "^10.1.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.1"
+    "react-scripts": "3.3.1",
+    "react-toast-notifications": "^2.4.0",
+    "react-toastify": "^5.5.0"
   },
   "scripts": {
     "start": "react-scripts start",

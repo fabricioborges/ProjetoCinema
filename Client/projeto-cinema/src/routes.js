@@ -17,16 +17,17 @@ export default function Routes() {
     return (
         <BrowserRouter>
             <Route path="/" exact component={Login} />
-            <Route path="/user/" component={User} />
-            <Route path="/session/" component={Session} />
-            <Route path="/ticket/:id" component={Ticket} />
-            <Route path="/seat/:movieTheaterId" component={Seat} />
-            <Route path="/snack/" component={Snack} />
-            <Route path="/ticket-buy/" component={TicketBuy} />
-            <Route path="/usermanager/:id" component={UserManager} />
-            <Route path="/movie/" component={Movie} />
-            <Route path="/movieview/" component={MovieView} />
-            <Route path="/snack-new/" component={SnackNew} />
+            <Route path="/user/" exact component={User} />
+            <Route path="/session/" exact component={Session} />
+            <Route path="/ticket/:id" exact component={Ticket} />
+            <Route path="/seat/:movieTheaterId" exact component={Seat} />
+            <Route path="/snack/" exact component={Snack} />
+            <Route path="/ticket-buy/" exact component={TicketBuy} />
+            <Route path="/usermanager/:id" exact component={UserManager} />
+            <Route path="/movie/" exact component={Movie} />
+            <Route path="/movie/:id" exact component={Movie} />
+            <Route path="/movieview/" exact component={MovieView} />
+            <Route path="/snack-new/" exact component={SnackNew} />
         </BrowserRouter>
     );
 }

@@ -14,6 +14,8 @@ namespace Projeto_Cinema.Application.Features.Movies.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         public TimeSpan Duration { get; set; }
+        public DateTime DebutDate { get; set; }
+        public DateTime EndDate { get; set; }
         public AnimationTypeEnum AnimationType { get; set; }
         public TypeAudioEnum TypeAudio { get; set; }
     }

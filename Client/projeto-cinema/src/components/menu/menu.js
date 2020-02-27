@@ -14,7 +14,7 @@ export default props => {
                 Salas
       </a>}
 
-            <a className="menu-item" href="/movie/">
+            <a className="menu-item" href="/movieview/">
                 Filmes
       </a>
 
