@@ -1,28 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import api from '../../services/api';
-import logo from '../../assets/logo.png'
-import './movie.css'
+import logo from '../../assets/logo.png';
+import './movie.css';
+import Input from '../../components/inputs/input';
+import { Form } from '@unform/web';
+import Menu from '../../components/menu/menu';
 
 export default function Movie({ history }) {
 
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [image, setImage] = useState('')
-    const [duration, setDuration] = useState('')
-    const [debutDate, setDebutDate] = useState('')
-    const [endDate, setEndDate] = useState('')
-
-    async function handleSubmit(event) {
-        event.preventDefault();
-
-        const movie = {
-            title: title,
-            description: description,
-            image: image,
-            duration: duration,
-            debutDate: debutDate,
-            endDate: endDate
-        }
+    async function handleSubmit(movie) {
 
         const response = await api.post('api/movie', movie);
 
@@ -34,44 +20,27 @@ export default function Movie({ history }) {
     }
 
     return (
-        <div className="movie-container">
-            <form onSubmit={handleSubmit}>
-                <img src={logo} alt="logo" />
-                <input placeholder="Digite o título"
-                    value={title}
-                    onChange={e => setTitle(e.target.value)}
-                />
-                <input placeholder="Digite a descrição"
-                    type="text"
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                />
-                <input placeholder="Digite a url da imagem"
-                    type="text"
-                    value={image}
-                    onChange={e => setImage(e.target.value)}
-                />
-                <label>Insira a duração do filme</label>
-                <input placeholder="Digite a url da imagem"
-                    type="time"
-                    value={duration}
-                    onChange={e => setDuration(e.target.value)}
-                />
-                <label>Digite a date de estreia</label>
-                <input placeholder="Digite a date de estreia"
-                    type="date"
-                    value={debutDate}
-                    onChange={e => setDebutDate(e.target.value)}
-                />
-                <label>Digite a date de final</label>
-                <input placeholder="Digite a date de final"
-                    type="date"
-                    value={endDate}
-                    onChange={e => setEndDate(e.target.value)}
-                />
-                <button className="movie" type="submit">Cadastrar</button>
-
-            </form>
+        <div id="App">
+            <Menu />
+            <div className="movie-container">
+                <Form onSubmit={handleSubmit}>
+                    <img src={logo} alt="logo" />
+                    <Input placeholder="Digite o título" name="title" />
+                    <Input placeholder="Digite a descrição" name="description" type="text" />
+                    <Input placeholder="Digite a url da imagem" name="image" type="text" />
+                    
+                    <label>Insira a duração do filme</label>
+                    <Input name="duration" type="time" />
+                    
+                    <label>Digite a data de estreia</label>
+                    <Input type="date" name="debutDate"/>
+                    
+                    <label>Digite a data de final</label>
+                    <Input name="endDate" type="date"/>
+                    
+                    <button className="movie" type="submit">Cadastrar</button>
+                </Form>
+            </div>
         </div>
     );
 }

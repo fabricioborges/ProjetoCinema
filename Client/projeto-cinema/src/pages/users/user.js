@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
 import logo from '../../assets/logo.png'
-import { func } from 'prop-types';
 import Input from '../../components/inputs/input';
 import { Form } from '@unform/web';
+import Menu from '../../components/menu/menu';
 
 
 export default function User({ history }) {
@@ -31,17 +31,20 @@ export default function User({ history }) {
     }
 
     return (
-        <div className="login-container">           
-            <Form onSubmit={handleSubmit}>
-                <img src={logo} alt="logo" />
-                <Input placeholder="Digite seu nome" name="name" />
-                <Input placeholder="Digite seu e-mail" name="email" type="email" />
-                <Input placeholder="Digite sua senha" name="password" type="password" />
-                <Input placeholder="Confirme sua senha" name="confirmedPassword" type="password" />
-                <button className="login" type="submit">Cadastrar</button>
-                {manager === 'true' ? ''
-                    : <button className="createAccount" onClick={handleLogin}>Já tenho uma conta</button>}
-            </Form>
+        <div id="App">
+            <Menu />
+            <div className="login-container">
+                <Form onSubmit={handleSubmit}>
+                    <img src={logo} alt="logo" />
+                    <Input placeholder="Digite seu nome" name="name" />
+                    <Input placeholder="Digite seu e-mail" name="email" type="email" />
+                    <Input placeholder="Digite sua senha" name="password" type="password" />
+                    <Input placeholder="Confirme sua senha" name="confirmedPassword" type="password" />
+                    <button className="login" type="submit">Cadastrar</button>
+                    {manager === 'true' ? ''
+                        : <button className="createAccount" onClick={handleLogin}>Já tenho uma conta</button>}
+                </Form>
+            </div>
         </div>
     );
 }

@@ -10,6 +10,7 @@ import Snack from './pages/snacks/snack.js'
 import TicketBuy from './pages/tickets/ticket-buy.js'
 import UserManager from './pages/users/user-manager.js'
 import Movie from './pages/movies/movie.js'
+import MovieView from './pages/movies/movie-view.js'
 import SnackNew from './pages/snacks/snack-new.js'
 
 export default function Routes() {
@@ -24,6 +25,7 @@ export default function Routes() {
             <Route path="/ticket-buy/" component={TicketBuy} />
             <Route path="/usermanager/:id" component={UserManager} />
             <Route path="/movie/" component={Movie} />
+            <Route path="/movieview/" component={MovieView} />
             <Route path="/snack-new/" component={SnackNew} />
         </BrowserRouter>
     );

@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import api from '../../services/api';
 import './session.css';
 import { addDays } from "date-fns";
-import Menu from '../../components/menu/menu'
+import Menu from '../../components/menu/menu';
 
 export default function Session({ history }) {
 
