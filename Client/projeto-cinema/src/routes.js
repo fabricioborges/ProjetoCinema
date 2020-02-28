@@ -29,6 +29,7 @@ export default function Routes() {
             <Route path="/movie/:id" exact component={Movie} />
             <Route path="/movieview/" exact component={MovieView} />
             <Route path="/snack-new/" exact component={SnackNew} />
+            <Route path="/snack-new/:id" exact component={SnackNew} />
         </BrowserRouter>
     );
 }

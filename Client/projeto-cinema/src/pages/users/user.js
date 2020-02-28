@@ -23,7 +23,7 @@ const MsgError = ({ closeToast }) => (
 export default function User({ history, match }) {
 
     var manager = localStorage.getItem('Manager');
-    console.log(manager);
+
     const formRef = useRef(null);
 
     useEffect(() => {
@@ -77,13 +77,12 @@ export default function User({ history, match }) {
                 if (response.status === codeResponse) {
                     history.push(`/session/`)
                 }
-            }    
-         
+            }
+
         }
-        catch(err){
-            toast.error(<MsgError/>)
-        }      
-        
+        catch (err) {
+            toast.error(<MsgError />)
+        }
     }
 
     function handleLogin() {

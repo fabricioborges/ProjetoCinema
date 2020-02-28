@@ -1,52 +1,89 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import api from '../../services/api';
 import './snack-new.css'
 import logo from '../../assets/logo.png'
+import Input from '../../components/inputs/input';
+import { Form } from '@unform/web';
+import Menu from '../../components/menu/menu';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function SnackNew({history}){
+const MsgSuccess = ({ closeToast }) => (
+    <div>
+        Snack cadastrado com sucesso!
+        </div>
+)
 
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
-    const [image, setImage] = useState('')    
+const MsgError = ({ closeToast }) => (
+    <div>
+        Ocorreu um error ao gravar o registro
+    </div>
+)
 
-    async function handleSubmit(event) {
-        event.preventDefault();
+export default function SnackNew({ history, match }) {
 
-        const snack = {
-            name: name,
-            price: price,
-            image: image          
+    const formRef = useRef(null);
+
+    useEffect(() => {
+
+        if (match.params.id) {
+            async function loadSnacks() {
+
+                const response = await api.get(`api/snack/${match.params.id}`, {
+                    headers: {
+                        token: sessionStorage.getItem('token')
+                    }
+                });
+
+                setTimeout(() => {
+                    formRef.current.setData({
+                        name: response.data.Name,
+                        price: response.data.Price,
+                        image: response.data.Image,
+                    })
+                }, 500)
+            }
+            loadSnacks();
         }
+    });
 
-        const response = await api.post('api/snack', snack);
+    async function handleSubmit(snack) {
+        try {
+            var response;
+            const codeResponse = 200;
 
-        const codeResponse = 200;
+            if (match.params.id) {
+                snack.id = match.params.id;
+                response = await api.put('api/snack', snack);
 
-        if (response.status === codeResponse) {
-            history.push(``)
+                if (response.status === codeResponse) {
+                    toast.success(<MsgSuccess />, { autoClose: 5000 });
+                }
+            }
+            else {
+                response = await api.post('api/snack', snack);
+                toast.success(<MsgSuccess />, { autoClose: 5000 });
+            }
+
+            history.push(`/snack/`);
+        }
+        catch (err) {
+            toast.error(<MsgError />);
         }
     }
 
     return (
-        <div className="login-container">
-            <form onSubmit={handleSubmit}>
-                <img src={logo} alt="logo" />
-                <input placeholder="Digite nome do snack"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                />
-                <input placeholder="Insira o preço do snack"
-                    type="number"
-                    value={price}
-                    onChange={e => setPrice(e.target.value)}
-                />
-                <input placeholder="Insira a url da imagem"
-                    type="text"
-                    value={image}
-                    onChange={e => setImage(e.target.value)}
-                />
-                <button className="login" type="submit">Cadastrar</button>                
-            </form>
+        <div id="App">
+            <Menu />
+            <div className="login-container">
+                <Form ref={formRef} onSubmit={handleSubmit}>
+                    <img src={logo} alt="logo" />
+                    <Input placeholder="Digite nome do snack" name="name" />
+                    <Input placeholder="Insira o preço do snack" name="price" type="number" />
+                    <Input placeholder="Insira a url da imagem" name="image" type="text" />
+                    <button className="login" type="submit">Cadastrar</button>
+                </Form>
+            </div>
         </div>
     );
 }
