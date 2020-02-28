@@ -1,0 +1,67 @@
+.user-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-container form {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-container form input {
+    margin-top:  20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 48px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.user-container form input::placeholder {
+    color: #999;
+}
+
+
+.user-container form .user{
+    margin-top:  10px;
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 16px;
+    background: #b80e0e;
+    font-weight:  bold;
+    color:  #fff;
+    cursor: pointer;
+}
+
+.user-container form .accountExists{
+    margin-top:  10px;
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 16px;
+    background: #f5f5f5;
+    font-weight:  bold;
+    color:  #555555;
+    cursor: pointer;
+}
+
+.user-container form img {
+    height: 165px;
+    width: 285px;    
+}
+
+.user-container form select {
+    margin-top:  20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 48px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
+}

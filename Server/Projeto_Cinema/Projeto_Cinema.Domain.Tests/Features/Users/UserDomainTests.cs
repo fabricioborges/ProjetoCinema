@@ -56,6 +56,20 @@ namespace Projeto_Cinema.Domain.Tests.Features.Users
             //Assert
             validate.Should().Throw<UserException>();
         }
+
+        [Test]
+        public void Dominio_Deveria_retornar_a_senha_sem_criptografia()
+        {
+            //Arrange
+            var password = "123456";
+            _user.GeneratePassword(password);
+
+            //Action
+           _user.GetPassword(_user.Password);
+
+            //Assert
+            _user.Password.Should().Be(password);
+        }
         
     }
 }

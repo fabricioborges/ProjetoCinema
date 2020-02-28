@@ -6,7 +6,7 @@ export default props => {
 
     return (
         <Menu>
-            <a className="menu-item" href="/user/">
+            <a className="menu-item" href="/userview/">
                 Usuários
       </a>
 

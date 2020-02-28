@@ -40,7 +40,9 @@ namespace Projeto_Cinema.Application.Features.Users
 
         public User GetById(long Id)
         {
-            return UserRepository.GetById(Id);
+            var user = UserRepository.GetById(Id);
+            user.GetPassword(user.Password);
+            return user;
         }
 
         public bool GetUserByEmail(UserLoginCommand loginCommand)
@@ -63,6 +65,7 @@ namespace Projeto_Cinema.Application.Features.Users
                 throw new NotFoundException("Registro não encontrado!");
 
             var userEdit = Mapper.Map(user, userDb);
+            userEdit.GeneratePassword(userEdit.Password);
 
             return UserRepository.Update(userEdit);
         }

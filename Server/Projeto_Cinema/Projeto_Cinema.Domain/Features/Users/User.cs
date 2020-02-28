@@ -29,6 +29,12 @@ namespace Projeto_Cinema.Domain.Features.Users
             Password = password.EncryptPassword();
         }
 
+        public void GetPassword(string password)
+        {
+            Password = password.DecryptPassword();           
+        }
+
+
         protected void CanAccess(AccessLevelEnum accessLevel)
         {
             AccessLevel = accessLevel;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import './user-view.css';
 import api from '../../services/api';
-import './movie-view.css'
 import Menu from '../../components/menu/menu';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
@@ -10,49 +10,49 @@ import 'react-toastify/dist/ReactToastify.css';
 const MsgSuccess = ({ closeToast }) => (
     <div>
         Registro excluído com sucesso!
-        </div>
+    </div>
 )
 
 const MsgError = ({ closeToast }) => (
     <div>
         Não foi possível excluir o registro!
-        </div>
+    </div>
 )
 
-export default function MovieView({ history }) {
+export default function UserView({ history }) {
 
-    var [movies, setMovies] = useState([]);
+    var [users, setUsers] = useState([]);
 
     useEffect(() => {
-        async function loadMovies() {
+        async function loadusers() {
 
-            const response = await api.get(`api/movie/`, {
+            const response = await api.get(`api/user/`, {
                 headers: {
                     token: sessionStorage.getItem('token')
                 }
             });
 
-            setMovies(response.data.Items);
+            setUsers(response.data.Items);
         }
-        loadMovies();
+        loadusers();
     }, []);
 
     function handleToEdit(id) {
-        history.push(`/movie/${id}`)
+        history.push(`/user/${id}`)
     }
 
     function handleToNew() {
-        history.push(`/movie/`)
+        history.push(`/user/`)
     }
 
-    function handleToDelete(movie) {
+    function handleToDelete(user) {
         const options = {
             title: 'Excluir registro',
-            message: 'Deseja excluir o filme selecionado?',
+            message: 'Deseja excluir o usuário selecionado?',
             buttons: [
                 {
                     label: 'Sim',
-                    onClick: () => removeMovie(movie)
+                    onClick: () => removeUser(user)
                 },
                 {
                     label: 'Não',
@@ -69,27 +69,27 @@ export default function MovieView({ history }) {
         confirmAlert(options);
     }
 
-    async function removeMovie(movie) {
+    async function removeUser(user) {
         try {
-            const id = movie.Id;
-            
-            await api.delete(`api/movie`, { data: { id } }, {
+            const id = user.Id;
+
+            await api.delete(`api/user`, { data: { id } }, {
                 headers: {
                     token: sessionStorage.getItem('token'),
                     contenttype: 'application/json'
                 }
             });
 
-            const index = movies.indexOf(movie);
-            var moviesRefresh = [];
+            const index = users.indexOf(user);
+            var usersRefresh = [];
 
             if (index > -1) {
-                delete movies[index];
+                delete users[index];
 
-                movies.map(x => moviesRefresh.push(x));
+                users.map(x => usersRefresh.push(x));
             }
 
-            setMovies(moviesRefresh);
+            setUsers(usersRefresh);
             toast.success(<MsgSuccess />);
 
         }
@@ -102,23 +102,17 @@ export default function MovieView({ history }) {
         <div id="App">
             <Menu />
             <ToastContainer />
-            <div className="movie-container-view">
+            <div className="user-container-view">
                 <button className="new" onClick={() => handleToNew()}>Adicionar</button>
-                {movies.length > 0 ?
+                {users.length > 0 ?
                     (<ul>
-                        {movies.map(movie => (
-                            <li key={movie.Id}>
-                                <img src={movie.Image} alt="image" />
+                        {users.map(user => (
+                            <li key={user.Id}>
                                 <footer>
-                                    <strong>{movie.Title}</strong>
-                                    <p>{movie.Description}</p>
-                                    <p>{movie.Duration}</p>
-                                    <p>{movie.AnimationType == 1 ? '3D' : '2D'}</p>
-                                    <p>{movie.TypeAudio == 1 ? 'Dublado' : 'Legendado'}</p>
-                                    <p>Data de estreia: {movie.DebutDate}</p>
-
-                                    <button className="edit" onClick={() => handleToEdit(movie.Id)}>Editar</button>
-                                    <button className="delete" onClick={() => handleToDelete(movie)}>Excluir</button>
+                                    <strong>{user.Name}</strong>
+                                    <p>{user.Email}</p>
+                                    <button className="edit" onClick={() => handleToEdit(user.Id)}>Editar</button>
+                                    <button className="delete" onClick={() => handleToDelete(user)}>Excluir</button>
                                 </footer>
                             </li>
                         ))}
