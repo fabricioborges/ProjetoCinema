@@ -46,7 +46,8 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters
 
         public IQueryable<MovieTheater> GetAll()
         {
-            return MovieTheaterRepository.GetAll();
+            var movieTheater =  MovieTheaterRepository.GetAll();
+            return movieTheater;
         }
 
         public MovieTheater GetById(long Id)
