@@ -38,22 +38,18 @@ namespace Projeto_Cinema.API.Controllers.MovieTheaters
         [ODataQueryOptionsValidate]
         public IHttpActionResult Get(ODataQueryOptions<MovieTheater> queryOptions)
         {
-            var query = default(IQueryable<MovieTheater>);
+            var movieTheaters = MovieTheaterAppService.GetAll().ToList();
 
-            query = MovieTheaterAppService.GetAll();
-
-            return HandleQueryable<MovieTheater, MovieTheaterViewModel>(query, queryOptions);
+            return Ok(movieTheaters);
         }
 
         [HttpGet]
         [Route("{id:int}")]
         public IHttpActionResult GetById(int id)
         {
-            //  return HandleCallback(() => Mapper.Map<MovieTheaterViewModel>(MovieTheaterAppService.GetById(id)));
+            var movieTheater = MovieTheaterAppService.GetById(id);
 
-            var movieTheater = Mapper.Map<MovieTheaterViewModel>(MovieTheaterAppService.GetById(id));
-
-            return Ok(movieTheater);
+            return Ok(Mapper.Map<MovieTheaterViewModel>(movieTheater));
         }
 
         [HttpPut]

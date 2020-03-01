@@ -35,7 +35,7 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters
             movieTheaterAdd.Seats = seats;
 
             var newMovieTheater = MovieTheaterRepository.Add(movieTheaterAdd);
-                       
+
             return newMovieTheater.Id;
         }
 
@@ -46,15 +46,14 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters
 
         public IQueryable<MovieTheater> GetAll()
         {
-            var movieTheater =  MovieTheaterRepository.GetAll();
-            return movieTheater;
+            return MovieTheaterRepository.GetAll();
         }
 
         public MovieTheater GetById(long Id)
         {
             return MovieTheaterRepository.GetById(Id);
         }
-            
+
         public bool Update(MovieTheaterUpdateCommand movieTheater)
         {
             var movieTheaterDb = MovieTheaterRepository.GetById(movieTheater.Id);
@@ -62,7 +61,9 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters
                 throw new NotFoundException("Registro não encontrado!");
 
             var movieTheaterEdit = Mapper.Map(movieTheater, movieTheaterDb);
-
+            
+            MovieTheaterRepository.Update(movieTheaterEdit);
+            
             return MovieTheaterRepository.Update(movieTheaterEdit);
         }
     }

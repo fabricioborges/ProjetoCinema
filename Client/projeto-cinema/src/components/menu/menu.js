@@ -10,7 +10,7 @@ export default props => {
                 Usuários
       </a>
 
-            {mostrar && <a className="menu-item" href="/movietheater/" hidden={false}>
+            {mostrar && <a className="menu-item" href="/movietheaterview/" hidden={false}>
                 Salas
       </a>}
 

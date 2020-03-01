@@ -1,8 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import './movie-theater-view.css';
+import Menu from '../../components/menu/menu';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function MovieTheaterView() {
+const MsgSuccess = ({ closeToast }) => (
+    <div>
+        Registro excluído com sucesso!
+        </div>
+)
+
+const MsgError = ({ closeToast }) => (
+    <div>
+        Não foi possível excluir o registro!
+        </div>
+)
+
+
+export default function MovieTheaterView({history}) {
     const [movieTheaters, setmovieTheaters] = useState([]);
 
     useEffect(() => {
@@ -13,19 +31,19 @@ export default function MovieTheaterView() {
                     token: sessionStorage.getItem('token')
                 }
             });
-
-            setmovieTheaters(response.data.Items);
+            console.log(response.data[0].Seats)
+            setmovieTheaters(response.data);
         }
         loadMovies();
     }, []);
     
 
     function handleToEdit(id) {
-        history.push(`/movieTheater/${id}`)
+        history.push(`/movietheater/${id}`)
     }
 
     function handleToNew() {
-        history.push(`/movieTheater/`)
+        history.push(`/movietheater/`)
     }
 
     function handleToDelete(movieTheater) {
@@ -56,7 +74,7 @@ export default function MovieTheaterView() {
         try {
             const id = movieTheater.Id;
 
-            await api.delete(`api/movieTheater`, { data: { id } }, {
+            await api.delete(`api/movietheater`, { data: { id } }, {
                 headers: {
                     token: sessionStorage.getItem('token'),
                     contenttype: 'application/json'
@@ -67,12 +85,12 @@ export default function MovieTheaterView() {
             var moviesTheatersRefresh = [];
 
             if (index > -1) {
-                delete movieTheater[index];
+                delete movieTheaters[index];
 
-                movieTheater.map(x => moviesTheatersRefresh.push(x));
+                movieTheaters.map(x => moviesTheatersRefresh.push(x));
             }
 
-            setmovieTheaters(moviesRefresh);
+            setmovieTheaters(moviesTheatersRefresh);
             toast.success(<MsgSuccess />);
 
         }
@@ -92,14 +110,11 @@ export default function MovieTheaterView() {
                         {movieTheaters.map(movieTheater => (
                             <li key={movieTheater.Id}>                               
                                 <footer>
-                                    <strong>{movieTheater.Title}</strong>
-                                    <p>{movieTheater.Description}</p>
-                                    <p>{movieTheater.Duration}</p>
-                                    <p>{movieTheater.AnimationType == 1 ? '3D' : '2D'}</p>
-                                    <p>{movieTheater.TypeAudio == 1 ? 'Dublado' : 'Legendado'}</p>
-                                  
-                                    <button className="edit" onClick={() => handleToEdit(movie.Id)}>Editar</button>
-                                    <button className="delete" onClick={() => handleToDelete(movie)}>Excluir</button>
+                                    <strong>{movieTheater.Name}</strong>      
+                                    <p>Quantidade de assentos: {movieTheater.Seats.length}</p>  
+                                                                                              
+                                    <button className="edit" onClick={() => handleToEdit(movieTheater.Id)}>Editar</button>
+                                    <button className="delete" onClick={() => handleToDelete(movieTheater)}>Excluir</button>
                                 </footer>
                             </li>
                         ))}

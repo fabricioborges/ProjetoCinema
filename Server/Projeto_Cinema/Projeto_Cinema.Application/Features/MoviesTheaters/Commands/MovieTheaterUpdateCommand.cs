@@ -13,6 +13,7 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters.Commands
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public int QuantityOfSeats { get; set; }
         public List<Seat> Seats { get; set; }
 
         public virtual ValidationResult Validation()

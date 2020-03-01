@@ -1,0 +1,86 @@
+
+.movie-theater-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-theater-container form {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-theater-container form input {
+    margin-top:  20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 48px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.movie-theater-container form input::placeholder {
+    color: #999;
+}
+
+
+.movie-theater-container form .movie-theater{
+    margin-top:  10px;
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 16px;
+    background: #b80e0e;
+    font-weight:  bold;
+    color:  #fff;
+    cursor: pointer;
+}
+
+.movie-theater-container form .createAccount{
+    margin-top:  10px;
+    border: 0;
+    border-radius: 4px;
+    height: 48px;
+    font-size: 16px;
+    background: #f5f5f5;
+    font-weight:  bold;
+    color:  #555555;
+    cursor: pointer;
+}
+
+.movie-theater-container form img {
+    height: 165px;
+    width: 285px;    
+}
+
+.movie-theater-container form select {
+    margin-top:  20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 48px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #666;
+}
+
+.movie-theater-container label {
+    font-size: 10;
+    color: #999;
+    align-items: center;
+} 
+
+.movie-theater-seat-container ul{
+    display: grid;
+    grid-template-columns: repeat(13, 0fr);
+    grid-gap: 5px;
+    margin-top: 50px;    
+}
+
+.movie-theater-seat-container  ul li {
+    display: flex;
+    flex-direction: column;
+}

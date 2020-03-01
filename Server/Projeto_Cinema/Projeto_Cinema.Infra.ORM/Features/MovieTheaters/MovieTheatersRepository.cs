@@ -37,12 +37,12 @@ namespace Projeto_Cinema.Infra.ORM.Features.MovieTheaters
 
         public IQueryable<MovieTheater> GetAll()
         {
-            return Context.MovieTheaters;
+            return Context.MovieTheaters.Include(x => x.Seats).AsNoTracking();
         }
 
         public MovieTheater GetById(long Id)
         {
-            return Context.MovieTheaters.FirstOrDefault(m => m.Id == Id);
+            return Context.MovieTheaters.Include(x => x.Seats).FirstOrDefault(m => m.Id == Id);
         }
 
         public bool Update(MovieTheater movieTheater)

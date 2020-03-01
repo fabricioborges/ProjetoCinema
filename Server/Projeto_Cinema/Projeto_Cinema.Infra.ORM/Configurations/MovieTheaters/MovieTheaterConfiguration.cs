@@ -15,7 +15,8 @@ namespace Projeto_Cinema.Infra.ORM.Configurations.MovieTheaters
             ToTable("TbMovieTheaters");
 
             Property(p => p.Name).IsRequired();
-            HasMany(p => p.Seats).WithOptional();
+            HasMany(p => p.Seats).WithOptional()
+                .WillCascadeOnDelete();
         }
     }
 }

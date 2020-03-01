@@ -125,6 +125,15 @@
     <Compile Include="Features\Snacks\SnackRepository.cs" />
     <Compile Include="Features\Tickets\TicketRepository.cs" />
     <Compile Include="Features\Users\UserRepository.cs" />
+    <Compile Include="Migrations\202002172054503_InitialCreate.cs" />
+    <Compile Include="Migrations\202002172054503_InitialCreate.designer.cs">
+      <DependentUpon>202002172054503_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002292233246_deleteOnCascade.cs" />
+    <Compile Include="Migrations\202002292233246_deleteOnCascade.designer.cs">
+      <DependentUpon>202002292233246_deleteOnCascade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +146,14 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202002172054503_InitialCreate.resx">
+      <DependentUpon>202002172054503_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002292233246_deleteOnCascade.resx">
+      <DependentUpon>202002292233246_deleteOnCascade.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

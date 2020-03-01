@@ -35,6 +35,9 @@ namespace Projeto_Cinema.Infra.ORM.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
+            modelBuilder.Entity<MovieTheater>()
+                .HasMany(x => x.Seats);
+            
             base.OnModelCreating(modelBuilder);
         }
     }
