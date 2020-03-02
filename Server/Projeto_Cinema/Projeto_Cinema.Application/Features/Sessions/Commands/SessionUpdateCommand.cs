@@ -13,8 +13,8 @@ namespace Projeto_Cinema.Application.Features.Sessions.Commands
         public DateTime DateInitial { get; set; }
         public DateTime EndDate { get; private set; }
         public DateTime Hour { get; set; }
-        public Movie Movie { get; set; }
-        public MovieTheater MovieTheater { get; set; }
+        public long MovieId { get; set; }
+        public long MovieTheaterId { get; set; }
         public TimeSpan Duration { get; private set; }
         public AnimationTypeEnum AnimationType { get; set; }
         public TypeAudioEnum TypeAudio { get; set; }

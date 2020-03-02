@@ -22,5 +22,6 @@ namespace Projeto_Cinema.Application.Features.Sessions.ViewModels
         public TimeSpan Duration { get; private set; }
         public AnimationTypeEnum AnimationType { get; set; }
         public TypeAudioEnum TypeAudio { get; set; }
+        public double ValueOfSeats { get; set; }
     }
 }

@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Login from './pages/login/login.js';
 import User from './pages/users/user.js';
 import UserView from './pages/users/user-view.js';
+import SessionView from './pages/sessions/session-view.js';
 import Session from './pages/sessions/session.js';
 import Ticket from './pages/tickets/ticket.js'
 import Seat from './pages/seats/seat.js'
@@ -23,6 +24,8 @@ export default function Routes() {
             <Route path="/user/:id" exact component={User} />
             <Route path="/userview/" exact component={UserView} />
             <Route path="/session/" exact component={Session} />
+            <Route path="/session/:id" exact component={Session} />
+            <Route path="/sessionview/" exact component={SessionView} />
             <Route path="/ticket/:id" exact component={Ticket} />
             <Route path="/seat/:movieTheaterId" exact component={Seat} />
             <Route path="/snack/" exact component={Snack} />

@@ -61,6 +61,13 @@ namespace Projeto_Cinema.Application.Features.Sessions
                 throw new NotFoundException("Registro não encontrado!");
 
             var seatEdit = Mapper.Map(session, sessionDb);
+            var movie = MovieRepository.GetById(session.MovieId);
+
+            seatEdit.Movie = movie;
+
+            seatEdit.SetDuration();
+
+            seatEdit.SetEndDate();
 
             return SessionRepository.Update(seatEdit);
         }

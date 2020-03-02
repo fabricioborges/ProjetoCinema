@@ -5,7 +5,6 @@ import logo from '../../assets/logo.png';
 import Input from '../../components/inputs/input';
 import { Form } from '@unform/web';
 import Menu from '../../components/menu/menu';
-import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,6 +26,7 @@ var quantityDb = 0;
 export default function MovieTheater({ history, match }) {
     const formRef = useRef(null);
     const [seats, setSeat] = useState([]);
+    var seatsToEdit = [];
 
     useEffect(() => {
 
@@ -61,7 +61,7 @@ export default function MovieTheater({ history, match }) {
             const quantityOfSeats = JSON.parse(formRef.current.getFieldValue('quantityOfSeats'));
             if (match.params.id) {
                 movie.id = match.params.id;
-                debugger
+
                 if (quantityDb < quantityOfSeats) {
                     addSeats(quantityOfSeats)
                 }
@@ -69,7 +69,7 @@ export default function MovieTheater({ history, match }) {
                     removeSeats(quantityOfSeats)
                 }
 
-                movie.seats = seats;
+                movie.seats = seats.concat(seatsToEdit);
 
                 response = await api.put('api/movietheater', movie);
             }
@@ -91,11 +91,8 @@ export default function MovieTheater({ history, match }) {
     }
 
     function addSeats(items) {
-        debugger
         const news = items - quantityDb;
 
-        var seatsToEdit = [];
-        seatsToEdit = seats;
         if (seats.length > 0) {
             for (var i = 1; i <= news; i++) {
                 const lastNumber = seats[seats.length - 1].Number;
@@ -118,17 +115,10 @@ export default function MovieTheater({ history, match }) {
                 seatsToEdit.push(newSeat);
             }
         }
-
-
-        setSeat(seatsToEdit);
     }
 
     function removeSeats(items) {
         const removes = quantityDb - items;
-
-        var seatsToEdit = [];
-
-        debugger
 
         for (var i = 1; i <= removes; i++) {
             const lastIndex = seats[seats.length - i];
@@ -144,6 +134,7 @@ export default function MovieTheater({ history, match }) {
     return (
         <div className="App">
             <Menu />
+            <ToastContainer />
             <div className="movie-theater-container">
                 <Form ref={formRef} onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />

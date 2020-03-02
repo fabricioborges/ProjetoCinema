@@ -25,7 +25,6 @@ export default function Snack({ history }) {
     const [value, setValue] = useState(0);
     var valueOfSnacks = 0;
     var manager = localStorage.getItem('Manager');
-    console.log(manager)
 
     useEffect(() => {
         async function loadSnacks() {

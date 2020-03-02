@@ -1,70 +1,160 @@
-import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React, { useEffect, useRef, useState } from 'react';
 import api from '../../services/api';
+import logo from '../../assets/logo.png';
 import './session.css';
-import { addDays } from "date-fns";
+import Input from '../../components/inputs/input';
+import Select from 'react-select';
+import { Form } from '@unform/web';
 import Menu from '../../components/menu/menu';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function Session({ history }) {
+const MsgSuccess = ({ closeToast }) => (
+    <div>
+        Sessão cadastrada com sucesso!
+        </div>
+)
 
-    const [sessions, setSessions] = useState([]);
-    const [startDate, setStartDate] = useState(new Date());
+const MsgError = ({ closeToast }) => (
+    <div>
+        Ocorreu um error ao gravar o registro
+    </div>
+)
+
+export default function Session({ history, match }) {
+
+    const formRef = useRef(null);
+    const [movieTheaters, setmovieTheaters] = useState([]);
+    const [movies, setMovies] = useState([]);
+    var movieId = 0;
+    var movieTheaterId = 0;
+    var movieIdDb = 0;
+    var movieTheaterIdDb = 0;
 
     useEffect(() => {
-        var paramDate = new Date(Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()));
-        const dateExhibition = paramDate.toJSON();
 
-        async function loadSessions() {
-            const response = await api.get(`api/session?$filter=EndDate ge ${dateExhibition}`, {
+        if (match.params.id) {
+            async function loadSessions() {
+
+                const response = await api.get(`api/session/${match.params.id}`, {
+                    headers: {
+                        token: sessionStorage.getItem('token')
+                    }
+                });
+
+
+                setTimeout(() => {
+                    formRef.current.setData({
+                        valueOfSeats: response.data.ValueOfSeats,
+                        hour: response.data.Hour.slice(11, 16),
+                        dateInitial: response.data.DateInitial.slice(0, 10)
+                    })
+                }, 500)
+
+                movieIdDb = response.data.Movie.Id;
+                movieTheaterIdDb = response.data.MovieTheater.Id;
+            }
+            loadSessions();
+        }
+    }, []);
+
+    useEffect(() => {
+        async function loadMovies() {
+
+            const response = await api.get(`api/movie/`, {
                 headers: {
                     token: sessionStorage.getItem('token')
                 }
-            })
-            setSessions(response.data.Items);
+            });
+
+            setMovies(response.data.Items);
         }
-        loadSessions();
+        loadMovies();
+    }, [])
 
-    }, [startDate]);
+    useEffect(() => {
+        async function loadMoviesTheaters() {
 
-    async function handleToTicket(item) {
-        history.push(`/ticket/${item}`);
+            const response = await api.get(`api/movietheater/`, {
+                headers: {
+                    token: sessionStorage.getItem('token')
+                }
+            });
+            setmovieTheaters(response.data);
+        }
+        loadMoviesTheaters();
+    }, []);
+
+    async function handleSubmit(session) {
+        try {
+            var response;
+            debugger;
+            if (match.params.id) {
+                session.id = match.params.id;
+                debugger
+                session.movieId = movieId != 0 ? movieId : movieIdDb;
+                session.movieTheaterId = movieTheaterId != 0 ? movieTheaterId : movieTheaterIdDb;
+                response = await api.put('api/session', session);
+
+            }
+            else {
+                response = await api.post('api/session', session);
+            }
+            const codeResponse = 200;
+
+            if (response.status === codeResponse) {
+                toast.success(<MsgSuccess />, { autoClose: 5000 });
+
+                history.push(`/sessionview/`)
+
+            }
+        }
+        catch (err) {
+            toast.success(<MsgError />, { autoClose: 5000 });
+        }
+    }
+
+    function handleMovie(option) {
+        movieId = JSON.parse(option);
+    }
+
+    function handleMovieTheater(option) {
+        movieTheaterId = JSON.parse(option);
     }
 
     return (
         <div id="App">
-            <Menu/>
+            <Menu />
             <div className="session-container">
-                <DatePicker
-                    className="date"
-                    selected={startDate}
-                    onChange={date => setStartDate(date)}
-                    minDate={new Date()}
-                    maxDate={addDays(new Date(), 7)}
-                    dateFormat="dd/MM"
-                />
-                {sessions.length > 0 ?
-                    (<ul>
-                        {sessions.map(session => (
-                            <li key={session.Id}>
-                                <img src={session.Movie.Image} alt="image" />
-                                <footer>
-                                    <strong>{session.Movie.Title}</strong>
-                                    <p>{session.Movie.Description}</p>
-                                    <p>{session.Duration}</p>
-                                    <p>{session.AnimationType == 1 ? '3D' : '2D'}</p>
-                                    <p>{session.TypeAudio == 1 ? 'Dublado' : 'Legendado'}</p>
-                                    <p>{session.MovieTheater.Name}</p>
-                                    <p className="dateSession">{session.Hour}</p>
-                                    <button className="buy" onClick={() => handleToTicket(session.Id)}>Comprar</button>
-                                </footer>
-                            </li>
+                <Form ref={formRef} onSubmit={handleSubmit}>
+                    <img src={logo} alt="logo" />
+
+                    <Input placeholder="Digite o valor dos assentos" name="valueOfSeats" type="number" />
+                    <select onChange={e => handleMovie(e.target.value)} >
+                        <option selected disabled>Selecione um filme</option>
+                        {movies.map(option => (
+                            <option value={option.Id}>{option.Title}</option>
                         ))}
-                    </ul>) : (
-                        <div>
-                            <div className="empty"> Não há sessões cadastradas para esse dia :(</div>
-                        </div>)}
+                    </select>
+
+                    <select onChange={e => handleMovieTheater(e.target.value)}>
+                        <option selected disabled>Selecione um filme</option>
+                        {movieTheaters.map(option => (
+                            <option value={option.Id} >{option.Name}</option>
+                        ))}
+                    </select>
+
+                    <label>Digite a hora inicial da sessão</label>
+                    <Input name="hour" type="time" />
+
+                    <label>Digite a data de início da sessão</label>
+                    <Input name="dateInitial" type="date" />
+
+                    <button className="session" type="submit">Cadastrar</button>
+                </Form>
+
+
             </div>
         </div>
-    );
+    )
 }

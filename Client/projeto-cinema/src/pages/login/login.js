@@ -29,7 +29,7 @@ export default function Login({ history }) {
                 }
                 else {
                     localStorage.setItem('Manager', JSON.parse(false));
-                    history.push(`/session/`);
+                    history.push(`/sessionview/`);
                 }
             }
         }

@@ -2,37 +2,31 @@ import React from 'react';
 import { bubble as Menu } from 'react-burger-menu';
 
 export default props => {
-    var mostrar = true;
-
+    var manager = localStorage.getItem('Manager');
+    console.log(manager)
     return (
         <Menu>
-            <a className="menu-item" href="/userview/">
+            {manager && <a className="menu-item" href="/userview/">
                 Usuários
-      </a>
+      </a>}
 
-            {mostrar && <a className="menu-item" href="/movietheaterview/" hidden={false}>
+            {manager && <a className="menu-item" href="/movietheaterview/" hidden={false}>
                 Salas
       </a>}
 
-            <a className="menu-item" href="/movieview/">
+            {manager && <a className="menu-item" href="/movieview/"> 
                 Filmes
-      </a>
+      </a>}
 
-            <a className="menu-item" href="/session/">
+            <a className="menu-item" href="/sessionview/">
                 Sessões
       </a>
 
-            <a className="menu-item" href="/snack">
+            {manager &&  <a className="menu-item" href="/snack">
                 Snacks
-      </a>      
+    </a>     } 
       
-            <a className="menu-item" href="/snack">
-                Relatório clientes
-      </a> 
-
-            <a className="menu-item" href="/snack">
-                Relatório filmes
-      </a>       
+        
              
         </Menu>
     );

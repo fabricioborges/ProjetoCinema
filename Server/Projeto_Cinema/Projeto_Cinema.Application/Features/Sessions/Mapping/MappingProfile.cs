@@ -11,9 +11,7 @@ namespace Projeto_Cinema.Application.Features.Sessions.Mapping
         {
             CreateMap<SessionAddCommand, Session>();                
 
-            CreateMap<SessionUpdateCommand, Session>()
-                .ForPath(src => src.Movie, m => m.MapFrom(dest => dest.Movie))
-                .ForPath(src => src.MovieTheater, m => m.MapFrom(dest => dest.MovieTheater));
+            CreateMap<SessionUpdateCommand, Session>();
 
             CreateMap<Session, SessionViewModel>();
         }
