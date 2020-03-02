@@ -15,6 +15,8 @@ cadastro de filmes implementado parcial
 
 utilizado banco de dados SQL Server, .Net Framework 4.6.1 e ReactJs para o front end.
 
+Utilizar o Update-DataBase para realizar a migração do banco de dados.
+
 Para executar os testes do projeto, basta acessar o gerenciamento de testes do visual studio
 
 Para executar o frontend é necessário utilizar o comando npm install ou yarn install para baixar os pacotes necessários e em seguida utilizar 
