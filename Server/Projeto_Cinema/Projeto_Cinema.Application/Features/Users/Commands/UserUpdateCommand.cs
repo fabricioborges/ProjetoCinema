@@ -15,6 +15,8 @@ namespace Projeto_Cinema.Application.Features.Users.Commands
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public AccessLevelEnum AccessLevel { get; set; }
+
 
         public virtual ValidationResult Validation()
         {

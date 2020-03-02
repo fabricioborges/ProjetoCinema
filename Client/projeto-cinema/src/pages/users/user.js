@@ -14,6 +14,12 @@ const MsgSuccess = ({ closeToast }) => (
         </div>
 )
 
+const options = [
+    { value: 0, label: 'Cliente' },
+    { value: 1, label: 'Atendente' },
+    { value: 2, label: 'Gerente' }
+]
+
 const MsgError = ({ closeToast }) => (
     <div>
         Ocorreu um error ao gravar o registro
@@ -23,7 +29,7 @@ const MsgError = ({ closeToast }) => (
 export default function User({ history, match }) {
 
     var manager = localStorage.getItem('Manager');
-
+    var permision = 0;
     const formRef = useRef(null);
 
     useEffect(() => {
@@ -63,6 +69,7 @@ export default function User({ history, match }) {
 
             if (match.params.id) {
                 user.id = match.params.id;
+                user.accessLevelEnum = permision;
                 response = await api.put('api/user', user);
 
                 if (response.status === codeResponse) {
@@ -71,6 +78,7 @@ export default function User({ history, match }) {
                 }
             }
             else {
+                user.accessLevelEnum = permision;
                 response = await api.post('api/user', user);
                 toast.success(<MsgSuccess />, { autoClose: 5000 });
 
@@ -89,6 +97,10 @@ export default function User({ history, match }) {
         history.push(``);
     }
 
+    function handlePermision(option){
+        permision = option;
+    }
+
     return (
         <div id="App">
             {manager === true ? <Menu /> : ''}
@@ -97,6 +109,12 @@ export default function User({ history, match }) {
                     <img src={logo} alt="logo" />
                     <Input placeholder="Digite seu nome" name="name" />
                     <Input placeholder="Digite seu e-mail" name="email" type="email" />
+                    <select onChange={e => handlePermision(e.target.value)} >
+                        <option selected disabled>Selecione um nível de permisionamento</option>
+                       <option value={0}>Cliente</option>
+                        <option value={1}>Atendente</option>
+                        <option value={2}>Gerente</option>
+                    </select>
                     <Input placeholder="Digite sua senha" name="password" type="password" />
                     <Input placeholder="Confirme sua senha" name="confirmedPassword" type="password" />
                     <button className="user" type="submit">Cadastrar</button>
