@@ -24,7 +24,7 @@ export default function MovieTheaterView({history}) {
     const [movieTheaters, setmovieTheaters] = useState([]);
 
     useEffect(() => {
-        async function loadMovies() {
+        async function loadMoviesTheaters() {
 
             const response = await api.get(`api/movietheater/`, {
                 headers: {
@@ -34,7 +34,7 @@ export default function MovieTheaterView({history}) {
             console.log(response.data[0].Seats)
             setmovieTheaters(response.data);
         }
-        loadMovies();
+        loadMoviesTheaters();
     }, []);
     
 
@@ -101,7 +101,7 @@ export default function MovieTheaterView({history}) {
 
     return(
         <div id="App">
-            <Menu />
+            <Menu  {...history}/>
             <ToastContainer />
             <div className="movie-theater-container-view">
                 <button className="new" onClick={() => handleToNew()}>Adicionar</button>

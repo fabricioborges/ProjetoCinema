@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import logo from '../../assets/logo.png';
 import './session.css';
-import Input from '../../components/inputs/input';
-import Select from 'react-select';
+import input from '../../components/inputs/input';
 import { Form } from '@unform/web';
 import Menu from '../../components/menu/menu';
 import { ToastContainer, toast } from 'react-toastify';
@@ -12,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const MsgSuccess = ({ closeToast }) => (
     <div>
         Sessão cadastrada com sucesso!
-        </div>
+    </div>
 )
 
 const MsgError = ({ closeToast }) => (
@@ -22,15 +21,14 @@ const MsgError = ({ closeToast }) => (
 )
 
 export default function Session({ history, match }) {
-
-    const formRef = useRef(null);
+    const [movieId, setmovieId] = useState();
+    const [movieTheaterId, setMovieTheaterId] = useState();
     const [movieTheaters, setmovieTheaters] = useState([]);
     const [movies, setMovies] = useState([]);
-    var movieId = 0;
-    var movieTheaterId = 0;
-    var movieIdDb = 0;
-    var movieTheaterIdDb = 0;
-
+    const [valueOfSeats, setValue] = useState(0);
+    const [hour, setHour] = useState();
+    const [dateInitial, setInitialDate] = useState();
+    
     useEffect(() => {
 
         if (match.params.id) {
@@ -41,18 +39,11 @@ export default function Session({ history, match }) {
                         token: sessionStorage.getItem('token')
                     }
                 });
-
-
-                setTimeout(() => {
-                    formRef.current.setData({
-                        valueOfSeats: response.data.ValueOfSeats,
-                        hour: response.data.Hour.slice(11, 16),
-                        dateInitial: response.data.DateInitial.slice(0, 10)
-                    })
-                }, 500)
-
-                movieIdDb = response.data.Movie.Id;
-                movieTheaterIdDb = response.data.MovieTheater.Id;
+                setmovieId(response.data.Movie.Id);
+                setValue(response.data.ValueOfSeats);
+                setHour(response.data.Hour.slice(11, 16));
+                setInitialDate(response.data.DateInitial.slice(0, 10));
+                setMovieTheaterId(response.data.MovieTheater.Id);                    
             }
             loadSessions();
         }
@@ -85,20 +76,31 @@ export default function Session({ history, match }) {
         loadMoviesTheaters();
     }, []);
 
-    async function handleSubmit(session) {
+    async function handleSubmit(e) {
+        e.preventDefault();
         try {
             var response;
-            debugger;
+
             if (match.params.id) {
-                session.id = match.params.id;
-                debugger
-                session.movieId = movieId != 0 ? movieId : movieIdDb;
-                session.movieTheaterId = movieTheaterId != 0 ? movieTheaterId : movieTheaterIdDb;
-                response = await api.put('api/session', session);
+                const id = match.params.id;
+                response = await api.put('api/session', {
+                    id,
+                    valueOfSeats,
+                    hour, 
+                    dateInitial,
+                    movieId,
+                    movieTheaterId
+                });
 
             }
             else {
-                response = await api.post('api/session', session);
+                response = await api.post('api/session', {
+                    valueOfSeats,
+                    hour,
+                    dateInitial,
+                    movieId,
+                    movieTheaterId
+                });
             }
             const codeResponse = 200;
 
@@ -106,7 +108,8 @@ export default function Session({ history, match }) {
                 toast.success(<MsgSuccess />, { autoClose: 5000 });
 
                 history.push(`/sessionview/`)
-
+            } else {
+                toast.error(<MsgError />, { autoClose: 5000 });
             }
         }
         catch (err) {
@@ -115,43 +118,49 @@ export default function Session({ history, match }) {
     }
 
     function handleMovie(option) {
-        movieId = JSON.parse(option);
+        setmovieId(option);
     }
 
     function handleMovieTheater(option) {
-        movieTheaterId = JSON.parse(option);
+        setMovieTheaterId(option);
     }
 
     return (
         <div id="App">
-            <Menu />
+            <Menu {...history}/>
             <div className="session-container">
-                <Form ref={formRef} onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />
 
-                    <Input placeholder="Digite o valor dos assentos" name="valueOfSeats" type="number" />
-                    <select onChange={e => handleMovie(e.target.value)} >
-                        <option selected disabled>Selecione um filme</option>
+                    <input placeholder="Digite o valor dos assentos" name="valueOfSeats" 
+                        type="number"
+                        value={valueOfSeats} 
+                        onChange={e => setValue(e.target.value)}/>
+                    <select value={movieId}  onChange={e => handleMovie(e.target.value)} >
+                        <option value={0}>Selecione um filme</option>
                         {movies.map(option => (
-                            <option value={option.Id}>{option.Title}</option>
+                            <option key={option.Id} value={option.Id}>{option.Title}</option>
                         ))}
                     </select>
-
-                    <select onChange={e => handleMovieTheater(e.target.value)}>
-                        <option selected disabled>Selecione um filme</option>
+                    <select value={movieTheaterId} onChange={e => handleMovieTheater(e.target.value)}>
+                        <option value={0}>Selecione uma sala</option>
                         {movieTheaters.map(option => (
-                            <option value={option.Id} >{option.Name}</option>
+                            <option key={option.Id} value={option.Id} >{option.Name}</option>
                         ))}
                     </select>
 
                     <label>Digite a hora inicial da sessão</label>
-                    <Input name="hour" type="time" />
+                    <input name="hour" type="time" 
+                        value={hour}
+                        onChange={e => setHour(e.target.value)}/>
 
                     <label>Digite a data de início da sessão</label>
-                    <Input name="dateInitial" type="date" />
+                    <input name="dateInitial" type="date" 
+                        value={dateInitial}
+                        onChange={e => setInitialDate(e.target.value)}/>
 
                     <button className="session" type="submit">Cadastrar</button>
-                </Form>
+                </form>
 
 
             </div>

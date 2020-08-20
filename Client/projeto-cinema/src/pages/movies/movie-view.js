@@ -100,7 +100,7 @@ export default function MovieView({ history }) {
 
     return (
         <div id="App">
-            <Menu />
+            <Menu  {...history}/>
             <ToastContainer />
             <div className="movie-container-view">
                 <button className="new" onClick={() => handleToNew()}>Adicionar</button>

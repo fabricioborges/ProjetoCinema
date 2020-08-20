@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import api from '../../services/api';
 import './snack.css'
 import Menu from '../../components/menu/menu';
+import MenuCustomer from '../../components/menu/menu-customer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { ToastContainer, toast } from 'react-toastify';
@@ -135,7 +136,7 @@ export default function Snack({ history }) {
 
     return (
         <div id="App">
-            <Menu />
+            {manager === 'true' ? <Menu  {...history} /> : <MenuCustomer  {...history}/>}
             <ToastContainer />
             <div className="snack-container">
                 {manager === 'true' ? <button className="new" onClick={handleNew}>Adicionar Snack</button> : ''}

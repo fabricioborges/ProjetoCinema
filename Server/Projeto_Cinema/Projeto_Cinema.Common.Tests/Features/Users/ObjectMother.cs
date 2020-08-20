@@ -18,7 +18,7 @@ namespace Projeto_Cinema.Common.Tests.Features
                 {
                     Id = 1,
                     Name = "user",
-                    Email = "email@email.com"                 
+                    Email = "email@email.com"                    
                 };
             }
         }

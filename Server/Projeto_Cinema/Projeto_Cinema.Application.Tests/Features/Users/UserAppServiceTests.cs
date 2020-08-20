@@ -120,6 +120,7 @@ namespace Projeto_Cinema.Application.Tests.Features.Users
         {
             //Arrange
             User user = ObjectMother.userDefault;
+            user.GeneratePassword("123");
             _repository.Setup(x => x.GetById(It.IsAny<long>())).Returns(user);
 
             //Action

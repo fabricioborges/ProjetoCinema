@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const MsgSuccess = ({ closeToast }) => (
     <div>
         Snack cadastrado com sucesso!
-        </div>
+    </div>
 )
 
 const MsgError = ({ closeToast }) => (
@@ -74,7 +74,7 @@ export default function SnackNew({ history, match }) {
 
     return (
         <div id="App">
-            <Menu />
+            <Menu {...history}/>
             <div className="login-container">
                 <Form ref={formRef} onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />

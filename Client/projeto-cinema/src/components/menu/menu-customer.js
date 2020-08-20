@@ -1,14 +1,20 @@
 import React from 'react';
 import { bubble as MenuCustomer } from 'react-burger-menu';
+import logout from '../../utils/logout';
 
 export default props => {
-    var manager = localStorage.getItem('Manager');
-    console.log(manager)
+    function handleLogout() {
+        logout(props);
+    }
+
     return (
         <MenuCustomer>
             <a className="menu-item" href="/sessionview/">
                 Sessões
-      </a>
+            </a>
+            <a className="menu-item" onClick={handleLogout}>
+                Sair
+            </a>
         </MenuCustomer>
     );
 };

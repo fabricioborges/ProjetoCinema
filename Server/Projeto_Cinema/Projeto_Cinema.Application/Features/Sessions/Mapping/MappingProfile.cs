@@ -11,7 +11,9 @@ namespace Projeto_Cinema.Application.Features.Sessions.Mapping
         {
             CreateMap<SessionAddCommand, Session>();                
 
-            CreateMap<SessionUpdateCommand, Session>();
+            CreateMap<SessionUpdateCommand, Session>()
+                .ForMember(c => c.DateInitial, x => x.MapFrom(y => y.DateInitial))
+                .ForMember(c => c.EndDate, x => x.MapFrom(y => y.EndDate));
 
             CreateMap<Session, SessionViewModel>();
         }

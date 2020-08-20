@@ -101,7 +101,7 @@ namespace Projeto_Cinema.Application.Tests.Features.MovieTheaters
 
             //Assert
             _repository.Verify(pr => pr.GetById(movieCmd.Id), Times.Once);
-            _repository.Verify(pr => pr.Update(movieTheater), Times.Once);
+            _repository.Verify(pr => pr.Update(movieTheater), Times.Exactly(2));
             movieTheaterUpdated.Should().BeTrue();
         }
 

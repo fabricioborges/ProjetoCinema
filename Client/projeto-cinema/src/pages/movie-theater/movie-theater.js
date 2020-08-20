@@ -133,13 +133,13 @@ export default function MovieTheater({ history, match }) {
 
     return (
         <div className="App">
-            <Menu />
+            <Menu  {...history}/>
             <ToastContainer />
             <div className="movie-theater-container">
                 <Form ref={formRef} onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />
                     <Input placeholder="Digite o nome da sala" name="name" />
-                    <Input placeholder="Quantidade de assentos" name="quantityOfSeats" type="number" />
+                    <Input placeholder="Quantidade de assentos" name="quantityOfSeats" type="number" min="1" max="100"/>
 
                     <button className="movie-theater" type="submit">Cadastrar</button>
                 </Form>

@@ -1,24 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
-import logo from '../../assets/logo.png'
-import Input from '../../components/inputs/input';
-import { Form } from '@unform/web';
+import logo from '../../assets/logo.png';
 import Menu from '../../components/menu/menu';
+import MenuCustomer from '../../components/menu/menu-customer';
 import './user.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MsgSuccess = ({ closeToast }) => (
     <div>
         Usuário cadastrado com sucesso!
-        </div>
+    </div>
 )
-
-const options = [
-    { value: 0, label: 'Cliente' },
-    { value: 1, label: 'Atendente' },
-    { value: 2, label: 'Gerente' }
-]
 
 const MsgError = ({ closeToast }) => (
     <div>
@@ -29,36 +22,36 @@ const MsgError = ({ closeToast }) => (
 export default function User({ history, match }) {
 
     var manager = localStorage.getItem('Manager');
-    var permision = 0;
-    const formRef = useRef(null);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmedPassword, setConfirmedPAssword] = useState('');
+    const [accessLevel, setAccessLevel] = useState(0);
 
     useEffect(() => {
 
         if (match.params.id) {
-            async function loadMovies() {
+            async function loadUser() {
 
                 const response = await api.get(`api/user/${match.params.id}`, {
                     headers: {
                         token: sessionStorage.getItem('token')
                     }
                 });
-
-                setTimeout(() => {
-                    formRef.current.setData({
-                        name: response.data.Name,
-                        email: response.data.Email,
-                        password: response.data.Password,
-                        confirmedPassword: response.data.Password,
-                    })
-                }, 500)
+                setAccessLevel(response.data.AccessLevel);  
+                setName(response.data.Name);
+                setPassword(response.data.Password);
+                setEmail(response.data.Email);  
+                setConfirmedPAssword(response.data.Password);                       
             }
-            loadMovies();
+            loadUser();
         }
-    });
+    }, []);
 
-    async function handleSubmit(user) {
+    async function handleSubmit(e) {
+        e.preventDefault();
 
-        if (user.password != user.confirmedPassword) {
+        if (password != confirmedPassword) {
             alert("As senhas não são iguais!")
             return;
         }
@@ -68,9 +61,14 @@ export default function User({ history, match }) {
             const codeResponse = 200;
 
             if (match.params.id) {
-                user.id = match.params.id;
-                user.accessLevelEnum = permision;
-                response = await api.put('api/user', user);
+                const id = match.params.id;
+                response = await api.put('api/user', {
+                    id,                    
+                    name,
+                    email,
+                    accessLevel,
+                    password
+                });
 
                 if (response.status === codeResponse) {
                     toast.success(<MsgSuccess />, { autoClose: 5000 });
@@ -78,8 +76,14 @@ export default function User({ history, match }) {
                 }
             }
             else {
-                user.accessLevelEnum = permision;
-                response = await api.post('api/user', user);
+                debugger
+               
+                response = await api.post('api/user', {
+                    name,
+                    email,
+                    accessLevel,
+                    password
+                });
                 toast.success(<MsgSuccess />, { autoClose: 5000 });
 
                 if (response.status === codeResponse) {
@@ -97,29 +101,41 @@ export default function User({ history, match }) {
         history.push(``);
     }
 
-    function handlePermision(option){
-        permision = option;
+    function handlePermision(option) {
+        setAccessLevel(option);
     }
 
     return (
         <div id="App">
-            {manager === true ? <Menu /> : ''}
+            {manager === 'true' ? <Menu {...history} /> : manager === 'false' ? <MenuCustomer {...history} /> : ''}
             <div className="user-container">
-                <Form ref={formRef} onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />
-                    <Input placeholder="Digite seu nome" name="name" />
-                    <Input placeholder="Digite seu e-mail" name="email" type="email" />
-                    <select onChange={e => handlePermision(e.target.value)} >
-                        <option selected disabled>Selecione um nível de permisionamento</option>
-                       <option value={0}>Cliente</option>
-                        <option value={1}>Atendente</option>
-                        <option value={2}>Gerente</option>
-                    </select>
-                    <Input placeholder="Digite sua senha" name="password" type="password" />
-                    <Input placeholder="Confirme sua senha" name="confirmedPassword" type="password" />
+                    <input placeholder="Digite seu nome" name="name"
+                        value={name}
+                        onChange={e => setName(e.target.value)} />
+                    <input placeholder="Digite seu e-mail" name="email" 
+                        type="email" 
+                        value={email}
+                        onChange={e => setEmail(e.target.value)} />
+                    {manager === 'true' ?
+                        <select value={accessLevel} onChange={e => handlePermision(e.target.value)} >
+                            <option>Selecione um nível de permisionamento</option>
+                            <option value={1}>Cliente</option>
+                            <option value={2}>Atendente</option>
+                            <option value={3}>Gerente</option>
+                        </select> : ''}
+                    <input placeholder="Digite sua senha" name="password" 
+                        type="password" 
+                        value={password}
+                        onChange={e => setPassword(e.target.value)} />
+                    <input placeholder="Confirme sua senha" name="confirmedPassword" 
+                        type="password" 
+                        value={confirmedPassword}
+                        onChange={e => setConfirmedPAssword(e.target.value)}/>
                     <button className="user" type="submit">Cadastrar</button>
-                    <button className="accountExists" onClick={handleLogin}>Já tenho uma conta</button>
-                </Form>
+                    {match.params.id ? '' : <button className="accountExists" onClick={handleLogin}>Já tenho uma conta</button>}
+                </form>
             </div>
         </div>
     );

@@ -109,17 +109,15 @@ export default function SessionView({ history }) {
         history.push(`/session/`)
     }
 
-    function handleToLogin(){
-        history.push("/")
-    }
-
     return (
         <div id="App">
-            {manager === 'true' ? <Menu /> : <MenuCustomer/>}            
+            {manager === 'true' ? <Menu {...history} /> : <MenuCustomer {...history}/>}
             <ToastContainer />
             <div className="session-container-view">
-                <button className="new" onClick={() => handleToNew()}>Adicionar</button>
-                <button className="new" onClick={() => handleToLogin()}>Sair</button>
+                <div>
+                    {manager === 'true' ? <button className="new" onClick={() => handleToNew()}>Adicionar</button> : ''}
+                </div>
+                
                 <DatePicker
                     className="date"
                     selected={startDate}
@@ -155,6 +153,7 @@ export default function SessionView({ history }) {
                             <div className="empty"> Não há sessões cadastradas para esse dia :(</div>
                         </div>)}
             </div>
+            
         </div>
     );
 }

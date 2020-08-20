@@ -8,8 +8,8 @@ namespace Projeto_Cinema.Domain.Features.Users.Enums
 {
     public enum AccessLevelEnum : Byte
     {
-        Customer = 0,
-        Attendant = 1,
-        Manager = 2
+        Customer = 1,
+        Attendant = 2,
+        Manager = 3
     }
 }

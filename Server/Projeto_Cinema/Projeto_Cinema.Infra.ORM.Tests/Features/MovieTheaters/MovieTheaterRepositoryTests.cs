@@ -111,7 +111,7 @@ namespace Projeto_Cinema.Infra.ORM.Tests.Features.MovieTheaters
             //Assert
             movieTheaters.Should().NotBeNull();
             movieTheaters.Should().HaveCount(Context.MovieTheaters.Count());
-            movieTheaters.First().Should().Be(_movieTheaterSeed);
+            movieTheaters.First().Name.Should().Be(_movieTheaterSeed.Name);
 
         }
     }

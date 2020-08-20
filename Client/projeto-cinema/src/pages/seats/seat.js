@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useImperativeHandle } from 'react';
 import api from '../../services/api';
 import './seat.css';
+import MenuCustomer from '../../components/menu/menu-customer';
+
 
 export default function Seat({ match, history }) {
 
@@ -35,7 +37,7 @@ export default function Seat({ match, history }) {
         var selected = seatSeatsSelected.filter(x => x.IsSelected === true);
         localStorage.setItem('seats', JSON.stringify(selected));
         setValue(selected.length * 10);
-       
+
     }
 
     async function handleConfirmed() {
@@ -52,30 +54,33 @@ export default function Seat({ match, history }) {
     }
 
     return (
-        <div className="seat-container">
-            <h1>Selecionar assentos</h1>
-            {seats.length > 0 ?
-                (<div>
-                    <ul>
-                        {seats.map(seat => (
-                            <li style={{ background: seat.IsAvailable === true ? 'rgb(17, 182, 91)' : seat.IsSelected === true ? 'blue' : 'red' }} onChange={handleSeatsSelected} key={seat.Id}>
-                                {seat.IsAvailable}
-                                <footer>
-                                    <button disabled={!seat.IsAvailable && !seat.IsSelected} style={{
-                                        background: seat.IsAvailable === true ? 'rgb(17, 182, 91)'
-                                            : seat.IsSelected === true ? 'blue' : 'red'
-                                    }} onClick={() => handleSeatsSelected(seat)}>{seat.Number}</button>
-                                </footer>
-                            </li>
-                        ))}
-                    </ul>
-                    <p value={value}>Preço: R${value}</p>
-                    <button className="confirmed" onClick={handleConfirmed}> Confirmar</button>
-                </div>
-                ) : (
-                    <div>
-                        <div className="empty"> Não há sessões cadastradas para esse dia :(</div>
-                    </div>)}
+        <div className="app">
+            <MenuCustomer  {...history}/>
+            <div className="seat-container">
+                <h1>Selecionar assentos</h1>
+                {seats.length > 0 ?
+                    (<div>
+                        <ul>
+                            {seats.map(seat => (
+                                <li style={{ background: seat.IsAvailable === true ? 'rgb(17, 182, 91)' : seat.IsSelected === true ? 'blue' : 'red' }} onChange={handleSeatsSelected} key={seat.Id}>
+                                    {seat.IsAvailable}
+                                    <footer>
+                                        <button disabled={!seat.IsAvailable && !seat.IsSelected} style={{
+                                            background: seat.IsAvailable === true ? 'rgb(17, 182, 91)'
+                                                : seat.IsSelected === true ? 'blue' : 'red'
+                                        }} onClick={() => handleSeatsSelected(seat)}>{seat.Number}</button>
+                                    </footer>
+                                </li>
+                            ))}
+                        </ul>
+                        <p value={value}>Preço: R${value}</p>
+                        <button className="confirmed" onClick={handleConfirmed}> Confirmar</button>
+                    </div>
+                    ) : (
+                        <div>
+                            <div className="empty"> Não há sessões cadastradas para esse dia :(</div>
+                        </div>)}
+            </div>
         </div>
     )
 }

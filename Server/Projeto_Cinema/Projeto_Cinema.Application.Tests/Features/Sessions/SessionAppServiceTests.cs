@@ -91,7 +91,9 @@ namespace Projeto_Cinema.Application.Tests.Features.Sessions
             var session = ObjectMother.sessionDefault;
             var sesionCmd = ObjectMother.sessionUpdateCommand;
             var updated = true;
+            var movie = ObjectMother.movieDefault;
             _repository.Setup(x => x.GetById(sesionCmd.Id)).Returns(session);
+            _movieRepository.Setup(x => x.GetById(sesionCmd.MovieId)).Returns(movie);
             _repository.Setup(pr => pr.Update(session)).Returns(updated);
 
             //Action

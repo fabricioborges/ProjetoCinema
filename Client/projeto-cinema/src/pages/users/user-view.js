@@ -100,7 +100,7 @@ export default function UserView({ history }) {
 
     return (
         <div id="App">
-            <Menu />
+            <Menu {...history}/>
             <ToastContainer />
             <div className="user-container-view">
                 <button className="new" onClick={() => handleToNew()}>Adicionar</button>
