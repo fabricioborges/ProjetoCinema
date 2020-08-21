@@ -26,7 +26,7 @@ export default function Snack({ history }) {
     const [value, setValue] = useState(0);
     var valueOfSnacks = 0;
     var manager = localStorage.getItem('Manager');
-
+  
     useEffect(() => {
         async function loadSnacks() {
 
@@ -39,7 +39,7 @@ export default function Snack({ history }) {
         }
         loadSnacks();
     }, [])
-
+   
     async function handlePlus(snack) {
         const index = snacks.indexOf(snack);
         snack.Quantity = snack.Quantity + 1;

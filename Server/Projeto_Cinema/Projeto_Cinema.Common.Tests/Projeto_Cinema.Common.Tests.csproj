@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Features\Movies\ObjectMother.cs" />
     <Compile Include="Features\MovieTheaters\ObjectMother.cs" />
+    <Compile Include="Features\Reports\CustomerStories\ObjectMother.cs" />
     <Compile Include="Features\Seats\ObjectMother.cs" />
     <Compile Include="Features\Sessions\ObjectMother.cs" />
     <Compile Include="Features\Snacks\ObjectMother.cs" />

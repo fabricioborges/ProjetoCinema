@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from '../../services/api';
+import MenuCustomer from '../../components/menu/menu-customer';
 import './ticket-buy.css';
 
 export default function TicketBuy({ history }) {
@@ -41,60 +42,62 @@ export default function TicketBuy({ history }) {
     }, []);
 
     async function handleConfirmed(movieTheaterid) {
-
+        console.log(user);
         var ticketAdd = {
-            userId: user.data.Items[0].Id,
+            userId: user.Id,
             sessionId: sessions[0].Id,
             movieId: sessions[0].Movie.Id,
             movieTheaterid: sessions[0].MovieTheater.Id,
-            snacksIds: snacksConcat.map(x => x.Id).filter(x => x.Quantity > 0),             
+            snacksIds: snacksConcat.map(x => x.Id).filter(x => x.Quantity > 0),
             value: valueTotal
         }
 
-        const response = await api.post(`api/ticket`, ticketAdd )
+        const response = await api.post(`api/ticket`, ticketAdd)
 
-        if(response.status === 200)
+        if (response.status === 200)
             alert("compra efetuada com sucesso");
     }
 
     return (
-        <div className="ticket-buy-container">
 
-            <ul>
-                {sessions.map(session => (
-                    <li key={session.Id}>
-                        <img src={session.Movie.Image} alt="image" />
-                        <footer>
-                            <strong>{session.Movie.Title}</strong>
-                            <p>{session.Movie.Description}</p>
-                            <p>{session.Duration}</p>
-                            <p>{session.AnimationType == 1 ? '3D' : '2D'}</p>
-                            <p>{session.TypeAudio == 1 ? 'Dublado' : 'Legendado'}</p>
-                            <p>{session.MovieTheater.Name}</p>
-                            <p className="dateSession">{session.Hour}</p>
-                            {snacksConcat.map(snack => (
-                                <li key={snack.Id}>
-                                    <footer>
-                                        <strong>{snack.Name}</strong>
-                                        <p>Preço: R${snack.Price}</p>
-                                        <p>Quantidade: {snack.Quantity}</p>
-                                    </footer>
-                                </li>
-                            ))}
-                            {seatsConcat.map(seat => (
-                                <li key={seat.Id}>
-                                    <footer>
-                                        <strong>Assento: {seat.Number}</strong>
-                                        <p>Preço: R${seatValue}</p>
-                                    </footer>
-                                </li>
-                            ))}
-                            <strong>Total: R${valueTotal}</strong>
-                            <button className="confirmed" onClick={handleConfirmed}>Confirmar</button>
-                        </footer>
-                    </li>))}
-            </ul>
-
+        <div className="app">
+            <MenuCustomer {... history}/>
+            <div className="ticket-buy-container">
+                <ul>
+                    {sessions.map(session => (
+                        <li key={session.Id}>
+                            <img src={session.Movie.Image} alt="image" />
+                            <footer>
+                                <strong>{session.Movie.Title}</strong>
+                                <p>{session.Movie.Description}</p>
+                                <p>{session.Duration}</p>
+                                <p>{session.AnimationType == 1 ? '3D' : '2D'}</p>
+                                <p>{session.TypeAudio == 1 ? 'Dublado' : 'Legendado'}</p>
+                                <p>{session.MovieTheater.Name}</p>
+                                <p className="dateSession">{session.Hour}</p>
+                                {snacksConcat.map(snack => (
+                                    <li key={snack.Id}>
+                                        <footer>
+                                            <strong>{snack.Name}</strong>
+                                            <p>Preço: R${snack.Price}</p>
+                                            <p>Quantidade: {snack.Quantity}</p>
+                                        </footer>
+                                    </li>
+                                ))}
+                                {seatsConcat.map(seat => (
+                                    <li key={seat.Id}>
+                                        <footer>
+                                            <strong>Assento: {seat.Number}</strong>
+                                            <p>Preço: R${seatValue}</p>
+                                        </footer>
+                                    </li>
+                                ))}
+                                <strong>Total: R${valueTotal}</strong>
+                                <button className="confirmed" onClick={handleConfirmed}>Confirmar</button>
+                            </footer>
+                        </li>))}
+                </ul>
+            </div>
         </div>
     )
 

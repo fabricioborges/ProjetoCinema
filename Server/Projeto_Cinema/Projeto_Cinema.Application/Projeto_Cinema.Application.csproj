@@ -75,6 +75,9 @@
     <Compile Include="Features\Movies\MovieAppService.cs" />
     <Compile Include="Features\Movies\ViewModels\MovieInExhibitionViewModel.cs" />
     <Compile Include="Features\Movies\ViewModels\MovieViewModel.cs" />
+    <Compile Include="Features\Reports\IReportAppService.cs" />
+    <Compile Include="Features\Reports\ReportAppService.cs" />
+    <Compile Include="Features\Reports\ViewModels\CustomerStoryViewModel.cs" />
     <Compile Include="Features\Seats\Commands\SeatAddCommand.cs" />
     <Compile Include="Features\Seats\Commands\SeatDeleteCommand.cs" />
     <Compile Include="Features\Seats\Commands\SeatUpdateCommand.cs" />

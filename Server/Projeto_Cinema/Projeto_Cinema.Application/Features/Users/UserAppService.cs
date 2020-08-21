@@ -19,13 +19,13 @@ namespace Projeto_Cinema.Application.Features.Users
             UserRepository = repository;
         }
 
-        public long Add(UserAddCommand user)
+        public User Add(UserAddCommand user)
         {
             var userAdd = Mapper.Map<UserAddCommand, User>(user);
             userAdd.GeneratePassword(userAdd.Password);
             var newUser = UserRepository.Add(userAdd);
 
-            return newUser.Id;
+            return newUser;
         }
 
         public bool Delete(UserDeleteCommand user)

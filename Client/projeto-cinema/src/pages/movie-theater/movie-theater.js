@@ -21,17 +21,24 @@ const MsgError = ({ closeToast }) => (
     </div>
 )
 
+const MsgValidator = ({ closeToast }) => (
+    <div>
+        Já existe uma sala cadastrada com esse nome!
+    </div>
+)
+
 var quantityDb = 0;
 
 export default function MovieTheater({ history, match }) {
     const formRef = useRef(null);
     const [seats, setSeat] = useState([]);
+    const [movieTheaters, setMovieTheaters] = useState([]);
     var seatsToEdit = [];
 
     useEffect(() => {
 
         if (match.params.id) {
-            async function loadMovies() {
+            async function loadMovieTheater() {
 
                 const response = await api.get(`api/movietheater/${match.params.id}`, {
                     headers: {
@@ -51,11 +58,31 @@ export default function MovieTheater({ history, match }) {
                 }, 500)
 
             }
-            loadMovies();
+            loadMovieTheater();
         }
     }, []);
 
+    useEffect(() => {
+        async function loadMoviesTheaters() {
+            const response = await api.get('api/movietheater/', {
+                headers: {
+                    token: sessionStorage.getItem('token')
+                }
+            });
+
+            setMovieTheaters(response.data);
+        }
+
+        loadMoviesTheaters();
+    }, [])
+
     async function handleSubmit(movie) {
+
+        if (movieTheaters.find(x => x.Name.toUpperCase() === movie.name.toUpperCase() && x.Id != match.params.id)){
+            toast.error(<MsgValidator />, { autoClose: 5000 });
+            return;
+        }
+
         try {
             var response;
             const quantityOfSeats = JSON.parse(formRef.current.getFieldValue('quantityOfSeats'));
@@ -86,7 +113,7 @@ export default function MovieTheater({ history, match }) {
             }
         }
         catch (err) {
-            toast.success(<MsgError />, { autoClose: 5000 });
+            toast.error(<MsgError />, { autoClose: 5000 });
         }
     }
 
@@ -133,13 +160,13 @@ export default function MovieTheater({ history, match }) {
 
     return (
         <div className="App">
-            <Menu  {...history}/>
+            <Menu  {...history} />
             <ToastContainer />
             <div className="movie-theater-container">
                 <Form ref={formRef} onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />
                     <Input placeholder="Digite o nome da sala" name="name" />
-                    <Input placeholder="Quantidade de assentos" name="quantityOfSeats" type="number" min="1" max="100"/>
+                    <Input placeholder="Quantidade de assentos" name="quantityOfSeats" type="number" min="20" max="100" />
 
                     <button className="movie-theater" type="submit">Cadastrar</button>
                 </Form>

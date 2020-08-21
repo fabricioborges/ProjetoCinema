@@ -20,14 +20,21 @@ const MsgError = ({ closeToast }) => (
     </div>
 )
 
+const MsgValidator = ({ closeToast }) => (
+    <div>
+        Já existe um filme cadastrado com esse título!
+    </div>
+)
+
 export default function Movie({ history, match }) {
 
     const formRef = useRef(null);
+    const [movies, setMovies] = useState([]);
 
     useEffect(() => {
 
         if (match.params.id) {
-            async function loadMovies() {
+            async function loadMovie() {
 
                 const response = await api.get(`api/movie/${match.params.id}`, {
                     headers: {
@@ -46,11 +53,31 @@ export default function Movie({ history, match }) {
                     })
                 }, 500)
             }
-            loadMovies();
+            loadMovie();
         }
     });
 
+    useEffect(() => {
+        async function loadMovies(){
+            const response = await api.get('api/movie/', {
+                headers: {
+                    token: sessionStorage.getItem('token')
+                }
+            });
+
+            setMovies(response.data.Items);
+        }
+
+        loadMovies();
+    }, [])
+
     async function handleSubmit(movie) {
+      
+        if (movies.find(x => x.Title.toUpperCase() === movie.title.toUpperCase() && x.Id != match.params.id)){
+            toast.error(<MsgValidator />, { autoClose: 5000 });
+            return;
+        }
+        
         try {
             var response;
 
@@ -72,13 +99,14 @@ export default function Movie({ history, match }) {
             }
         }
         catch (err) {
-            toast.success(<MsgError />, { autoClose: 5000 });
+            toast.error(<MsgError />, { autoClose: 5000 });
         }
     }
 
     return (
         <div id="App">
-            <Menu />
+            <Menu  {...history}/>
+            <ToastContainer />
             <div className="movie-container">
                 <Form ref={formRef} onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />

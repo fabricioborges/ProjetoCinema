@@ -14,6 +14,7 @@ namespace Projeto_Cinema.Application.Config
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfiles(typeof(AutoMapperConfig));
+                cfg.ValidateInlineMaps = false;
             });            
         }
 

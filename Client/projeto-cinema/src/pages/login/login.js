@@ -22,7 +22,9 @@ export default function Login({ history }) {
             if (response.status === 200) {
                 sessionStorage.setItem('token', response.data)
                 const userAuthenticated = await api.get(`api/user?$filter=Email eq '${user.email}'`);
+                debugger
                 localStorage.setItem('User', JSON.stringify(userAuthenticated))
+                localStorage.setItem('customerId',userAuthenticated.data.Items[0].Id);
                 if (userAuthenticated.data.Items[0].AccessLevel === 3) {
                     localStorage.setItem('Manager', JSON.parse(true));
                     history.push(`/userview/`);

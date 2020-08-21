@@ -185,6 +185,7 @@
     <Compile Include="Controllers\Login\LoginController.cs" />
     <Compile Include="Controllers\Movies\MovieController.cs" />
     <Compile Include="Controllers\MovieTheaters\MovieTheaterController.cs" />
+    <Compile Include="Controllers\Reports\ReportController.cs" />
     <Compile Include="Controllers\Seats\SeatController.cs" />
     <Compile Include="Controllers\Sessions\SessionController.cs" />
     <Compile Include="Controllers\Snacks\SnackController.cs" />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import api from '../../services/api';
 import './snack-new.css'
 import logo from '../../assets/logo.png'
@@ -20,10 +20,17 @@ const MsgError = ({ closeToast }) => (
     </div>
 )
 
+const MsgValidator = ({ closeToast }) => (
+    <div>
+        Já existe um snack cadastrado com esse nome!
+    </div>
+)
+
 export default function SnackNew({ history, match }) {
 
+    const [snacks, setSnacks] = useState([]);
     const formRef = useRef(null);
-
+    
     useEffect(() => {
 
         if (match.params.id) {
@@ -45,9 +52,29 @@ export default function SnackNew({ history, match }) {
             }
             loadSnacks();
         }
-    });
+    },[]);
+
+    useEffect(() => {
+        async function loadSnacks() {
+            const response = await api.get('api/snack', {
+                headers: {
+                    token: sessionStorage.getItem('token')
+                }
+            })
+
+            setSnacks(response.data.Items);
+        }
+
+        loadSnacks();
+    }, [])
 
     async function handleSubmit(snack) {
+        
+        if(snacks.find(x => x.Name.toUpperCase() === snack.name.toUpperCase() && x.Id != match.params.id)){
+            toast.error(<MsgValidator />, { autoClose: 5000 });
+            return;
+        }
+        
         try {
             var response;
             const codeResponse = 200;
@@ -75,6 +102,7 @@ export default function SnackNew({ history, match }) {
     return (
         <div id="App">
             <Menu {...history}/>
+            <ToastContainer />
             <div className="login-container">
                 <Form ref={formRef} onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />

@@ -4,7 +4,7 @@ import logo from '../../assets/logo.png';
 import Menu from '../../components/menu/menu';
 import MenuCustomer from '../../components/menu/menu-customer';
 import './user.css';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MsgSuccess = ({ closeToast }) => (
@@ -16,6 +16,18 @@ const MsgSuccess = ({ closeToast }) => (
 const MsgError = ({ closeToast }) => (
     <div>
         Ocorreu um error ao gravar o registro
+    </div>
+)
+
+const MsgInvalidPassword = ({ closeToast }) => (
+    <div>
+        A senha deve conter pelo menos um caracter maiusculo, 4 minusculos e 2 numeros!
+    </div>
+)
+
+const MsgPasswordIncorrect = ({ closeToast }) => (
+    <div>
+        As senha digitas não são iguais!
     </div>
 )
 
@@ -38,11 +50,11 @@ export default function User({ history, match }) {
                         token: sessionStorage.getItem('token')
                     }
                 });
-                setAccessLevel(response.data.AccessLevel);  
+                setAccessLevel(response.data.AccessLevel);
                 setName(response.data.Name);
                 setPassword(response.data.Password);
-                setEmail(response.data.Email);  
-                setConfirmedPAssword(response.data.Password);                       
+                setEmail(response.data.Email);
+                setConfirmedPAssword(response.data.Password);
             }
             loadUser();
         }
@@ -51,8 +63,15 @@ export default function User({ history, match }) {
     async function handleSubmit(e) {
         e.preventDefault();
 
+        const re = /(?=.*?[A-Z])(?=.*?[a-z]{4})(?=.*?[0-9]{2})/
+       
+        if (!re.test(password)) {
+            toast.error(<MsgInvalidPassword />, { autoClose: 5000 });
+            return;
+        }
+
         if (password != confirmedPassword) {
-            alert("As senhas não são iguais!")
+            toast.error(<MsgPasswordIncorrect />, { autoClose: 5000 });
             return;
         }
 
@@ -63,7 +82,7 @@ export default function User({ history, match }) {
             if (match.params.id) {
                 const id = match.params.id;
                 response = await api.put('api/user', {
-                    id,                    
+                    id,
                     name,
                     email,
                     accessLevel,
@@ -76,18 +95,19 @@ export default function User({ history, match }) {
                 }
             }
             else {
-                debugger
-               
+
                 response = await api.post('api/user', {
                     name,
                     email,
                     accessLevel,
                     password
                 });
-                toast.success(<MsgSuccess />, { autoClose: 5000 });
-
+                console.log(response)
                 if (response.status === codeResponse) {
-                    history.push(`/session/`)
+                    localStorage.setItem('User', JSON.stringify(response.data))
+                    localStorage.setItem('customerId', response.data.Id)
+                    toast.success(<MsgSuccess />, { autoClose: 5000 });
+                    history.push(`/sessionview/`)
                 }
             }
 
@@ -108,14 +128,15 @@ export default function User({ history, match }) {
     return (
         <div id="App">
             {manager === 'true' ? <Menu {...history} /> : manager === 'false' ? <MenuCustomer {...history} /> : ''}
+            <ToastContainer />
             <div className="user-container">
                 <form onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />
                     <input placeholder="Digite seu nome" name="name"
                         value={name}
                         onChange={e => setName(e.target.value)} />
-                    <input placeholder="Digite seu e-mail" name="email" 
-                        type="email" 
+                    <input placeholder="Digite seu e-mail" name="email"
+                        type="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)} />
                     {manager === 'true' ?
@@ -125,14 +146,14 @@ export default function User({ history, match }) {
                             <option value={2}>Atendente</option>
                             <option value={3}>Gerente</option>
                         </select> : ''}
-                    <input placeholder="Digite sua senha" name="password" 
-                        type="password" 
+                    <input placeholder="Digite sua senha" name="password"
+                        type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)} />
-                    <input placeholder="Confirme sua senha" name="confirmedPassword" 
-                        type="password" 
+                    <input placeholder="Confirme sua senha" name="confirmedPassword"
+                        type="password"
                         value={confirmedPassword}
-                        onChange={e => setConfirmedPAssword(e.target.value)}/>
+                        onChange={e => setConfirmedPAssword(e.target.value)} />
                     <button className="user" type="submit">Cadastrar</button>
                     {match.params.id ? '' : <button className="accountExists" onClick={handleLogin}>Já tenho uma conta</button>}
                 </form>

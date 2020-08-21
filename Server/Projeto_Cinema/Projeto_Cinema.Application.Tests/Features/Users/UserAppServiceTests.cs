@@ -41,7 +41,7 @@ namespace Projeto_Cinema.Application.Tests.Features.Users
             var result = _appService.Add(userAddCommand);
 
             //Assert
-            result.Should().Be((int)user.Id);
+            result.Id.Should().Be((int)user.Id);
             _repository.Verify(x => x.Add(It.IsAny<User>()), Times.Once);
             _repository.VerifyNoOtherCalls();
         }

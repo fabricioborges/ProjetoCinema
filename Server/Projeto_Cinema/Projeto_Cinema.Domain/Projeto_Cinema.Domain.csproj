@@ -55,6 +55,8 @@
     <Compile Include="Features\Movies\Movie.cs" />
     <Compile Include="Features\MovieTheaters\IMovieTheaterRepository.cs" />
     <Compile Include="Features\MovieTheaters\MovieTheater.cs" />
+    <Compile Include="Features\Reports\CustomerStories\CustomerStory.cs" />
+    <Compile Include="Features\Reports\IReportRepository.cs" />
     <Compile Include="Features\Seats\ISeatRepository.cs" />
     <Compile Include="Features\Seats\Seat.cs" />
     <Compile Include="Features\Sessions\ISessionRepository.cs" />

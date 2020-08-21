@@ -6,7 +6,7 @@ namespace Projeto_Cinema.Application.Features.Users
 {
     public interface IUserAppService
     {
-        long Add(UserAddCommand user);
+        User Add(UserAddCommand user);
 
         IQueryable<User> GetAll();
 

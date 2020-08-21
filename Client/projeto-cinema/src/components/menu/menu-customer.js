@@ -12,6 +12,9 @@ export default props => {
             <a className="menu-item" href="/sessionview/">
                 Sessões
             </a>
+            <a className="menu-item" href="/customerstory/">
+                Histórico
+            </a>
             <a className="menu-item" onClick={handleLogout}>
                 Sair
             </a>

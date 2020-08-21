@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-
 import Login from './pages/login/login.js';
 import User from './pages/users/user.js';
 import UserView from './pages/users/user-view.js';
@@ -15,6 +14,7 @@ import MovieView from './pages/movies/movie-view.js'
 import SnackNew from './pages/snacks/snack-new.js'
 import MovieTheaterView from './pages/movie-theater/movie-theater-view'
 import MovieTheater from './pages/movie-theater/movie-theater'
+import CustomerStory from './pages/reports/customer-stories/customer-story.js';
 
 export default function Routes() {
     return (
@@ -38,6 +38,7 @@ export default function Routes() {
             <Route path="/movietheaterview/" exact component={MovieTheaterView} />
             <Route path="/movietheater/" exact component={MovieTheater} />
             <Route path="/movietheater/:id" exact component={MovieTheater} />
+            <Route path="/customerstory/" exact component={CustomerStory} />
         </BrowserRouter>
     );
 }
