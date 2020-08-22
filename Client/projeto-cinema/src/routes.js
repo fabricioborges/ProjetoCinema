@@ -15,6 +15,8 @@ import SnackNew from './pages/snacks/snack-new.js'
 import MovieTheaterView from './pages/movie-theater/movie-theater-view'
 import MovieTheater from './pages/movie-theater/movie-theater'
 import CustomerStory from './pages/reports/customer-stories/customer-story.js';
+import MovieReport from './pages/reports/movie-reports/movie-report.js';
+import CustomerReport from './pages/reports/customer-report/customer-report';
 
 export default function Routes() {
     return (
@@ -39,6 +41,8 @@ export default function Routes() {
             <Route path="/movietheater/" exact component={MovieTheater} />
             <Route path="/movietheater/:id" exact component={MovieTheater} />
             <Route path="/customerstory/" exact component={CustomerStory} />
+            <Route path="/moviereport/" exact component={MovieReport} />
+            <Route path="/customerreport/" exact component={CustomerReport} />
         </BrowserRouter>
     );
 }

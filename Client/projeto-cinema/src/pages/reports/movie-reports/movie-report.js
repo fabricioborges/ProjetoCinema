@@ -16,17 +16,15 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import api from '../../../services/api';
-import MenuCustomer from '../../../components/menu/menu-customer';
-import './customer-story.css'
+import Menu from '../../../components/menu/menu';
+import './movie-report.css';
 
-export default function CustomerStory({ history }) {
-    const [customerStories, setCustomerStories] = useState([]);
-    const id = localStorage.getItem('customerId');
+export default function MovieReport({ history }) {
+    const [movieReports, setMovieReports] = useState([]);
 
     const columns = [
         { title: 'Filme', field: 'TitleMovie', cellStyle: { padding: '5px', width: '10px' } },
-        { title: 'Sala', field: 'NameMovieTheater', cellStyle: { padding: '5px', width: '10px' } },
-        { title: 'Data', field: 'DateSession', type: 'numeric', cellStyle: { padding: '5px', width: '10px' } }
+        { title: 'Faturamento', field: 'Value', type: 'currency', currencySetting: { currencyCode: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 2 }, cellStyle: { padding: '5px', width: '10px' } }
     ]
 
     const tableIcons = {
@@ -50,28 +48,28 @@ export default function CustomerStory({ history }) {
     }
 
     useEffect(() => {
-        async function loadCustomerStories() {
-            const responde = await api.get(`api/report/customerstories/${id}`)
+        async function loadMovieReports() {
+            const response = await api.get('api/report/moviereport');
 
-            setCustomerStories(responde.data);
+            setMovieReports(response.data);
         }
 
-        loadCustomerStories();
+        loadMovieReports();
     }, [])
 
     return (
         <div id="App">
-            <MenuCustomer {...history} />
-            <div className="customer-story-container-view">
-                {customerStories.length > 0 ?
+            <Menu {...history} />
+            <div className="movie-report-container-view">
+                {movieReports.length > 0 ?
                     (<MaterialTable
-                        title="Histórico"
+                        title="Relatório de Filmes"
                         columns={columns}
-                        data={customerStories}
+                        data={movieReports}
                         style={{
                             maxHeight: "500px"
                         }}
-                        options={{pageSize: 10}}
+                        options={{ pageSize: 10 }}
                         icons={tableIcons}
                     />
                     ) : ''}

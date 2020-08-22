@@ -30,6 +30,14 @@ export default props => {
                 Snacks
             </a>
 
+            <a className="menu-item" href="/moviereport">
+                Relatório de Filmes
+            </a>
+
+            <a className="menu-item" href="/customerreport">
+                Relatório de Clientes
+            </a>
+
             <a className="menu-item" onClick={handleLogout}>
                 Sair
             </a>

@@ -16,17 +16,16 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import api from '../../../services/api';
-import MenuCustomer from '../../../components/menu/menu-customer';
-import './customer-story.css'
+import Menu from '../../../components/menu/menu';
+import './customer-report.css';
 
-export default function CustomerStory({ history }) {
-    const [customerStories, setCustomerStories] = useState([]);
-    const id = localStorage.getItem('customerId');
+export default function CustomerReport({ history }) {
+    const [customerReports, setCustomerReports] = useState([]);
 
     const columns = [
-        { title: 'Filme', field: 'TitleMovie', cellStyle: { padding: '5px', width: '10px' } },
-        { title: 'Sala', field: 'NameMovieTheater', cellStyle: { padding: '5px', width: '10px' } },
-        { title: 'Data', field: 'DateSession', type: 'numeric', cellStyle: { padding: '5px', width: '10px' } }
+        { title: 'Cliente', field: 'Name', cellStyle: { padding: '5px', width: '10px' } },
+        { title: 'Email', field: 'Email', cellStyle: { padding: '5px', width: '10px' } },
+        { title: 'Gastos', field: 'Value', type: 'currency', currencySetting: { currencyCode: 'BRL', minimumFractionDigits: 0, maximumFractionDigits: 2 }, cellStyle: { padding: '5px', width: '10px' } }
     ]
 
     const tableIcons = {
@@ -50,28 +49,28 @@ export default function CustomerStory({ history }) {
     }
 
     useEffect(() => {
-        async function loadCustomerStories() {
-            const responde = await api.get(`api/report/customerstories/${id}`)
+        async function loadCustomerReports() {
+            const response = await api.get('api/report/customerreport');
 
-            setCustomerStories(responde.data);
+            setCustomerReports(response.data);
         }
 
-        loadCustomerStories();
+        loadCustomerReports();
     }, [])
 
     return (
         <div id="App">
-            <MenuCustomer {...history} />
-            <div className="customer-story-container-view">
-                {customerStories.length > 0 ?
+            <Menu {...history} />
+            <div className="customer-report-container-view">
+                {customerReports.length > 0 ?
                     (<MaterialTable
-                        title="Histórico"
+                        title="Relatório de Clientes"
                         columns={columns}
-                        data={customerStories}
+                        data={customerReports}
                         style={{
                             maxHeight: "500px"
                         }}
-                        options={{pageSize: 10}}
+                        options={{ pageSize: 10 }}
                         icons={tableIcons}
                     />
                     ) : ''}
