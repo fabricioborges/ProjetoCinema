@@ -1,13 +1,21 @@
-import React, { useState, useEffect, useImperativeHandle } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
+import { ToastContainer, toast } from 'react-toastify';
 import './seat.css';
 import MenuCustomer from '../../components/menu/menu-customer';
+
+const MsgInvalid = ({ closeToast }) => (
+    <div>
+        Necessário selecionar pelo menos um assento!
+    </div>
+)
 
 
 export default function Seat({ match, history }) {
 
     var [seats, setSeats] = useState([]);
     const [value, setValue] = useState();
+    const [seatSelected, setSeatSelected] = useState([]);
 
     useEffect(() => {
         async function loadSeats() {
@@ -35,27 +43,29 @@ export default function Seat({ match, history }) {
         setSeats(seatSeatsSelected);
 
         var selected = seatSeatsSelected.filter(x => x.IsSelected === true);
-        localStorage.setItem('seats', JSON.stringify(selected));
+
+        setSeatSelected(selected);
         setValue(selected.length * 10);
 
     }
 
     async function handleConfirmed() {
-        const response = await api.put(`api/seat/`, seats, {
-            headers: {
-                token: sessionStorage.getItem('token')
-            }
-        })
 
-        if (response.data === true) {
-            localStorage.setItem('seatsValue', JSON.stringify(value));
-            history.push(`/snack/`)
+        if (seatSelected.length === 0) {
+            toast.error(<MsgInvalid />, { autoClose: 5000 });
+            return;
         }
+
+        localStorage.setItem('seats', JSON.stringify(seatSelected));
+        localStorage.setItem('seatsToPersist', JSON.stringify(seats))
+        localStorage.setItem('seatsValue', JSON.stringify(value));
+        history.push(`/snack/`)
     }
 
     return (
-        <div className="app">
-            <MenuCustomer  {...history}/>
+        <div className="App">
+            <MenuCustomer  {...history} />
+            <ToastContainer />
             <div className="seat-container">
                 <h1>Selecionar assentos</h1>
                 {seats.length > 0 ?
@@ -76,10 +86,7 @@ export default function Seat({ match, history }) {
                         <p value={value}>Preço: R${value}</p>
                         <button className="confirmed" onClick={handleConfirmed}> Confirmar</button>
                     </div>
-                    ) : (
-                        <div>
-                            <div className="empty"> Não há sessões cadastradas para esse dia :(</div>
-                        </div>)}
+                    ) : ''}
             </div>
         </div>
     )

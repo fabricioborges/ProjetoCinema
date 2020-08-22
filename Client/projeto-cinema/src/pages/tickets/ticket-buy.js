@@ -17,7 +17,7 @@ export default function TicketBuy({ history }) {
         async function loadSessions() {
 
             id = localStorage.getItem('session')
-            var user = localStorage.getItem('User')
+            var userId = localStorage.getItem('customerId')
             const snacks = localStorage.getItem('snacks');
             const seats = localStorage.getItem('seats');
             var value = localStorage.getItem('seatsValue')
@@ -35,7 +35,7 @@ export default function TicketBuy({ history }) {
             value = parseInt(value)
             valueSnack = parseInt(valueSnack)
             setValue(value + valueSnack);
-            setUser(JSON.parse(user));
+            setUser(JSON.parse(userId));
         }
         loadSessions();
 
@@ -43,8 +43,19 @@ export default function TicketBuy({ history }) {
 
     async function handleConfirmed(movieTheaterid) {
         console.log(user);
+        
+        const seatsToPersist = localStorage.getItem('seatsToPersist');
+        debugger
+        const seats = JSON.parse(seatsToPersist);
+
+        await api.put(`api/seat/`, seats, {
+            headers: {
+                token: sessionStorage.getItem('token')
+            }
+        })
+
         var ticketAdd = {
-            userId: user.Id,
+            userId: user,
             sessionId: sessions[0].Id,
             movieId: sessions[0].Movie.Id,
             movieTheaterid: sessions[0].MovieTheater.Id,
@@ -61,7 +72,7 @@ export default function TicketBuy({ history }) {
     return (
 
         <div className="app">
-            <MenuCustomer {... history}/>
+            <MenuCustomer {...history} />
             <div className="ticket-buy-container">
                 <ul>
                     {sessions.map(session => (
