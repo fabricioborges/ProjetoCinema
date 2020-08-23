@@ -25,6 +25,12 @@ const MsgInvalidPassword = ({ closeToast }) => (
     </div>
 )
 
+const MsgInvalidEmail = ({ closeToast }) => (
+    <div>
+        Este e-mail já está vinculado a outra conta!
+    </div>
+)
+
 const MsgPasswordIncorrect = ({ closeToast }) => (
     <div>
         As senha digitas não são iguais!
@@ -38,7 +44,8 @@ export default function User({ history, match }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmedPassword, setConfirmedPAssword] = useState('');
-    const [accessLevel, setAccessLevel] = useState(0);
+    const [accessLevel, setAccessLevel] = useState(1);
+    const [usersDb, setUsersDb] = useState([]);
 
     useEffect(() => {
 
@@ -57,23 +64,27 @@ export default function User({ history, match }) {
                 setConfirmedPAssword(response.data.Password);
             }
             loadUser();
+        } else {
+            async function loadUsersDb(){
+                const response = await api.get(`api/user/`, {
+                    headers: {
+                        token: sessionStorage.getItem('token')
+                    }
+                });
+
+                setUsersDb(response.data.Items);
+            }
+
+            loadUsersDb();
         }
     }, []);
 
     async function handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault();      
 
-        const re = /(?=.*?[A-Z])(?=.*?[a-z]{4})(?=.*?[0-9]{2})/
-       
-        if (!re.test(password)) {
-            toast.error(<MsgInvalidPassword />, { autoClose: 5000 });
-            return;
-        }
+        const isValid = validateField()
 
-        if (password != confirmedPassword) {
-            toast.error(<MsgPasswordIncorrect />, { autoClose: 5000 });
-            return;
-        }
+        if(!isValid) return;
 
         try {
             var response;
@@ -95,19 +106,24 @@ export default function User({ history, match }) {
                 }
             }
             else {
-
                 response = await api.post('api/user', {
                     name,
                     email,
                     accessLevel,
                     password
                 });
-                console.log(response)
+
                 if (response.status === codeResponse) {
                     localStorage.setItem('User', JSON.stringify(response.data))
                     localStorage.setItem('customerId', response.data.Id)
                     toast.success(<MsgSuccess />, { autoClose: 5000 });
-                    history.push(`/sessionview/`)
+
+                    if (JSON.parse(manager) === true) {
+                        history.push(`/userview/`);
+                    } else {
+                        localStorage.setItem('Manager', JSON.parse(false));
+                        history.push(`/sessionview/`)
+                    }
                 }
             }
 
@@ -115,6 +131,28 @@ export default function User({ history, match }) {
         catch (err) {
             toast.error(<MsgError />)
         }
+    }
+
+    function validateField(){
+
+        const re = /(?=.*?[A-Z])(?=.*?[a-z]{4})(?=.*?[0-9]{2})/
+
+        if (!re.test(password) && JSON.parse(manager) !== true) {
+            toast.error(<MsgInvalidPassword />, { autoClose: 5000 });
+            return;
+        }
+
+        if (password != confirmedPassword) {
+            toast.error(<MsgPasswordIncorrect />, { autoClose: 5000 });
+            return;
+        }
+
+        if (usersDb.find(x => x.Email.toUpperCase() === email.toUpperCase())) {
+            toast.error(<MsgInvalidEmail />, { autoClose: 5000 })
+            return;
+        }
+
+        return true;
     }
 
     function handleLogin() {

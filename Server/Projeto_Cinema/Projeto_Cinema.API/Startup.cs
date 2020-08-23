@@ -78,7 +78,7 @@ namespace Projeto_Cinema.API
         private static void EnableOdata(HttpConfiguration config)
         {
             // Web API Enable OData
-            config.Count().Select().Filter().OrderBy().MaxTop(null);
+            config.Count().Expand().Select().Filter().OrderBy().MaxTop(null);
             config.AddODataQueryFilter();
             config.EnableDependencyInjection(builder =>
             {

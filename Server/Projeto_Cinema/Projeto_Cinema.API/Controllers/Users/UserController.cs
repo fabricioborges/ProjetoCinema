@@ -38,6 +38,7 @@ namespace Projeto_Cinema.API.Controllers.Users
         [ODataQueryOptionsValidate]
         public IHttpActionResult Get(ODataQueryOptions<User> queryOptions)
         {
+
             var query = default(IQueryable<User>);
 
             query = UserAppService.GetAll();

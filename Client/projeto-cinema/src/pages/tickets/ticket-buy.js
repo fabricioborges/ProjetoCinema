@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from "react";
 import api from '../../services/api';
+import { ToastContainer, toast } from 'react-toastify';
 import MenuCustomer from '../../components/menu/menu-customer';
 import './ticket-buy.css';
+
+const MsgSuccess = ({ closeToast }) => (
+    <div>
+       Compra efetuada com sucesso!
+    </div>
+)
+
+const MsgError = ({ closeToast }) => (
+    <div>
+        Ocorreu um erro ao comprar o ingresso
+    </div>
+)
+
 
 export default function TicketBuy({ history }) {
 
@@ -41,11 +55,10 @@ export default function TicketBuy({ history }) {
 
     }, []);
 
-    async function handleConfirmed(movieTheaterid) {
+    async function handleConfirmed() {
         console.log(user);
-        
+
         const seatsToPersist = localStorage.getItem('seatsToPersist');
-        debugger
         const seats = JSON.parse(seatsToPersist);
 
         await api.put(`api/seat/`, seats, {
@@ -65,8 +78,14 @@ export default function TicketBuy({ history }) {
 
         const response = await api.post(`api/ticket`, ticketAdd)
 
-        if (response.status === 200)
-            alert("compra efetuada com sucesso");
+        if (response.status === 200) {
+            toast.success(<MsgSuccess />, { autoClose: 5000 });
+            history.push('/sessionview/')
+        } else {
+            toast.error(<MsgError />, { autoClose: 5000 });
+        }
+
+
     }
 
     return (
