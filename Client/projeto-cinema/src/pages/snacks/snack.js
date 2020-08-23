@@ -6,6 +6,7 @@ import MenuCustomer from '../../components/menu/menu-customer';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { ToastContainer, toast } from 'react-toastify';
+import Pagination from "@material-ui/lab/Pagination";
 import 'react-toastify/dist/ReactToastify.css';
 
 const MsgSuccess = ({ closeToast }) => (
@@ -24,13 +25,36 @@ export default function Snack({ history }) {
 
     var [snacks, setSnack] = useState([]);
     const [value, setValue] = useState(0);
+    const [page, setPage] = useState(0);
+    const [count, setCount] = useState(0)
+    const [refresh, setRefresh] = useState(true);
     var valueOfSnacks = 0;
     var manager = localStorage.getItem('Manager');
-  
+
+    useEffect(() => {
+        async function loadCount() {
+
+            const response = await api.get(`api/snack?$count=true&$top=0`, {
+                headers: {
+                    token: sessionStorage.getItem('token')
+                },
+            });
+
+            const getCount = Math.ceil(response.data.Count / 10);
+            setCount(getCount);
+            setRefresh(false);
+            if (count < page) {
+                setPage(count);
+            }
+        }
+
+        loadCount();
+    }, [])
+
     useEffect(() => {
         async function loadSnacks() {
-
-            const response = await api.get(`api/snack/`, {
+            const params = getRequestParams();
+            const response = await api.get(`api/snack${params}`, {
                 headers: {
                     token: sessionStorage.getItem('token')
                 }
@@ -38,8 +62,24 @@ export default function Snack({ history }) {
             setSnack(response.data.Items);
         }
         loadSnacks();
-    }, [])
-   
+    }, [page])
+
+
+    function getRequestParams() {
+
+        if (page > 1) {
+            const skip = (page * 10) - 10;
+            const params = `?$skip=${skip}&$top=10`
+            return params;
+        }
+
+        return '?$top=10';
+    };
+
+    const handlePageChange = (event, value) => {
+        setPage(value);
+    };
+
     async function handlePlus(snack) {
         const index = snacks.indexOf(snack);
         snack.Quantity = snack.Quantity + 1;
@@ -127,7 +167,7 @@ export default function Snack({ history }) {
 
             setSnack(snacksRefresh);
             toast.success(<MsgSuccess />);
-
+            setRefresh(true);
         }
         catch (err) {
             toast.error(<MsgError />);
@@ -136,28 +176,39 @@ export default function Snack({ history }) {
 
     return (
         <div id="App">
-            {manager === 'true' ? <Menu  {...history} /> : <MenuCustomer  {...history}/>}
+            {manager === 'true' ? <Menu  {...history} /> : <MenuCustomer  {...history} />}
             <ToastContainer />
             <div className="snack-container">
                 {manager === 'true' ? <button className="new" onClick={handleNew}>Adicionar Snack</button> : ''}
                 {snacks.length > 0 ?
-                    (<div><ul>
-                        {snacks.map(snack => (
-                            <li key={snack.Id}>
-                                <img src={snack.Image} alt="image" />
-                                <footer>
-                                    <strong>{snack.Name}</strong>
-                                    <p>Preço: R${snack.Price}</p>
-                                    {manager === 'true' ? '' : <p>Quantidade: {snack.Quantity}</p>}
-                                    {manager === 'true' ? <button onClick={() => handleToEdit(snack.Id)}>Editar</button> : <button onClick={() => handlePlus(snack)}>Adicionar+</button>}
-                                    {manager === 'true' ? <button onClick={() => handleToDelete(snack)}>Excluir</button> : <button className="remove" onClick={() => handleRemove(snack)}>Remover-</button>}
-                                </footer>
-                            </li>
-                        ))}
-                    </ul>
+                    (<>
+                        <ul>
+                            {snacks.map(snack => (
+                                <li key={snack.Id}>
+                                    <img src={snack.Image} alt="image" />
+                                    <footer>
+                                        <strong>{snack.Name}</strong>
+                                        <p>Preço: R${snack.Price}</p>
+                                        {manager === 'true' ? '' : <p>Quantidade: {snack.Quantity}</p>}
+                                        {manager === 'true' ? <button onClick={() => handleToEdit(snack.Id)}>Editar</button> : <button onClick={() => handlePlus(snack)}>Adicionar+</button>}
+                                        {manager === 'true' ? <button onClick={() => handleToDelete(snack)}>Excluir</button> : <button className="remove" onClick={() => handleRemove(snack)}>Remover-</button>}
+                                    </footer>
+                                </li>
+                            ))}
+                        </ul>
                         {manager === 'true' ? '' : <p>Preço: R${value}</p>}
                         {manager === 'true' ? '' : <button className="confirmed" onClick={handleConfirmed}> Adicionar Itens</button>}
-                    </div>)
+
+
+                        <Pagination
+                            className="my-3"
+                            count={count}
+                            page={page}
+                            siblingCount={1}
+                            boundaryCount={1}
+                            onChange={handlePageChange}
+                        />
+                    </>)
                     : (
                         <div>
                             <div className="empty"> Não há snacks disponíveis :(</div>

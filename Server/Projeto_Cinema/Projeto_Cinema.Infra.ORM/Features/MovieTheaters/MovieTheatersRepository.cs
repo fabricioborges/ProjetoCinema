@@ -37,7 +37,7 @@ namespace Projeto_Cinema.Infra.ORM.Features.MovieTheaters
 
         public IQueryable<MovieTheater> GetAll()
         {
-            return Context.MovieTheaters.Include(x => x.Seats).AsNoTracking();
+            return Context.MovieTheaters.Include(x => x.Seats);
         }
 
         public MovieTheater GetById(long Id)

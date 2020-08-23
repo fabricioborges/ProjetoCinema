@@ -21,7 +21,8 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters.Mapping
             CreateMap<MovieTheaterUpdateCommand, MovieTheater>();
 
             CreateMap<MovieTheater, MovieTheaterViewModel>()
-                .ForPath(src => src.Seats, m => m.MapFrom(dest => dest.Seats));
+                .ForPath(src => src.Seats, m => m.MapFrom(dest => dest.Seats))
+                .ForMember(src => src.QuantityOfSeats, m => m.MapFrom(dest => dest.QuantityOfSeats));
         }
     }
 }

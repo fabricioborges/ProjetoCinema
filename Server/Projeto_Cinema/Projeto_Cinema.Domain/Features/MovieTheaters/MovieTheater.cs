@@ -2,14 +2,17 @@
 using Projeto_Cinema.Domain.Features.Seats;
 using Projeto_Cinema.Domain.Features.Sessions;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Projeto_Cinema.Domain.Features.MovieTheaters
 {
-    public class MovieTheater 
+    public class MovieTheater
     {
         public long Id { get; set; }
         public string Name { get; set; }
         public virtual List<Seat> Seats { get; set; }
+        private long _quantity;
+        public long QuantityOfSeats { get { return Seats.Count; } private set { _quantity = Seats.Count; } }
 
         public void ValidateNumberOfSeats()
         {

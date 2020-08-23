@@ -34,13 +34,24 @@ namespace Projeto_Cinema.API.Controllers.MovieTheaters
             return HandleCallback(() => MovieTheaterAppService.Add(movieTheater));
         }
 
+        //[HttpGet]
+        //[ODataQueryOptionsValidate]
+        //public IHttpActionResult Get(ODataQueryOptions<MovieTheater> queryOptions)
+        //{
+        //    var movieTheaters = MovieTheaterAppService.GetAll().ToList();
+
+        //    return Ok(movieTheaters);
+        //}
+
         [HttpGet]
         [ODataQueryOptionsValidate]
         public IHttpActionResult Get(ODataQueryOptions<MovieTheater> queryOptions)
         {
-            var movieTheaters = MovieTheaterAppService.GetAll().ToList();
+            var query = default(IQueryable<MovieTheater>);
 
-            return Ok(movieTheaters);
+            query = MovieTheaterAppService.GetAll();
+
+            return HandleQueryable<MovieTheater, MovieTheaterViewModel>(query, queryOptions);
         }
 
         [HttpGet]

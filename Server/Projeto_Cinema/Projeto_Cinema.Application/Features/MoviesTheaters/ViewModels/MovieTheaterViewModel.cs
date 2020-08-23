@@ -12,5 +12,6 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters.ViewModels
         public long Id { get; set; }
         public string Name { get; set; }
         public List<SeatViewModel> Seats { get; set; }
+        public long QuantityOfSeats { get; set; }
     }
 }

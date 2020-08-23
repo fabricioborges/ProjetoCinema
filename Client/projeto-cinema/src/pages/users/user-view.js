@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './user-view.css';
 import api from '../../services/api';
 import Menu from '../../components/menu/menu';
@@ -23,8 +23,28 @@ const MsgError = ({ closeToast }) => (
 export default function UserView({ history }) {
 
     const [users, setUsers] = useState([]);
-    const [page, setPage] = useState(1);
-    const [count, setCount] = useState(0)
+    const [page, setPage] = useState(0);
+    const [count, setCount] = useState(0);
+    const [refresh, setRefresh] = useState(true);
+    
+    useEffect(() => {
+        async function loadCount() {
+            const response = await api.get(`api/user?$count=true&$top=0`, {
+                headers: {
+                    token: sessionStorage.getItem('token')
+                },
+            });
+
+            const getCount = Math.ceil(response.data.Count / 10);
+            setCount(getCount)
+            setRefresh(false);
+            if (count < page) {
+                setPage(count);
+            }
+        }
+
+        loadCount();
+    }, [refresh])
 
     useEffect(() => {
         async function loadusers() {
@@ -36,39 +56,26 @@ export default function UserView({ history }) {
                     token: sessionStorage.getItem('token')
                 },
             });
-
-            setUsers(response.data.Items.slice(0, 10));           
+            
+            setUsers(response.data.Items);
         }
         loadusers();
     }, [page]);
 
-    useEffect(() => {
-        async function loadCount(){
-            const response = await api.get(`api/user?$count=true&$top=0`, {
-                headers: {
-                    token: sessionStorage.getItem('token')
-                },
-            });
-            console.log(response);
-            const getCount = Math.ceil(response.data.Count / 10);
-            setCount(getCount)
-        }
-
-        loadCount();
-    }, [])
 
     function getRequestParams() {
-               
-        if (page != 1 ) {
+
+        if (page > 1) {
             const skip = (page * 10) - 10;
             const params = `?$skip=${skip}&$top=10`
             return params;
         }
-        return '';
+
+        return '?$top=10';
     };
 
     const handlePageChange = (event, value) => {
-        setPage(value);
+        setPage(value);        
     };
 
     function handleToEdit(id) {
@@ -125,7 +132,7 @@ export default function UserView({ history }) {
 
             setUsers(usersRefresh);
             toast.success(<MsgSuccess />);
-
+            setRefresh(true);
         }
         catch (err) {
             toast.error(<MsgError />);
@@ -137,32 +144,31 @@ export default function UserView({ history }) {
             <Menu {...history} />
             <ToastContainer />
             <div className="user-container-view">
-                <button className="new" onClick={() => handleToNew()}>Adicionar</button>                
+                <button className="new" onClick={() => handleToNew()}>Adicionar</button>
                 {users.length > 0 ?
-                    (<ul>
-                        {users.map(user => (
-                            <li key={user.Id}>
-                                <footer>
-                                    <strong>{user.Name}</strong>
-                                    <p>{user.Email}</p>
-                                    <button className="edit" onClick={() => handleToEdit(user.Id)}>Editar</button>
-                                    <button className="delete" onClick={() => handleToDelete(user)}>Excluir</button>
-                                </footer>
-                            </li>
-                        ))}
-                    </ul>) : <div></div>
+                    (<>
+                        <ul>
+                            {users.map(user => (
+                                <li key={user.Id}>
+                                    <footer>
+                                        <strong>{user.Name}</strong>
+                                        <p>{user.Email}</p>
+                                        <button className="edit" onClick={() => handleToEdit(user.Id)}>Editar</button>
+                                        <button className="delete" onClick={() => handleToDelete(user)}>Excluir</button>
+                                    </footer>
+                                </li>
+                            ))}
+                        </ul>
+                        <Pagination
+                            className="my-3"
+                            count={count}
+                            page={page}                           
+                            siblingCount={1}
+                            boundaryCount={1}                           
+                            onChange={handlePageChange}
+                        />
+                    </>) : <div></div>
                 }
-                <Pagination
-                    className="my-3"
-                    count={count}
-                    page={page}
-                    siblingCount={1}
-                    boundaryCount={1}
-                    variant="outlined"
-                    shape="rounded"
-                    onChange={handlePageChange}
-                />
-
             </div>
         </div>
     )

@@ -54,7 +54,7 @@ export default function MovieTheater({ history, match }) {
 
                     quantityDb = response.data.Seats.length;
                     setSeat(response.data.Seats);
-                    console.log(seats);
+
                 }, 500)
 
             }
@@ -77,8 +77,9 @@ export default function MovieTheater({ history, match }) {
     }, [])
 
     async function handleSubmit(movie) {
-
-        if (movieTheaters.find(x => x.Name.toUpperCase() === movie.name.toUpperCase() && x.Id != match.params.id)){
+        debugger
+        console.log(movieTheaters);
+        if (movieTheaters.Items.find(x => x.Name.toUpperCase() === movie.name.toUpperCase() && x.Id != match.params.id)){
             toast.error(<MsgValidator />, { autoClose: 5000 });
             return;
         }
