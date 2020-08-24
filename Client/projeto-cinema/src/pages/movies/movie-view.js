@@ -170,7 +170,7 @@ export default function MovieView({ history }) {
                             boundaryCount={1}
                             onChange={handlePageChange}
                         />
-                    </>) : <div></div>
+                    </>) : 'Não há filmes cadastrados :('
                 }
             </div>
         </div>

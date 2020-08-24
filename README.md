@@ -1,10 +1,13 @@
 # ProjetoCinema
 
-Aplicação para gestão de compra de ingressos, com visualização de telas para seleção de filmes, lugares disponíveis, salas que estão em exibição e compra de snacks.
+Para iniciar o projeto é necessário executar o arquivo script.sql, realizará a inserção do usuário com nível de gerente 
+que possui usuário: printWay@printWay.com e senha 123456.
 
-Implementado utilizando C# no back end com banco SQLServer. Utilizado o ORM Entity framework.
+utilizado banco de dados SQL Server, .Net Framework 4.6.1 e ReactJs para o front end.
 
-Implementado utilizando TDD, com a biblioteca NUnit para gerenciar os testes.
+Para executar os testes do projeto, basta acessar o gerenciamento de testes do visual studio
 
-Implementado front end utilizando ReactJs, utilizando Hooks para gerenciamento de mudanças de estado. Utilizado axios para realizar requisições ao back end.
+Para executar o frontend é necessário utilizar o comando npm install ou yarn install para baixar os pacotes necessários e em seguida utilizar 
+o comando yarn start ou npm start
 
+Qualquer dúvida estou a disposição.

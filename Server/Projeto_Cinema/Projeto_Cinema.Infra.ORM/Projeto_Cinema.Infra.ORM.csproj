@@ -134,6 +134,10 @@
     <Compile Include="Migrations\202002292233246_deleteOnCascade.designer.cs">
       <DependentUpon>202002292233246_deleteOnCascade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008240042245_delete-on-cascade-session.cs" />
+    <Compile Include="Migrations\202008240042245_delete-on-cascade-session.designer.cs">
+      <DependentUpon>202008240042245_delete-on-cascade-session.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -153,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002292233246_deleteOnCascade.resx">
       <DependentUpon>202002292233246_deleteOnCascade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008240042245_delete-on-cascade-session.resx">
+      <DependentUpon>202008240042245_delete-on-cascade-session.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

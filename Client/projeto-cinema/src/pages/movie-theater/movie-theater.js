@@ -77,8 +77,7 @@ export default function MovieTheater({ history, match }) {
     }, [])
 
     async function handleSubmit(movie) {
-        debugger
-        console.log(movieTheaters);
+
         if (movieTheaters.Items.find(x => x.Name.toUpperCase() === movie.name.toUpperCase() && x.Id != match.params.id)){
             toast.error(<MsgValidator />, { autoClose: 5000 });
             return;

@@ -16,9 +16,11 @@ namespace Projeto_Cinema.Application.Features.MoviesTheaters.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<MovieTheaterAddCommand, MovieTheater>();
+            CreateMap<MovieTheaterAddCommand, MovieTheater>()
+                .ForPath(src => src.QuantityOfSeats, m => m.Ignore());
 
-            CreateMap<MovieTheaterUpdateCommand, MovieTheater>();
+            CreateMap<MovieTheaterUpdateCommand, MovieTheater>()
+                .ForPath(src => src.QuantityOfSeats, m => m.Ignore()); 
 
             CreateMap<MovieTheater, MovieTheaterViewModel>()
                 .ForPath(src => src.Seats, m => m.MapFrom(dest => dest.Seats))

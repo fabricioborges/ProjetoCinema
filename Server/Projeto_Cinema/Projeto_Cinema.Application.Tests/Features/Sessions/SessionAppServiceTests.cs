@@ -55,7 +55,7 @@ namespace Projeto_Cinema.Application.Tests.Features.Sessions
         {
             //Arrange
             var session = ObjectMother.sessionDeleteCommand;
-
+            _repository.Setup(x => x.GetById(session.Id)).Returns(new Session() { DateInitial = DateTime.Now.AddDays(11)});
             _repository.Setup(x => x.Delete(session.Id)).Returns(true);
 
             //Action
@@ -64,7 +64,6 @@ namespace Projeto_Cinema.Application.Tests.Features.Sessions
             //Assert
             sessionDeleteAction.Should().BeTrue();
             _repository.Verify(x => x.Delete(session.Id), Times.Once());
-            _repository.VerifyNoOtherCalls();
         }
 
         [Test]
@@ -72,7 +71,7 @@ namespace Projeto_Cinema.Application.Tests.Features.Sessions
         {
             //Arrange
             var session = ObjectMother.sessionDeleteCommand;
-
+            _repository.Setup(x => x.GetById(session.Id)).Returns(new Session() { DateInitial = DateTime.Now.AddDays(11) });
             _repository.Setup(x => x.Delete(session.Id)).Returns(false);
 
             //Action
@@ -81,7 +80,6 @@ namespace Projeto_Cinema.Application.Tests.Features.Sessions
             //Assert
             sessionDeleteAction.Should().BeFalse();
             _repository.Verify(x => x.Delete(session.Id), Times.Once());
-            _repository.VerifyNoOtherCalls();
         }
 
         [Test]

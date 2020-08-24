@@ -22,7 +22,7 @@ namespace Projeto_Cinema.Infra.ORM.Configurations.Tickets
             HasOptional(f => f.User).WithMany().HasForeignKey(k => k.UserId);
 
             Property(p => p.SessionId).HasColumnName("SessionId").IsOptional();
-            HasOptional(f => f.Session).WithMany().HasForeignKey(k => k.SessionId);
+            HasOptional(f => f.Session).WithMany().HasForeignKey(k => k.SessionId).WillCascadeOnDelete(true);
 
             Property(p => p.MovieTheaterId).HasColumnName("MovieTheaterId").IsOptional();
             HasOptional(f => f.MovieTheater).WithMany().HasForeignKey(k => k.MovieTheaterId);

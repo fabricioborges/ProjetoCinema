@@ -72,7 +72,7 @@ export default function MovieReport({ history }) {
                         options={{ pageSize: 10 }}
                         icons={tableIcons}
                     />
-                    ) : ''}
+                    ) : 'Não há relatórios para serem gerados :('}
             </div>
 
         </div>

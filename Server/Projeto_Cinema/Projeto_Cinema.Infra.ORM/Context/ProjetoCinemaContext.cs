@@ -36,7 +36,7 @@ namespace Projeto_Cinema.Infra.ORM.Context
         {
             modelBuilder.Configurations.AddFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
             modelBuilder.Entity<MovieTheater>()
-                .HasMany(x => x.Seats);
+                .HasMany(x => x.Seats);         
             
             base.OnModelCreating(modelBuilder);
         }

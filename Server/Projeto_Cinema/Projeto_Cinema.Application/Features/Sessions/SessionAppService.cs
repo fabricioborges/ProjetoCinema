@@ -30,6 +30,8 @@ namespace Projeto_Cinema.Application.Features.Sessions
 
             sessionAdd.Movie = movie;
 
+            sessionAdd.setHour();
+
             sessionAdd.SetDuration();
 
             sessionAdd.SetEndDate();
@@ -41,6 +43,11 @@ namespace Projeto_Cinema.Application.Features.Sessions
 
         public bool Delete(SessionDeleteCommand session)
         {
+            var result = SessionRepository.GetById(session.Id);
+            var targetDate = result.DateInitial - DateTime.Now;
+            if (targetDate.Days < 10)
+                throw new BusinessException(ErrorCode.Unauthorized, "Não é possível excluir uma sessão com menos de 10 dias para a estreia!");
+
             return SessionRepository.Delete(session.Id);
         }
 

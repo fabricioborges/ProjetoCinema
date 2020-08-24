@@ -56,8 +56,6 @@ export default function TicketBuy({ history }) {
     }, []);
 
     async function handleConfirmed() {
-        console.log(user);
-
         const seatsToPersist = localStorage.getItem('seatsToPersist');
         const seats = JSON.parse(seatsToPersist);
 

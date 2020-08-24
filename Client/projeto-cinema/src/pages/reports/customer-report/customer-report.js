@@ -73,7 +73,7 @@ export default function CustomerReport({ history }) {
                         options={{ pageSize: 10 }}
                         icons={tableIcons}
                     />
-                    ) : ''}
+                    ) : 'Não há relatórios para serem gerados :('}
             </div>
 
         </div>

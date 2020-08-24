@@ -25,10 +25,11 @@ export default function Session({ history, match }) {
     const [movieTheaterId, setMovieTheaterId] = useState();
     const [movieTheaters, setmovieTheaters] = useState([]);
     const [movies, setMovies] = useState([]);
-    const [valueOfSeats, setValue] = useState(0);
+    const [valueOfSeats, setValue] = useState();
     const [hour, setHour] = useState();
     const [dateInitial, setInitialDate] = useState();
-    
+    const [sessionsDb, setSessionsDb] = useState([]);
+
     useEffect(() => {
 
         if (match.params.id) {
@@ -43,11 +44,33 @@ export default function Session({ history, match }) {
                 setValue(response.data.ValueOfSeats);
                 setHour(response.data.Hour.slice(11, 16));
                 setInitialDate(response.data.DateInitial.slice(0, 10));
-                setMovieTheaterId(response.data.MovieTheater.Id);                    
+                setMovieTheaterId(response.data.MovieTheater.Id);
             }
             loadSessions();
         }
     }, []);
+
+    useEffect(() => {
+        if (dateInitial && hour) {
+            async function loadSessionsByDate() {
+                const params = getRequestParams();
+                const response = await api.get(`api/session?$filter=Hour ge ${params}&$filter=Hour le ${params}`, {
+                    headers: {
+                        token: sessionStorage.getItem('token')
+                    }
+                });
+
+                setSessionsDb(response.data.Items);
+            }
+
+            loadSessionsByDate();
+        }
+
+    }, [dateInitial, hour])
+
+    function getRequestParams() {
+        return `${dateInitial}T${hour}Z`
+    }
 
     useEffect(() => {
         async function loadMovies() {
@@ -64,17 +87,32 @@ export default function Session({ history, match }) {
     }, [])
 
     useEffect(() => {
-        async function loadMoviesTheaters() {
 
-            const response = await api.get(`api/movietheater/`, {
+        async function loadMoviesTheaters() {
+            let url;
+            if (sessionsDb.length > 0) {
+                const params = movieTheatersRequestParams();
+                url = `api/movietheater?$filter=Id in (${params}) eq false`;
+            } else {
+                url = `api/movietheater`;
+            }
+
+            const response = await api.get(url, {
                 headers: {
                     token: sessionStorage.getItem('token')
                 }
             });
-            setmovieTheaters(response.data);
+            setmovieTheaters(response.data.Items);
         }
         loadMoviesTheaters();
-    }, []);
+
+
+    }, [sessionsDb]);
+
+    function movieTheatersRequestParams() {
+        return sessionsDb.map(x => x.MovieTheater.Id);
+
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -86,7 +124,7 @@ export default function Session({ history, match }) {
                 response = await api.put('api/session', {
                     id,
                     valueOfSeats,
-                    hour, 
+                    hour,
                     dateInitial,
                     movieId,
                     movieTheaterId
@@ -127,37 +165,37 @@ export default function Session({ history, match }) {
 
     return (
         <div id="App">
-            <Menu {...history}/>
+            <Menu {...history} />
             <div className="session-container">
                 <form onSubmit={handleSubmit}>
                     <img src={logo} alt="logo" />
 
-                    <input placeholder="Digite o valor dos assentos" name="valueOfSeats" 
+                    <input placeholder="Digite o valor dos assentos" name="valueOfSeats"
                         type="number"
-                        value={valueOfSeats} 
-                        onChange={e => setValue(e.target.value)}/>
-                    <select value={movieId}  onChange={e => handleMovie(e.target.value)} >
+                        value={valueOfSeats}
+                        onChange={e => setValue(e.target.value)} />
+                    <select value={movieId} onChange={e => handleMovie(e.target.value)} >
                         <option value={0}>Selecione um filme</option>
                         {movies.map(option => (
                             <option key={option.Id} value={option.Id}>{option.Title}</option>
                         ))}
                     </select>
+                    <label>Digite a hora inicial da sessão</label>
+                    <input name="hour" type="time"
+                        value={hour}
+                        onChange={e => setHour(e.target.value)} />
+
+                    <label>Digite a data de início da sessão</label>
+                    <input name="dateInitial" type="date"
+                        value={dateInitial}
+                        onChange={e => setInitialDate(e.target.value)} />
+
                     <select value={movieTheaterId} onChange={e => handleMovieTheater(e.target.value)}>
                         <option value={0}>Selecione uma sala</option>
                         {movieTheaters.map(option => (
                             <option key={option.Id} value={option.Id} >{option.Name}</option>
                         ))}
                     </select>
-
-                    <label>Digite a hora inicial da sessão</label>
-                    <input name="hour" type="time" 
-                        value={hour}
-                        onChange={e => setHour(e.target.value)}/>
-
-                    <label>Digite a data de início da sessão</label>
-                    <input name="dateInitial" type="date" 
-                        value={dateInitial}
-                        onChange={e => setInitialDate(e.target.value)}/>
 
                     <button className="session" type="submit">Cadastrar</button>
                 </form>

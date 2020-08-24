@@ -26,6 +26,21 @@ namespace Projeto_Cinema.Domain.Features.Sessions
             return targetDate.Days >= 10;
         }
 
+        public void setHour()
+        {
+            var day = DateInitial.Day - 1;
+
+            var month = DateInitial.Month - 1;
+
+            var year = DateInitial.Year - 1;
+
+            var hour = Hour.Hour;
+
+            var minute = Hour.Minute;
+
+            Hour = new DateTime()
+                .AddDays(day).AddMonths(month).AddYears(year).AddHours(hour).AddMinutes(minute);
+        }
         public void SetDuration() => Duration = Movie.Duration;       
 
         public void SetEndDate() => EndDate = Movie.EndDate;
